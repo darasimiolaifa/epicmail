@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="css/style.css">
+  <title>EPIC Mail</title>
+</head>
+<body>
+  <div class="container">
+    <div class="form-container">
+      <div class="form-div">
+        <div class="signup-heading">
+          <h1 class="form-title">Create your EPIC Mail Account.</h1>
+        </div>
+        <form id="signup-form" class="form-element">
+          <div class="double-form-elements text">
+            <input type="text" name="firstname" id="firstname" placeholder="First name">
+            <input type="text" name="lastname" id="lastname" placeholder="Last name">
+          </div>
+          <div class="full-form-elements">
+            <input type="text" name="phone" id="phone" class="full-width" placeholder="+234">
+          </div>
+          <div class="full-form-elements">
+            <input type="text" name="username" id="username" class="full-width" placeholder="Username">
+          </div>
+          <div class="double-form-elements password">
+            <input type="password" name="password" id="password" placeholder="Password">
+            <input type="password" name="confirm" id="confirm" placeholder="Confirm"> 
+            <a href="#"><span class="show" onclick="showPassword()">Show</span></a>
+          </div>
+          <div class="form-bottom-links">
+            <div class="signin-link"><a href="#">Sign in instead</a></div>
+            <div class="button submit-link">Submit</div>
+          </div>
+        </form>
+      </div>
+      <footer class="signup-footer">
+        <div class="language">English(United Kingdom)</div>
+        <div class="footer-link">&copy;2019 Copyright EPIC Mail.</div>
+      </footer>
+    </div>
+  </div>
+  <script src="js/main.js"></script>
+  <script type="text/javascript">
+    const showPassword = function() {
+      const passwordField = document.getElementById('password');
+      const confirmField = document.getElementById('confirm');
+      if(passwordField.getAttribute('type') === 'text') {
+        passwordField.setAttribute("type", "password"); 
+        confirmField.setAttribute("type", "password"); 
+      }
+      else {
+        passwordField.setAttribute("type", "text");
+        confirmField.setAttribute("type", "text");
+      }
+    }
+  </script>
+</body>
+</html>
