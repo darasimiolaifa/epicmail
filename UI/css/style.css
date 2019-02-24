@@ -179,7 +179,7 @@ a {
   padding: 2em;
 }
 
-.full-form-elements input[type="text"] {
+.full-form-elements input[type="text"], .full-form-elements input[type="password"] {
   width: 91%;
 }
 
@@ -261,3 +261,37 @@ a {
   justify-self: end;
 }
 /** Sign Up Page styling ends **/
+
+/** Sign in Page **/
+
+.login-form-div {
+  width: 50%;
+  margin: 0 auto;
+  border: .05em solid lightgray;
+  border-radius: .5em;
+  padding: 2em;
+}
+
+.login-form-title {
+  text-align: center;
+}
+
+.login-password-show {
+  float: right;
+  margin-right: .5em;
+  color: #4c9cdc;
+  font-weight: 500;
+}
+
+.login-password-forgot {
+  float: left;
+  margin-right: .5em;
+  color: #4c9cdc;
+  font-weight: 500;
+}
+
+.clearfix {
+  clear: both;
+}
+
+/** Sign in Page ends **/
