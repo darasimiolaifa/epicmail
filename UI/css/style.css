@@ -1,0 +1,163 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, Roboto, 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-size: 1em;
+}
+
+.container {
+  width: 100%;
+  position: absolute;
+}
+
+.container-fixed-header {
+  position: fixed;
+  height: 4.2em;
+  width: 100%;
+  padding: 0 1em .8em 1em;
+  background-color: whitesmoke;
+  display: grid;
+  grid-template-columns: 65% 35%;
+}
+
+.logo-elements {
+  margin-top: 1.1em;
+  margin-left: .2em;
+}
+
+.logo-elements p{
+  display: inline-block;
+  margin-left: .2em;
+  transform: translateY(-30%);
+  font-size: 1.5em;
+  color: dodgerblue;
+}
+
+.navbar-list-items {
+  list-style-type: none;
+  display: inline-block;
+  top: 0;
+  min-height: 5em;
+}
+
+.navbar-list a:hover {
+  color: #4c9cdc;
+}
+
+.navbar-list-items p {
+  font-size: 1em;
+  text-transform: uppercase;
+  padding: 1.8em 1.3em 0 1.3em;
+}
+
+.navbar-list a:nth-of-type(3) li {
+  background-color: #4c9cdc;
+}
+
+.navbar-list a:nth-child(3) p {
+  color: white;
+}
+
+.main-content {
+  width: 100%;
+  margin-top: 5em;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.main-content > header {
+  background-image: url('../images/computer-3368242_1920.jpg');
+  height: 73em;
+  background-repeat: no-repeat;
+  display: grid;
+  grid-template-columns: 40% 60%;
+}
+
+.main-content-statement {
+  margin: 13em 0 0 5em;
+  color: white;
+}
+
+.main-content-statement h1 {
+  font-size: 3em;
+  margin-bottom: 1em;
+}
+
+.create-account {
+  background-color: #4c9cdc;
+  height: 5em;
+  width: fit-content;
+}
+
+.create-account p {
+  font-size: 1em;
+  padding: 1.8em;
+  text-transform: uppercase;
+  color: white;
+}
+
+.features-intro {
+  width: 50%;
+  margin: 8em auto 5em;
+  text-align: center;
+}
+
+.features-intro h1 {
+  font-size: 2.7em;
+  font-weight: 300;
+  margin-bottom: 1em;
+}
+
+.features-intro p {
+  margin: 0 3em;
+}
+
+.feature-illustration {
+  display: grid;
+  grid-template-columns: 33.3% 33.3% 33.3%;
+  margin-bottom: 5em;
+}
+
+.feature-illustration-details {
+  margin-left: 3em;
+  margin-right: 1em;
+  border: .04em solid grey;
+  border-radius: .7em .7em .3em .3em;
+  text-align: center;
+  padding-bottom: 1em;
+}
+
+.feature-illustration-details img {
+  width: 99.8%;
+  height: 13em;
+  border-radius: .7em .7em 0 0;
+  margin-bottom: 1.2em;
+}
+
+.feature-illustration-details p.title {
+  font-size: 1.5em;
+}
+
+.feature-illustration-details p.details {
+  padding: 1em 1.5em;
+}
+
+footer {
+  background-color: rgba(119, 136, 153, 1);
+  color: white;
+}
+
+.copyright{
+  text-align: center;
+  font-size: 1.5em;
+}
+
+.company-name {
+  color: #4c9cdc;
+}
