@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="css/style.css">
+  <title>EPIC Mail</title>
+</head>
+<body>
+  <div class="container">
+    <div class="form-container">
+      <div class="login-form-div">
+        <div class="signup-heading">
+          <h1 class="login-form-title">Sign in.</h1>
+        </div>
+        <form id="signup-form" class="form-element">
+          <div class="full-form-elements">
+            <input type="text" name="username" id="username" placeholder="Username">
+          </div>
+          <div class="full-form-elements">
+            <input type="password" name="password" id="password" placeholder="Password">
+            <a href="#"><span class="login-password-forgot" onclick="">Forgot password</span></a>
+            <a href="#"><span class="login-password-show" onclick="showPassword()">Show</span></a>
+          </div>
+          <div class="clearfix"></div>
+          <div class="form-bottom-links">
+            <div class="signin-link"><a href="#">Create Account</a></div>
+            <div class="button submit-link">Log In</div>
+          </div>
+        </form>
+      </div>
+      <footer class="signup-footer">
+        <div class="language">English(United Kingdom)</div>
+        <div class="footer-link">&copy;2019 Copyright EPIC Mail.</div>
+      </footer>
+    </div>
+  </div>
+  <script src="js/main.js"></script>
+  <script type="text/javascript">
+    const showPassword = function() {
+      const passwordField = document.getElementById('password');
+      if(passwordField.getAttribute('type') === 'text') {
+        passwordField.setAttribute("type", "password");
+      }
+      else {
+        passwordField.setAttribute("type", "text");
+      }
+    }
+  </script>
+</body>
+</html>
