@@ -275,7 +275,7 @@ a {
   background-repeat: no-repeat;
   display: grid;
   grid-template-columns: 20% 79%;
-  padding-top: 5em;
+  padding-top: 2em;
   opacity: .75;
 }
 
@@ -294,8 +294,20 @@ tr.data {
 }
 
 tr.data:hover {
-  box-shadow: 0 .1em .26em gray;
+  box-shadow: 0 .15em .4em gray;
   cursor: pointer;
+}
+
+tr.data td:nth-of-type(1) {
+  width: 20%;
+}
+
+tr.data td:nth-of-type(2) {
+  width: 70%;
+}
+
+tr.data td:nth-of-type(3) {
+  width: 10%;
 }
 
 input[type='checkbox']:hover {
@@ -351,6 +363,10 @@ td {
   font-weight: 500;
 }
 
+.search:focus {
+  opacity: 1;
+}
+
 .statement {
   font-weight: 400;
 }
@@ -381,7 +397,89 @@ td {
   background-color: rgba(255, 255, 255, .3);
   border-radius: .1em 2em 2em .1em;
 }
+
+.number-of-mails {
+  margin-left: 47%;
+}
+
+.read-mail h1 {
+  font-weight: 400;
+}
+
+.read-mail {
+  padding: 1.5em 2.5em 6em 3em;
+}
+
+.sender-and-time {
+  display: grid;
+  grid-template-columns: 75% 25%;
+  margin-bottom: 1.2em;
+  margin-top: 1em;
+}
+
+.read-mail hr {
+  border: .03em solid grey;
+  opacity: .1;
+}
+
+.sender-mail, .receipient-mail, .time {
+  font-size: small;
+  font-weight: 400;
+}
+
+.read-mail h1 {
+  font-size: 1.9em
+}
+
+.sender-name {
+  font-weight: 700;
+  font-size: .95em;
+}
+
+.message {
+  margin-top: .7em;
+}
+.message p{
+  margin-bottom: 1em ;
+  margin-right: 2em;
+  font-size: .94em;
+}
+
+.reply-buttons-item{
+  display: inline-block;
+  margin: .7em;
+  border: 1px solid dodgerblue;
+  border-radius: .4em;
+  color: dodgerblue;
+  width: 5em;
+  padding: .6em;
+  text-align: center;
+}
+
+#sent-mail {
+  display: none;
+}
+
+#drafts-mail {
+  display: none;
+}
+
+.mail-icons {
+  margin-left: .7em;
+}
+
+.mail-icons:hover {
+  color: #4c9cdc;
+}
+
+.reply-buttons-item:hover {
+  background-color: rgb(30, 144, 255, .7);
+  color: white;
+  border: 1px solid white;
+  cursor: pointer;
+}
 /** Inbox Page Styling ends **/
+
 /** Sign in Page **/
 
 .login-form-div {

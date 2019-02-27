@@ -13,9 +13,9 @@
     <sidebar class="inbox-sidebar-nav">
       <ul class="inbox-menu">
         <a href="#"><li class="inbox-menu-items" id="nav-compose"><span class="icon"><i class="fas fa-edit"></span></i>Compose</li></a>
-        <a href="#"><li class="inbox-menu-items inbox-active" id="nav-inbox"><span class="icon"><i class="fas fa-inbox"></span></i>Inbox</li></a>
+        <a href="#"><li class="inbox-menu-items inbox-active" id="nav-inbox"><span class="icon"><i class="fas fa-inbox"></span></i>Inbox <span class="number-of-mails">3</span></li></a>
         <a href="#"><li class="inbox-menu-items" id="nav-sent"><span class="icon"><i class="fas fa-envelope"></span></i>Sent</li></a>
-        <a href="#"><li class="inbox-menu-items" id="nav-drafts"><span class="icon"><i class="fas fa-folder"></span></i>Drafts</li></a>
+        <a href="#"><li class="inbox-menu-items" id="nav-drafts"><span class="icon"><i class="fas fa-folder"></span></i>Drafts <span class="number-of-mails">3</span></li></a>
         <a href="#"><li class="inbox-menu-items" id="nav-groups"><span class="icon"><i class="fas fa-users"></span></i>Groups</li></a>
       </ul>
     </sidebar>
@@ -28,22 +28,74 @@
             <span class="email-type" id="sent"><i data-id="sent"class="nav-icon fas fa-envelope"></i>Sent</span>
             <span class="email-type" id="drafts"><i data-id="drafts" class="nav-icon fas fa-folder"></i>Drafts</span>
           </div>
-          <table>
+          <table id="inbox-mail">
             <tr class="data">
-              <td class="sender-name"><input type="checkbox" name="" id=""> Ade Damola</td>
-              <td>This is a sample email for your consideration</td>
+              <td class="sender-name"><input type="checkbox" name="" id=""> Andela Nigeria</td>
+              <td>Congratulations - <span class='statement'>Hi Darasimi. We are pleased to inform...</span></td>
               <td>Feb 24</td>
             </tr>
             <tr class="data">
-                <td class="sender-name"><input type="checkbox" name="" id=""> Ade Damola</td>
-                <td>This is a sample email for your consideration - <span class='statement'>Hi Dear. We are pleased to inform</span></td>
+                <td class="sender-name"><input type="checkbox" name="" id=""> Andela Nigeria</td>
+                <td>Congratulations - <span class='statement'>Hi Darasimi. We are pleased to inform...</span></td>
                 <td>Feb 24</td>
             </tr>
             <tr class="data">
-                <td class="sender-name"><input type="checkbox" name="" id=""> Ade Damola</td>
-                <td>This is a sample email for your consideration</td>
+                <td class="sender-name"><input type="checkbox" name="" id=""> ANdela Nigeria</td>
+                <td>Congratulations - <span class='statement'>Hi Darasimi. We are pleased to inform...</span></td>
                 <td>Feb 24</td>
               </tr>
+          </table>
+          <table id="sent-mail">
+            <tr class="data">
+              <td class="sender-name"><input type="checkbox" name="" id=""> Babatope Oni</td>
+              <td>This is a sent message - <span class='statement'>Hi Boss. Please can i ask you for...</span></td>
+              <td>
+                <span><i class="mail-icons fas fa-undo"></i></span>
+                <span><i class="mail-icons fas fa-trash"></i></span>
+              </td>
+            </tr>
+            <tr class="data">
+              <td class="sender-name"><input type="checkbox" name="" id=""> James Efe</td>
+              <td>This is a sent message - <span class='statement'>Hi Boss. Please can i ask you for...</span></td>
+              <td>
+                <span><i class="mail-icons fas fa-undo"></i></span>
+                <span><i class="mail-icons fas fa-trash"></i></span>
+              </td>
+            </tr>
+            <tr class="data">
+              <td class="sender-name"><input type="checkbox" name="" id=""> Bola Adedeji</td>
+              <td>This is a sent message - <span class='statement'>Hi Boss. Please can i ask you for...</span></td>
+              <td>
+                <span><i class="mail-icons fas fa-undo"></i></span>
+                <span><i class="mail-icons fas fa-trash"></i></span>
+              </td>
+            </tr>
+          </table>
+          <table id="drafts-mail">
+            <tr class="data">
+              <td class="sender-name"><input type="checkbox" name="" id=""> Tosin Adedeji</td>
+              <td>This is a draft. Send or delete later. - <span class='statement'>Bro. I would like to ask you...</span></td>
+              <td>
+                  <span><i class="mail-icons fas fa-edit"></i></span>
+                  <span><i class="mail-icons fas fa-trash"></i></span>
+              </td>
+            </tr>
+            <tr class="data">
+              <td class="sender-name"><input type="checkbox" name="" id=""> Seun Omotehinse</td>
+              <td>This is a draft. Send or delete later. - <span class='statement'>Bro. I would like to ask you...</span></td>
+              <td>
+                  <span><i class="mail-icons fas fa-edit"></i></span>
+                  <span><i class="mail-icons fas fa-trash"></i></span>
+              </td>
+            </tr>
+            <tr class="data">
+              <td class="sender-name"><input type="checkbox" name="" id=""> Bola Shomoye</td>
+              <td>This is a draft. Send or delete later. - <span class='statement'>Bro. I would like to ask you...</span></td>
+              <td>
+                  <span><i class="mail-icons fas fa-edit"></i></span>
+                  <span><i class="mail-icons fas fa-trash"></i></span>
+              </td>
+            </tr>
           </table>
         </div>
       </main>
@@ -64,18 +116,32 @@
     const addActive = (e) => {
       elementsArray.forEach(element => {
         let divElement = document.getElementById(element);
+        let inboxNav = document.getElementById('inbox');
         if (e.target.id && e.target.id === `nav-${element}`) {
-          divElement ? divElement.classList.add('email-section-active'): true;
+          if(divElement) {
+            divElement.classList.add('email-section-active');
+            document.getElementById(`${element}-mail`).style.display = 'table';
+          }
+          else {
+            inboxNav.classList.add('email-section-active');
+            document.getElementById('inbox-mail').style.display = 'table';
+          }
           document.getElementById(`nav-${element}`).classList.add('inbox-active');
         }
         
         else if(e.target.id !== element) {
-          divElement ? divElement.classList.remove('email-section-active') : true;
+          if(divElement) {
+            divElement.classList.remove('email-section-active');
+            document.getElementById(`${element}-mail`).style.display = 'none';
+          }
           document.getElementById(`nav-${element}`).classList.remove('inbox-active');
         }
         
         else if(e.target.id) {
-          divElement ? divElement.classList.add('email-section-active') : true;
+          if(divElement) {
+            divElement.classList.add('email-section-active');
+            document.getElementById(`${element}-mail`).style.display = 'table';
+          }
           document.getElementById(`nav-${element}`).classList.add('inbox-active');
         }
     });

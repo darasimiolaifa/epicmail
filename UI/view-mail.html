@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>EPIC Mail</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/all.min.css">
+</head>
+<body>
+  <div class="container inbox">
+    <sidebar class="inbox-sidebar-nav">
+      <ul class="inbox-menu">
+        <a href="#"><li class="inbox-menu-items" id="nav-compose"><span class="icon"><i class="fas fa-edit"></span></i>Compose</li></a>
+        <a href="#"><li class="inbox-menu-items inbox-active" id="nav-inbox"><span class="icon"><i class="fas fa-inbox"></span></i>Inbox <span class="number-of-mails">3</span></li></a>
+        <a href="#"><li class="inbox-menu-items" id="nav-sent"><span class="icon"><i class="fas fa-envelope"></span></i>Sent</li></a>
+        <a href="#"><li class="inbox-menu-items" id="nav-drafts"><span class="icon"><i class="fas fa-folder"></span></i>Drafts <span class="number-of-mails">3</span></li></a>
+        <a href="#"><li class="inbox-menu-items" id="nav-groups"><span class="icon"><i class="fas fa-users"></span></i>Groups</li></a>
+      </ul>
+    </sidebar>
+    <div class="mail-div">
+      <input type="text" id="search" name="search" class="search" placeholder="Search Mail">
+      <main class="inbox-main-content">
+        <div class="emails-div">
+          <div class="read-mail">
+            <h1 class="title">This is a sample email</h1>
+            <div class="sender-and-time">
+              <span class="sender-name"> Ade Makinde <span class="sender-mail">&lt;noreply@mymail.com&gt;</span>
+                <p class="receipient-mail">to myfriend@ourmail.com</p>
+              </span>
+              <span class="time">Fri, Feb 22, 9:00 AM (5 days ago)</span>
+            </div>
+            <hr />
+            <div class="sender-and-time">
+              <span class="sender-name"> Ade Makinde <span class="sender-mail">&lt;noreply@mymail.com&gt;</span>
+                <p class="receipient-mail">to myfriend@ourmail.com</p>
+              </span>
+              <span class="time">Fri, Feb 22, 9:00 AM (5 days ago)</span>
+            </div>
+            <hr />
+            <div class="sender-and-time">
+              <span class="sender-name"> Ade Makinde <span class="sender-mail">&lt;noreply@mymail.com&gt;</span>
+                <p class="receipient-mail">to myfriend@ourmail.com</p>
+              </span>
+              <span class="time">Fri, Feb 22, 9:00 AM (5 days ago)</span>
+            </div>
+            <hr />
+            <div class="sender-and-time">
+              <span class="sender-name"> Ade Makinde <span class="sender-mail">&lt;noreply@mymail.com&gt;</span>
+                <p class="receipient-mail">to myfriend@ourmail.com</p>
+              </span>
+              <span class="time">Fri, Feb 22, 9:00 AM (5 days ago)</span>
+            </div>
+            <div class="message">
+              <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dicta, voluptatibus et dolores aut reiciendis sed. Eveniet voluptates, non maxime adipisci quisquam dolorum ex beatae aut debitis tempora odit deserunt blanditiis?</p>
+              <p>Suscipit molestias ea nemo eum sequi repellat alias eos iste perferendis aperiam fugiat neque, distinctio nulla obcaecati itaque? Est, natus perferendis! Beatae delectus culpa, sapiente eveniet amet commodi blanditiis dicta?</p>
+              <p>Voluptates omnis magni facilis sunt voluptas quos ad adipisci quia delectus perspiciatis soluta, iure quod aliquid autem veritatis. Modi amet tenetur nostrum explicabo, a omnis mollitia aliquam placeat porro dolores?</p>
+              <p>Quidem rerum recusandae officia nisi unde. Eligendi cumque earum asperiores exercitationem corrupti consectetur harum odio similique facilis nemo numquam, id aperiam, vel ullam non maiores beatae quas maxime? Laboriosam, id.</p>
+              <p>Aliquid saepe doloribus magni obcaecati quas molestias possimus quo asperiores explicabo reiciendis, recusandae ullam consequatur sint a. Animi cupiditate voluptate sapiente! Aspernatur, fugit saepe laboriosam reprehenderit ab minima tempora fugiat!</p>
+            </div>
+            <div class="reply-buttons">
+              <div class="reply-buttons-item">Reply</div>
+              <div class="reply-buttons-item">Reply All</div>
+              <div class="reply-buttons-item">Forward</div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script src="./js/main.js"></script>
+  <script src="./js/all.min.js"></script>
+  
+  <script type="text/javascript">
+    const elementsArray = ['inbox', 'sent', 'drafts', 'compose', 'groups'];
+    
+    elementsArray.forEach(element => {
+      document.getElementById(`nav-${element}`).addEventListener('click', (e) => addActive(e))
+      let divElement = document.getElementById(element);
+      divElement ? divElement.addEventListener('click', (e) => addActive(e)) : true;
+    });
+    
+    const addActive = (e) => {
+      elementsArray.forEach(element => {
+        let divElement = document.getElementById(element);
+        if (e.target.id && e.target.id === `nav-${element}`) {
+          divElement ? divElement.classList.add('email-section-active'): true;
+          document.getElementById(`nav-${element}`).classList.add('inbox-active');
+        }
+        
+        else if(e.target.id !== element) {
+          divElement ? divElement.classList.remove('email-section-active') : true;
+          document.getElementById(`nav-${element}`).classList.remove('inbox-active');
+        }
+        
+        else if(e.target.id) {
+          divElement ? divElement.classList.add('email-section-active') : true;
+          document.getElementById(`nav-${element}`).classList.add('inbox-active');
+        }
+    });
+  }
+  </script>
+</body>
+</html>
