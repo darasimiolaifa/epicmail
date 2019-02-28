@@ -489,6 +489,7 @@ hr {
   font-size: 1.1em;
   resize: none;
   overflow: auto;
+  height: 90%;
 }
 
 .compose-close {
