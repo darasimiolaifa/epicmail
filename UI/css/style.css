@@ -216,7 +216,7 @@ a {
 .button {
   height: 3em;
   color: white;
-  background: #4c9cdc;
+  background: #1a73e8;
   width: fit-content;
   height: fit-content;
   padding: .7em 1.7em;
@@ -417,7 +417,7 @@ td {
   margin-top: 1em;
 }
 
-.read-mail hr {
+hr {
   border: .03em solid grey;
   opacity: .1;
 }
@@ -431,6 +431,86 @@ td {
   font-size: 1.9em
 }
 
+.compose-mail {
+  background-color: white;
+  z-index: 100;
+  position: fixed;
+  width: 38%;
+  height: 70vh;
+  top: 30%;
+  left: 60%;
+  opacity: 0;
+  visibility: hidden;
+  display: grid;
+  grid-template-rows: 8% 92%;
+}
+
+.compose-mail:target {
+  opacity: 1;
+  visibility: visible;
+}
+
+.compose-buttons {
+  padding: .5em 1em;
+}
+
+.compose-buttons  span{
+  margin-right: .5em;
+}
+
+/*.compose-buttons .send-button {
+  height: 1em;
+  background-color: blue;
+  text-align: center;
+  padding: .5em .8em;
+}*/
+
+.compose-mail .compose-header {
+  background-color: black;
+  color: white;
+}
+
+.compose-header {
+  padding: .55em .9em;
+}
+
+.compose-mail-body {
+  display: grid;
+  grid-template-rows: 15% 70% 10%;
+}
+
+.compose-mail input[type="text"], .compose-mail textarea {
+  border: none;
+  width: 97%;
+  margin: .8em 1em;;
+}
+
+.compose-mail textarea {
+  font-size: 1.1em;
+  resize: none;
+  overflow: auto;
+}
+
+.compose-close {
+  color: grey;
+  font-size: 1.55em;
+  position: absolute;
+  top: .03em;
+  right: .5em;
+}
+
+.compose-minimize {
+  color: grey;
+  font-size: 1.55em;
+  position: absolute;
+  top: .03em;
+  right: 2em;
+}
+
+.compose-mail input:focus, .compose-mail textarea:focus {
+  outline: none !important;
+}
+
 .sender-name {
   font-weight: 700;
   font-size: .95em;
@@ -439,6 +519,7 @@ td {
 .message {
   margin-top: .7em;
 }
+
 .message p{
   margin-bottom: 1em ;
   margin-right: 2em;
