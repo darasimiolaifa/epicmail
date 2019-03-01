@@ -775,6 +775,15 @@ hr {
   .sender-checkbox {
     display: none;
   }
+  
+  .admin-form-div {
+    width: 90%;
+    padding: 1em 1em;
+  }
+  
+  .admin-form-container {
+    width: 90%;
+  }
 }
 
 @media (min-width: 481px) and (max-width: 767px) {
@@ -875,4 +884,14 @@ hr {
     padding-bottom: 1em;
     margin-bottom: 1.8em;
   }
+  
+  .admin-form-div {
+    width: 60%;
+    padding: 4em 4em;
+  }
+  
+  .admin-form-container {
+    width: 100%;
+  }
+  
 }

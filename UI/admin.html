@@ -55,10 +55,10 @@
   
   <script type="text/javascript">
     const addUsers = function() {
-      const value = document.getElementById('group').value
+      const groupField = document.getElementById('group');
       const groupDiv = document.getElementById('group-div');
-      const submitButton = document.getElementById('submit-group');
-      const submitText = submitButton.innerText;
+      const value = groupField.value;
+      groupField.value = '';
       const addUserForm = `
       <select>
         <option value="${value}" selected>${value}</option>
@@ -66,7 +66,7 @@
       <input type="text" name="otp" id="otp" placeholder="Enter the email of users, to add them to group">
       `
       groupDiv.innerHTML = addUserForm;
-      submitButton.innerText = 'Add Users';
+      document.getElementById('submit-group').innerText = 'Add Users';
     }
   </script>
 </body>
