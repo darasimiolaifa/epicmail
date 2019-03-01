@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>EPIC Mail</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/all.min.css">
+</head>
+<body>
+  <div class="container inbox">
+    <sidebar class="inbox-sidebar-nav">
+      <ul class="inbox-menu">
+        <a href="#"><li class="inbox-menu-items" id="nav-compose"><span class="icon"><i class="fas fa-edit"></span></i><span class="icon-text">Compose</span></li></a>
+        <a href="#"><li class="inbox-menu-items inbox-active" id="nav-inbox"><span class="icon"><i class="fas fa-inbox"></span></i><span class="icon-text">Inbox </span><span class="number-of-mails">3</span></li></a>
+        <a href="#"><li class="inbox-menu-items" id="nav-sent"><span class="icon"><i class="fas fa-envelope"></span></i><span class="icon-text">Sent</span></li></a>
+        <a href="#"><li class="inbox-menu-items" id="nav-drafts"><span class="icon"><i class="fas fa-folder"></span></i><span class="icon-text">Drafts</span><span class="number-of-mails">3</span></li></a>
+        <a href="#"><li class="inbox-menu-items" id="nav-groups"><span class="icon"><i class="fas fa-users"></span></i><span class="icon-text">Groups</span></li></a>
+      </ul>
+    </sidebar>
+    <div class="mail-div">
+      <input type="text" id="search" name="search" class="search" placeholder="Search Mail">
+      <main class="inbox-main-content">
+        <div class="emails-div">
+          <div class="read-mail">
+            <h1 class="title">Welcome, Admin.</h1>
+            <div class="admin-form-container">
+                <div class="admin-form-div">
+                  <div class="signup-heading">
+                    <h1 class="login-form-title">Create User Group</h1>
+                  </div>
+                  <form id="signup-form" class="form-element">
+                    <div class="full-form-elements" id="group-div">
+                      <input type="text" name="group" id="group" placeholder="Enter group name">
+                    </div>
+                    <div class="form-bottom-links">
+                      <div class="signin-link"><a href="#"></a></div>
+                      <div class="button submit-link" onclick="addUsers()" id="submit-group">Create group</div>
+                    </div>
+                  </form>
+                </div>
+                <footer class="signup-footer">
+                  <div class="language">English(United Kingdom)</div>
+                  <div class="footer-link">&copy;2019 Copyright EPIC Mail.</div>
+                </footer>
+              </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <script src="./js/main.js"></script>
+  <script src="./js/all.min.js"></script>
+  
+  <script type="text/javascript">
+    const addUsers = function() {
+      const value = document.getElementById('group').value
+      const groupDiv = document.getElementById('group-div');
+      const submitButton = document.getElementById('submit-group');
+      const submitText = submitButton.innerText;
+      const addUserForm = `
+      <select>
+        <option value="${value}" selected>${value}</option>
+      </select>
+      <input type="text" name="otp" id="otp" placeholder="Enter the email of users, to add them to group">
+      `
+      groupDiv.innerHTML = addUserForm;
+      submitButton.innerText = 'Add Users';
+    }
+  </script>
+</body>
+</html>
