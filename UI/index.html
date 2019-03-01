@@ -20,10 +20,17 @@
       <nav class="navigation">
         <ul class="navbar-list">
           <a href="#productivity"><li class="navbar-list-items"><p>Productivity</p></li></a>
-          <a href="#"><li class="navbar-list-items"><p>Sign in</p></li></a>
-          <a href="#"><li class="navbar-list-items"><p>Create an Account</p></li></a>
+          <a href="signin.html"><li class="navbar-list-items"><p>Sign in</p></li></a>
+          <a href="signup.html"><li class="navbar-list-items"><p>Create an Account</p></li></a>
         </ul>
-        <a href="" class="navbar-mobile-icon"><i class="fas fa-th-list"></i></a>
+        <a href="#" class="navbar-mobile-icon" id="mobile-navbar-icon"><i class="fas fa-th-list"></i></a>
+        <div class="mobile-nav-div" id="mobile-nav-div">
+          <ul class="mobile-navbar-list">
+            <a href="#productivity"><li class="mobile-navbar-list-items"><p>Productivity</p></li></a>
+            <a href="signin.html"><li class="mobile-navbar-list-items"><p>Sign in</p></li></a>
+            <a href="signup.html"><li class="mobile-navbar-list-items"><p>Create Account</p></li></a>
+          </ul>
+        </div>
       </nav>
     </div>
     <main class="main-content">
@@ -67,5 +74,24 @@
   </div>
   <script src="js/main.js"></script>
   <script src="./js/all.min.js"></script>
+  
+  <script>
+    document.getElementById('mobile-navbar-icon').addEventListener('click', (e) => openNav(e));
+    
+    const openNav = (e) => {
+      e.preventDefault();  
+      document.getElementById('mobile-nav-div').style.display = 'block';
+      document.getElementById('mobile-navbar-icon').removeEventListener('click', (e) => openNav(e));
+      document.getElementById('mobile-navbar-icon').addEventListener('click', (e) => closeNav(e));
+    }
+    
+    const closeNav = (e) => {
+      e.preventDefault();  
+      document.getElementById('mobile-nav-div').style.display = 'none';
+      document.getElementById('mobile-navbar-icon').removeEventListener('click', (e) => closeNav(e));
+      document.getElementById('mobile-navbar-icon').addEventListener('click', (e) => openNav(e));
+    }
+  
+  </script>
 </body>
 </html>

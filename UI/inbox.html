@@ -16,7 +16,7 @@
         <a href="#"><li class="inbox-menu-items inbox-active" id="nav-inbox"><span class="icon"><i class="fas fa-inbox"></span></i><span class="icon-text">Inbox </span><span class="number-of-mails">3</span></li></a>
         <a href="#"><li class="inbox-menu-items" id="nav-sent"><span class="icon"><i class="fas fa-envelope"></span></i><span class="icon-text">Sent</span></li></a>
         <a href="#"><li class="inbox-menu-items" id="nav-drafts"><span class="icon"><i class="fas fa-folder"></span></i><span class="icon-text">Drafts </span><span class="number-of-mails">3</span></li></a>
-        <a href="#"><li class="inbox-menu-items" id="nav-groups"><span class="icon"><i class="fas fa-users"></span></i><span class="icon-text">Groups</span></li></a>
+        <a href="admin.html"><li class="inbox-menu-items" id="nav-groups"><span class="icon"><i class="fas fa-users"></span></i><span class="icon-text">Groups</span></li></a>
       </ul>
     </sidebar>
     <div class="mail-div">
@@ -132,6 +132,11 @@
     document.getElementById('nav-sent').addEventListener('click', (e) => addActive(e, 'nav-sent'));
     document.getElementById('drafts').addEventListener('click', (e) => addActive(e, 'drafts'));
     document.getElementById('nav-drafts').addEventListener('click', (e) => addActive(e, 'nav-drafts'));
+    const mailRows = document.getElementsByClassName('data');
+    
+    for (const element of mailRows) {
+      element.addEventListener('click', (e) => showViewMailPage(e));
+    }
     
     document.getElementById('compose-minimize').addEventListener('click', (e) => addMinimize(e));
     
@@ -150,7 +155,6 @@
       });
     }
     
-    
     const addMinimize = (e) => {
       e.preventDefault();
       document.getElementById('compose-mail').style.top = '94.5%';
@@ -163,6 +167,10 @@
       document.getElementById('compose-mail').style.top = '30%';
       document.getElementById('compose-minimize').removeEventListener('click', (e) => addMaximize(e))
       document.getElementById('compose-minimize').addEventListener('click', (e) => addMinimize(e));
+    }
+    
+    const showViewMailPage = (e) => {
+      window.location.href = './view-mail.html';
     }
   </script>
 </body>

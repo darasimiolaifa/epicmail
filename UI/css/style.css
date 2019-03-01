@@ -172,6 +172,35 @@ a {
   font-size: 1em;
 }
 
+.mobile-nav-div {
+  display: none;
+}
+
+.mobile-navbar-list {
+  background: whitesmoke;
+}
+
+.mobile-navbar-list a {
+  padding: .5em .1em .5em 1em;
+  text-decoration: none;
+  font-size: 1.1em;
+  color: black;
+  display: block;
+  transition: 0.3s;
+}
+
+.mobile-navbar-list a:hover {
+  color: #4c9cdc;
+}
+
+.mobile-navbar-list .closebtn {
+  position: absolute;
+  top: 0;
+  right: 4em;
+  font-size: 2em;
+  margin-left: 2em;
+}
+
 /** Index Page styling ends **/
 
 /** Sign Up Page styling **/
@@ -265,20 +294,26 @@ select {
   margin-left: 1em
 }
 
-.signup-footer {
-  margin-left: 12em;
-  margin-top: 2em;
+.signup-footer, .admin-signup-footer {
+  margin: 1em auto;
   font-size: .8em;
   display: grid;
   grid-template-columns: 50% 50%;
 }
 
-.language {
-  justify-self: start;
-  
+.admin-signup-footer {
+  width: 80%;
 }
 
-.footer-lihk {
+.signup-footer {
+  width: 60%;
+}
+
+.language {
+  justify-self: start;
+}
+
+.footer-link {
   justify-self: end;
 }
 /** Sign Up Page styling ends **/
@@ -784,6 +819,10 @@ hr {
   .admin-form-container {
     width: 90%;
   }
+  
+  .signup-footer {
+    width: 100%; 
+  }
 }
 
 @media (min-width: 481px) and (max-width: 767px) {
@@ -894,4 +933,7 @@ hr {
     width: 100%;
   }
   
+  .admin-signup-footer {
+    width: 80%;
+  } 
 }

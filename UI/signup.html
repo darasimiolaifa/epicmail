@@ -8,6 +8,8 @@
   <title>EPIC Mail</title>
 </head>
 <body>
+    <div id="fb-root"></div>
+    <script async defer src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2&appId=363177464522399&autoLogAppEvents=1"></script>
   <div class="container">
     <div class="form-container">
       <div class="form-div">
@@ -31,9 +33,10 @@
             <a href="#"><span class="show" onclick="showPassword()">Show</span></a>
           </div>
           <div class="form-bottom-links">
-            <div class="signin-link"><a href="#">Sign in instead</a></div>
-            <div class="button submit-link">Submit</div>
+            <div class="signin-link"><a href="signin.html">Sign in instead</a></div>
+            <div class="button submit-link" id="create">Submit</div>
           </div>
+          <!--<div class="fb-login-button" data-size="medium" data-button-type="login_with" data-auto-logout-link="false" data-use-continue-as="true"></div> -->
         </form>
       </div>
       <footer class="signup-footer">
@@ -44,6 +47,7 @@
   </div>
   <script src="js/main.js"></script>
   <script type="text/javascript">
+    document.getElementById('create').addEventListener('click', (e) => window.location.href = './inbox.html');
     const showPassword = function() {
       const passwordField = document.getElementById('password');
       const confirmField = document.getElementById('confirm');
