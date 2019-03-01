@@ -6,6 +6,7 @@
 body {
   font-family: -apple-system, BlinkMacSystemFont, Roboto, 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-size: 1em;
+  height: 100%;
 }
 
 h1 {
@@ -69,6 +70,13 @@ li {
 
 .navbar-list a:nth-of-type(3) li {
   background-color: #4c9cdc;
+}
+
+.navbar-mobile-icon {
+  font-size: 1.9em;
+  margin: .5em 0 0 3.5em;
+  color: #4c9cdc;
+  display: none;
 }
 
 .navbar-list a:nth-child(3) p {
@@ -205,12 +213,21 @@ a {
   font-weight: 500;
 }
 
-.form-element input[type="text"], .form-element input[type="password"]{
+.form-element input[type="text"], .form-element input[type="password"] {
   height: 1.6em;
   margin: 1em 1em 1em 0;
   border: .05em solid lightgrey;
   border-radius: .3em;
   padding: .5em 1em;
+}
+
+select {
+  width: 97%;
+  height: 2.75em;
+  padding: .5em 1em;
+  margin: 1em 1em 1em 0;
+  border-radius: .3em;
+  border: .05em solid lightgrey;
 }
 
 .button {
@@ -404,6 +421,7 @@ td {
 
 .read-mail h1 {
   font-weight: 400;
+  font-size: 1.9em
 }
 
 .read-mail {
@@ -425,10 +443,6 @@ hr {
 .sender-mail, .receipient-mail, .time {
   font-size: small;
   font-weight: 400;
-}
-
-.read-mail h1 {
-  font-size: 1.9em
 }
 
 .compose-mail {
@@ -458,15 +472,8 @@ hr {
   margin-right: .5em;
 }
 
-/*.compose-buttons .send-button {
-  height: 1em;
-  background-color: blue;
-  text-align: center;
-  padding: .5em .8em;
-}*/
-
 .compose-mail .compose-header {
-  background-color: black;
+  background-color: rgba(0, 0, 0, .8);
   color: white;
 }
 
@@ -507,6 +514,7 @@ hr {
   top: .03em;
   right: 2em;
 }
+
 
 .compose-mail input:focus, .compose-mail textarea:focus {
   outline: none !important;
@@ -572,6 +580,19 @@ hr {
   padding: 2em;
 }
 
+.admin-form-div {
+  width: 80%;
+  margin: 0 auto;
+  border: .05em solid lightgray;
+  border-radius: .5em;
+  padding: 5em;
+}
+
+.admin-form-container {
+  width: 60%;
+  margin: 2em auto;
+}
+
 .login-form-title {
   text-align: center;
 }
@@ -595,3 +616,263 @@ hr {
 }
 
 /** Sign in Page ends **/
+
+/** Media queries **/
+
+@media (min-width : 320px) and (max-width: 480px) {
+  .navbar-list {
+    display: none;
+  }
+  
+  .logo-elements {
+    margin-top: .8em;
+  }
+  
+  .navbar-mobile-icon {
+    display: inline-block;
+  }
+  
+  .container-fixed-header {
+    height: 3.5em;
+    padding: 0 1em .8em .5em;
+  }
+  
+  .main-content > header {
+    background-image: url('../images/computer-3368242_1920.jpg');
+    height: 50em;
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-position-y: center;
+    display: grid;
+    grid-template-columns: 80% 20%;
+  }
+  
+  .main-content-statement {
+    margin: 5.5em 0 0 3em;
+    color: white;
+  }
+  
+  .main-content-statement h1 {
+    font-size: 2em;
+    margin-bottom: 1em;
+  }
+  
+  .create-account {
+    background-color: #4c9cdc;
+    height: 3em;
+    width: fit-content;
+  }
+   
+  .create-account p {
+    font-size: .9em;
+    padding: 1em;
+  }
+  
+  .features-intro {
+    width: 90%;
+    margin: 5em auto 3.5em;
+  }
+  
+  .features-intro p {
+    margin: 0 2em;
+  }
+  
+  .feature-illustration {
+    display: grid;
+    grid-template-columns: 90%;
+    margin-bottom: 1em;
+  }
+  
+  .feature-illustration-details img {
+    height: 14em;
+  }
+  
+  .feature-illustration-details {
+    margin: 0 0 2em 3.1em;
+  }
+  /** INDEX PAGE ENDS HERE **/
+  
+  /** RESET PASSWORD PAGE **/
+  
+  .form-container {
+    width: 80%;
+    margin: 5em 4em 5em 2em;
+  }
+  
+  .login-form-div {
+    width: 90%;
+  }
+  
+  .form-div {
+    width: 90%;
+  }
+  
+  /** PASSWORD-RESET PAGE ENDS HERE **/
+  
+  /** VIEW MAIL STARTS **/
+  
+  .inbox {
+    display: grid;
+    grid-template-columns: 15% 85%;
+    background-size: cover;
+  }
+  
+  .search {
+    width: 80%;
+    margin-left: 1em;
+  }
+  
+  .read-mail {
+    padding: 1.5em 1em 2em 1.5em;
+  }
+  
+  .message p{
+    margin-right: .5em;
+  }
+  
+  .reply-buttons-item {
+    margin: .3em;
+  }
+  
+  .number-of-mails {
+    display: none;
+  }
+  
+  .icon-text {
+    display: none;
+  }
+  
+  .icon {
+    font-size: 1.7em;
+    margin: .5em 1.5em 3em .7em;
+  }
+  
+  .inbox-active {
+    border-radius: 2em 3em 3em 2em;
+  }
+  
+  .inbox-menu-items {
+    padding-right: 4.5em;
+  }
+  
+  .inbox-menu-items:hover {
+    border-radius: 2em 3em 3em 2em;
+  }
+  
+  .compose-mail {
+    left: 16%;
+    width: 82%;
+  }
+  
+  .compose-mail-body {
+    grid-template-rows: 15% 72% 13%;
+  }
+  
+  .email-sections {
+    display: none;
+  }
+  
+  .sender-checkbox {
+    display: none;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+  .sender-checkbox {
+    display: none;
+  }
+  
+  .inbox {
+    display: grid;
+    grid-template-columns: 20% 78%;
+    background-size: cover;
+  }
+  
+  .mail-icons {
+    margin-left: .5em;
+  }
+  
+  tr.data td:nth-of-type(1) {
+    width: 20%;
+  }
+  
+  tr.data td:nth-of-type(2) {
+    width: 65%;
+  }
+  
+  tr.data td:nth-of-type(3) {
+    width: 15%;
+  }
+  
+  .number-of-mails {
+    margin-left: 1.3em;
+  }
+  
+  .icon {
+    margin: 0 .8em 0 1em;
+  }
+  
+  .compose-mail {
+    left: 27%;
+    width: 70%;
+  }
+  
+  .inbox-menu-items {
+    padding: .3em 0 .4em 0;
+  }
+  
+  .read-mail {
+    padding: 1.5em 1.5em 2em 2em;
+  }
+  
+  .form-container {
+    width: 80%;
+    margin: 5em 3em 5em 4.5em;
+  }
+  
+  .login-form-div {
+    width: 55%;
+  }
+  
+  .form-div {
+    width: 80%;
+  }
+  
+  .navbar-list-items p{
+    padding: 1.8em 1.2em 0 1em;
+  }
+  
+  .container-fixed-header {
+    display: grid;
+    grid-template-columns: 40% 60%;
+  }
+  
+  .main-content > header {
+    background-image: url('../images/computer-3368242_1920.jpg');
+    height: 65em;
+    display: grid;
+    grid-template-columns: 75% 25%;
+  }
+  
+  .main-content-statement {
+    margin-left: 2em;
+  }
+  
+  .features-intro {
+    width: 75%;
+    margin: 5em auto 5em;
+  }
+  
+  .feature-illustration {
+    display: grid;
+    grid-template-columns: 80%;
+    margin-bottom: 2em;
+  }
+  
+  .feature-illustration-details {
+    margin-left: 10em;
+    margin-right: 1em;
+    padding-bottom: 1em;
+    margin-bottom: 1.8em;
+  }
+}
