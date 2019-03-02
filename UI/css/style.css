@@ -678,6 +678,10 @@ hr {
     height: 31px;
   }
   
+  .logo-elements {
+    margin-top: 1.3em;
+  }
+  
   .logo-elements p{
     font-size: 1.25em;
   }
