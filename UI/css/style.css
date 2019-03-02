@@ -670,6 +670,16 @@ hr {
   .container-fixed-header {
     height: 3.5em;
     padding: 0 1em .8em .5em;
+    grid-template-columns: 55% 45%;
+  }
+  
+  .logo img {
+    width: 42px;
+    height: 31px;
+  }
+  
+  .logo-elements p{
+    font-size: 1.2em;
   }
   
   .main-content > header {
