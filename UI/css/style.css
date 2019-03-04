@@ -1,3 +1,5 @@
+/** GENERAL STYLE RULES **/
+
 *{
   margin: 0;
   padding: 0;
@@ -18,13 +20,29 @@ li {
   list-style-type: none;
 }
 
-
-/** Index Page styling **/
 .container {
   width: 100%;
   position: absolute;
 }
 
+a {
+  text-decoration: none;
+}
+
+.footer-link {
+  width: 100%;
+  text-align: center;
+}
+
+.clearfix {
+  clear: both;
+}
+/** GENERAL STYLE RULES END **/
+
+
+/** INDEX PAGE STYLING **/
+
+/* Header Navigation */
 .container-fixed-header {
   position: fixed;
   height: 4.2em;
@@ -73,8 +91,8 @@ li {
 }
 
 .navbar-mobile-icon {
-  font-size: 1.9em;
-  margin: .5em 0 0 3.5em;
+  font-size: 1.7em;
+  margin: .75em 0 0 4.5em;
   color: #4c9cdc;
   display: none;
 }
@@ -83,13 +101,39 @@ li {
   color: white;
 }
 
+.mobile-nav-div {
+  display: none;
+}
+
+.mobile-navbar-list {
+  background: whitesmoke;
+}
+
+.mobile-navbar-list a {
+  padding: .5em .1em .5em 1em;
+  text-decoration: none;
+  font-size: 1.1em;
+  color: black;
+  display: block;
+  transition: 0.3s;
+}
+
+.mobile-navbar-list a:hover {
+  color: #4c9cdc;
+}
+
+.mobile-navbar-list .closebtn {
+  position: absolute;
+  top: 0;
+  right: 4em;
+  font-size: 2em;
+  margin-left: 2em;
+}
+
+/* Main Content */
 .main-content {
   width: 100%;
   margin-top: 5em;
-}
-
-a {
-  text-decoration: none;
 }
 
 .main-content > header {
@@ -123,6 +167,7 @@ a {
   color: white;
 }
 
+/* Features Styling */
 .features-intro {
   width: 50%;
   margin: 8em auto 5em;
@@ -171,44 +216,14 @@ a {
   text-align: center;
   font-size: 1em;
 }
-
-.mobile-nav-div {
-  display: none;
-}
-
-.mobile-navbar-list {
-  background: whitesmoke;
-}
-
-.mobile-navbar-list a {
-  padding: .5em .1em .5em 1em;
-  text-decoration: none;
-  font-size: 1.1em;
-  color: black;
-  display: block;
-  transition: 0.3s;
-}
-
-.mobile-navbar-list a:hover {
-  color: #4c9cdc;
-}
-
-.mobile-navbar-list .closebtn {
-  position: absolute;
-  top: 0;
-  right: 4em;
-  font-size: 2em;
-  margin-left: 2em;
-}
-
 /** Index Page styling ends **/
 
 /** Sign Up Page styling **/
 
+/* Form Styling */
 .form-container {
   width: 60%;
   margin: 5em auto;
-  
 }
 
 .form-div {
@@ -219,7 +234,9 @@ a {
   padding: 2em;
 }
 
-.full-form-elements input[type="text"], .full-form-elements input[type="password"] {
+.full-form-elements input[type="text"],
+.full-form-elements input[type="password"],
+.full-form-elements textarea {
   width: 91%;
 }
 
@@ -242,12 +259,17 @@ a {
   font-weight: 500;
 }
 
-.form-element input[type="text"], .form-element input[type="password"] {
-  height: 1.6em;
+.form-element input[type="text"],
+.form-element input[type="password"],
+.form-element textarea {
   margin: 1em 1em 1em 0;
   border: .05em solid lightgrey;
   border-radius: .3em;
   padding: .5em 1em;
+}
+.form-element input[type="text"],
+.form-element input[type="password"] {
+  height: 1.6em;  
 }
 
 select {
@@ -259,25 +281,29 @@ select {
   border: .05em solid lightgrey;
 }
 
-.button {
+.button, .admin-button {
   height: 3em;
   color: white;
   background: #1a73e8;
   width: fit-content;
   height: fit-content;
-  padding: .7em 1.7em;
+  padding: .7em 1.3em;
   border-radius: .3em;
   margin-top: 1.7em;
   cursor: pointer;
 }
 
-.form-bottom-links {
+.form-bottom-links, .admin-form-bottom-links {
   display: grid;
   grid-template-columns: 50% 50%;
 }
 
 .submit-link {
   justify-self: end;
+}
+
+.save-link {
+  justify-self: start;
 }
 
 .signin-link a {
@@ -294,11 +320,10 @@ select {
   margin-left: 1em
 }
 
-.signup-footer, .admin-signup-footer {
+.signup-footer,
+.admin-signup-footer {
   margin: 1em auto;
   font-size: .8em;
-  display: grid;
-  grid-template-columns: 50% 50%;
 }
 
 .admin-signup-footer {
@@ -308,20 +333,13 @@ select {
 .signup-footer {
   width: 60%;
 }
-
-.language {
-  justify-self: start;
-}
-
-.footer-link {
-  justify-self: end;
-}
 /** Sign Up Page styling ends **/
 
 /** Inbox Page Styling **/
 
+/* Inbox Content Area */
 .inbox {
-  height: fit-content;
+  height: 100%;
   padding-bottom: 2em;
   background-image: url('../images/beach-bench-boardwalk-462024.jpg');
   background-repeat: no-repeat;
@@ -337,6 +355,57 @@ select {
   color: black;
 }
 
+/* EMail Serach field */
+.search {
+  width: 70%;
+  margin-bottom: 1em;
+  height: .9em;
+  padding: .7em 1.2em .7em 1.2em;
+  border-radius: .3em;
+  border: none;
+  opacity: .5;
+  font-size: 1.3em;
+  font-weight: 500;
+}
+
+.search:focus {
+  opacity: 1;
+}
+
+/* Inbox Side navigation */
+.inbox-sidebar-nav {
+  margin: 5.5em 1.5em 5.5em 0;
+}
+
+.inbox-sidebar-nav a {
+  color: white
+}
+
+.icon {
+  display: inline-block;
+  margin: 0 1.5em;
+}
+
+.inbox-menu-items {
+  padding: .4em 0;
+  margin-bottom: .15em;
+}
+
+.inbox-active {
+  background-color: rgba(255, 255, 255, .5);
+  border-radius: .1em 2em 2em .1em;
+}
+
+.inbox-menu-items:hover {
+  background-color: rgba(255, 255, 255, .3);
+  border-radius: .1em 2em 2em .1em;
+}
+
+.number-of-mails {
+  margin-left: 47%;
+}
+
+/* EMail Display Section */
 .emails-div table {
   width: 100%;
 }
@@ -362,15 +431,20 @@ tr.data td:nth-of-type(3) {
   width: 10%;
 }
 
-input[type='checkbox']:hover {
-  cursor: pointer;
-}
-
 td {
   padding: .6em .8em;
   font-weight: 700;
 }
 
+#sent-mail {
+  display: none;
+}
+
+#drafts-mail {
+  display: none;
+}
+
+/* Mail Message View */
 .email-sections {
   display: grid;
   grid-template-columns: 30% 30% 30% 10%;
@@ -398,60 +472,29 @@ td {
   cursor: pointer;
 }
 
+/* Individual Mail Message */
 .sender-name input[type='checkbox'] {
   transform: scale(1.5);
   margin-right: 1em;
-}
-
-.search {
-  width: 70%;
-  margin-bottom: 2em;
-  height: .9em;
-  padding: .7em 1.2em .7em 1.2em;
-  border-radius: .3em;
-  border: none;
-  opacity: .5;
-  font-size: 1.3em;
-  font-weight: 500;
-}
-
-.search:focus {
-  opacity: 1;
+  cursor: pointer;
 }
 
 .statement {
   font-weight: 400;
 }
 
-.inbox-sidebar-nav {
-  margin: 5.5em 1.5em 5.5em 0;
+.mail-icons {
+  margin-left: .7em;
 }
 
-.inbox-sidebar-nav a {
-  color: white
+.mail-icons:hover {
+  color: #4c9cdc;
 }
 
-.icon {
-  margin: 0 1.5em;
-}
-
-.inbox-menu-items {
-  padding: .4em 0;
-  margin-bottom: .15em;
-}
-
-.inbox-active {
-  background-color: rgba(255, 255, 255, .5);
-  border-radius: .1em 2em 2em .1em;
-}
-
-.inbox-menu-items:hover {
-  background-color: rgba(255, 255, 255, .3);
-  border-radius: .1em 2em 2em .1em;
-}
-
-.number-of-mails {
-  margin-left: 47%;
+/* View Mail Page */
+.sender-name {
+  font-weight: 700;
+  font-size: .95em;
 }
 
 .read-mail h1 {
@@ -480,6 +523,35 @@ hr {
   font-weight: 400;
 }
 
+.message {
+  margin-top: .7em;
+}
+
+.message p{
+  margin-bottom: 1em ;
+  margin-right: 2em;
+  font-size: .94em;
+}
+
+.reply-buttons-item{
+  display: inline-block;
+  margin: .7em;
+  border: 1px solid dodgerblue;
+  border-radius: .4em;
+  color: dodgerblue;
+  width: 5em;
+  padding: .6em;
+  text-align: center;
+}
+
+.reply-buttons-item:hover {
+  background-color: rgb(30, 144, 255, .7);
+  color: white;
+  border: 1px solid white;
+  cursor: pointer;
+}
+
+/* Compose Message Element */
 .compose-mail {
   background-color: white;
   z-index: 100;
@@ -521,7 +593,8 @@ hr {
   grid-template-rows: 15% 70% 10%;
 }
 
-.compose-mail input[type="text"], .compose-mail textarea {
+.compose-mail input[type="text"],
+.compose-mail textarea {
   border: none;
   width: 97%;
   margin: .8em 1em;;
@@ -550,63 +623,13 @@ hr {
   right: 2em;
 }
 
-
-.compose-mail input:focus, .compose-mail textarea:focus {
+.compose-mail input:focus,
+.compose-mail textarea:focus {
   outline: none !important;
-}
-
-.sender-name {
-  font-weight: 700;
-  font-size: .95em;
-}
-
-.message {
-  margin-top: .7em;
-}
-
-.message p{
-  margin-bottom: 1em ;
-  margin-right: 2em;
-  font-size: .94em;
-}
-
-.reply-buttons-item{
-  display: inline-block;
-  margin: .7em;
-  border: 1px solid dodgerblue;
-  border-radius: .4em;
-  color: dodgerblue;
-  width: 5em;
-  padding: .6em;
-  text-align: center;
-}
-
-#sent-mail {
-  display: none;
-}
-
-#drafts-mail {
-  display: none;
-}
-
-.mail-icons {
-  margin-left: .7em;
-}
-
-.mail-icons:hover {
-  color: #4c9cdc;
-}
-
-.reply-buttons-item:hover {
-  background-color: rgb(30, 144, 255, .7);
-  color: white;
-  border: 1px solid white;
-  cursor: pointer;
 }
 /** Inbox Page Styling ends **/
 
 /** Sign in Page **/
-
 .login-form-div {
   width: 50%;
   margin: 0 auto;
@@ -625,7 +648,18 @@ hr {
 
 .admin-form-container {
   width: 60%;
-  margin: 2em auto;
+  margin: 1em auto;
+}
+
+.new-group {
+  display: grid;
+  grid-template-rows: 100%;
+}
+
+.create-new-group {
+  justify-self: end;
+  margin-right: .7em;
+  margin-bottom: .7em;
 }
 
 .login-form-title {
@@ -645,15 +679,10 @@ hr {
   color: #4c9cdc;
   font-weight: 500;
 }
-
-.clearfix {
-  clear: both;
-}
-
 /** Sign in Page ends **/
 
-/** Media queries **/
 
+/** Media queries **/
 @media (min-width : 320px) and (max-width: 480px) {
   .navbar-list {
     display: none;
@@ -723,21 +752,21 @@ hr {
   }
   
   .features-intro p {
-    margin: 0 2em;
+    margin: 0 1em;
   }
   
   .feature-illustration {
     display: grid;
-    grid-template-columns: 90%;
+    grid-template-columns: 95%;
     margin-bottom: 1em;
   }
   
   .feature-illustration-details img {
-    height: 14em;
+    height: 15em;
   }
   
   .feature-illustration-details {
-    margin: 0 0 2em 3.1em;
+    margin: 0 0 2em 1.4em;
   }
   /** INDEX PAGE ENDS HERE **/
   
@@ -745,15 +774,21 @@ hr {
   
   .form-container {
     width: 80%;
-    margin: 5em 4em 5em 2em;
+    margin: 5em 4em 5em 1em;
   }
   
   .login-form-div {
     width: 90%;
+    padding: 2em 2em 2em 1.2em;
   }
   
   .form-div {
-    width: 90%;
+    width: 93%;
+    padding: 2em 2em 2em 1em;
+  }
+  
+  .form-title {
+    text-align: center;
   }
   
   /** PASSWORD-RESET PAGE ENDS HERE **/
@@ -762,13 +797,40 @@ hr {
   
   .inbox {
     display: grid;
-    grid-template-columns: 15% 85%;
+    grid-template-columns: 5% 85%;
+    grid-gap: 10%;
     background-size: cover;
+    padding-top: 1em;
   }
   
+  tr.data td:nth-of-type(1), tr.data td:nth-of-type(2) {
+    display: block;
+    width: 80%;
+    margin-left: .8em;
+  }
+  
+  tr.data td:nth-of-type(1) {
+    margin-top: 1.2em;
+    margin-bottom: .05em;
+  }
+  
+  tr.data td:nth-of-type(3) {
+    font-size: .75em;
+    width: 20%;
+  }
+  
+  td {
+    font-size: .95em;
+    padding: 0 .4em;
+  }
+  
+  .read-mail h1 {
+    font-weight: 400;
+    font-size: 1.5em
+  }
   .search {
     width: 80%;
-    margin-left: 1em;
+    margin-left: 0;
   }
   
   .read-mail {
@@ -792,20 +854,21 @@ hr {
   }
   
   .icon {
+    display: inline-block;
     font-size: 1.7em;
-    margin: .5em 1.5em 3em .7em;
+    margin: 0 .5em 0em .4em;
   }
   
-  .inbox-active {
-    border-radius: 2em 3em 3em 2em;
+  .inbox-sidebar-nav {
+    margin: 4em 5em 5.5em 0;
   }
   
   .inbox-menu-items {
     padding-right: 4.5em;
   }
   
-  .inbox-menu-items:hover {
-    border-radius: 2em 3em 3em 2em;
+  .inbox-active, .inbox-menu-items:hover {
+    border-radius: 10em;
   }
   
   .compose-mail {
@@ -827,26 +890,74 @@ hr {
   
   .admin-form-div {
     width: 90%;
-    padding: 1em 1em;
+    padding: 1em 1em 1em .5em;
   }
   
   .admin-form-container {
     width: 90%;
   }
   
-  .signup-footer {
-    width: 100%; 
+  .signup-footer, .admin-signup-footer {
+    width: 100%;
   }
+  
+  .admin-button {
+    padding: .7em .7em;
+  }
+  
+  .admin-form-bottom-links {
+    display: grid;
+    grid-template-columns: 0 100%;
+  }
+  
 }
 
 @media (min-width: 481px) and (max-width: 767px) {
+  .container-fixed-header {
+    display: grid;
+    grid-template-columns: 30% 70%;
+  }
+  
+  .logo img {
+    width: 42px;
+    height: 31px;
+  }
+  
+  .logo-elements {
+    margin-top: 1.5em;
+  }
+  
+  .logo-elements p{
+    font-size: 1.25em;
+  }
+  
+  .navbar-list-items p {
+    font-size: .9em;
+    padding: 2.2em .8em 0 .2em;
+  }
+  
+  .main-content > header {
+    background-image: url('../images/computer-3368242_1920.jpg');
+    height: 65em;
+    background-position-x: center;
+    background-position-y: center;
+    display: grid;
+    grid-template-columns: 75% 25%;
+  }
+ 
+  .main-content-statement {
+    margin-top: 7.5em;
+  }
+  
   .sender-checkbox {
     display: none;
   }
   
   .inbox {
     display: grid;
-    grid-template-columns: 20% 78%;
+    height: fit-content;
+    grid-template-columns: 5% 90%;
+    grid-gap: 5%;
     background-size: cover;
   }
   
@@ -867,20 +978,30 @@ hr {
   }
   
   .number-of-mails {
-    margin-left: 1.3em;
+    display: none;
+  }
+  
+  .icon-text {
+    display: none;
   }
   
   .icon {
-    margin: 0 .8em 0 1em;
+    display: inline-block;
+    font-size: 1.7em;
+    margin: 0 .5em 0em .4em;
+  }
+  
+  .inbox-sidebar-nav {
+    margin: 4em 5em 5.5em 0;
+  }
+  
+  .inbox-menu-items {
+    padding-right: 4.5em;
   }
   
   .compose-mail {
     left: 27%;
     width: 70%;
-  }
-  
-  .inbox-menu-items {
-    padding: .3em 0 .4em 0;
   }
   
   .read-mail {
@@ -904,38 +1025,31 @@ hr {
     padding: 1.8em 1.2em 0 1em;
   }
   
-  .container-fixed-header {
-    display: grid;
-    grid-template-columns: 40% 60%;
-  }
-  
-  .main-content > header {
-    background-image: url('../images/computer-3368242_1920.jpg');
-    height: 65em;
-    display: grid;
-    grid-template-columns: 75% 25%;
-  }
   
   .main-content-statement {
     margin-left: 2em;
   }
   
   .features-intro {
-    width: 75%;
-    margin: 5em auto 5em;
+    width: 85%;
+    margin: 3em auto 5em;
   }
   
   .feature-illustration {
     display: grid;
-    grid-template-columns: 80%;
+    grid-template-columns: 90%;
     margin-bottom: 2em;
   }
   
   .feature-illustration-details {
-    margin-left: 10em;
+    margin-left: 5em;
     margin-right: 1em;
     padding-bottom: 1em;
     margin-bottom: 1.8em;
+  }
+  
+  .feature-illustration-details img {
+    height: 16em;
   }
   
   .admin-form-div {
@@ -949,5 +1063,69 @@ hr {
   
   .admin-signup-footer {
     width: 80%;
-  } 
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .container-fixed-header {
+    display: grid;
+    grid-template-columns: 50% 50%;
+  }
+  
+  .main-content > header {
+    display: grid;
+    grid-template-columns: 55% 45%;
+    height: 70em;
+  }
+  
+  .features-intro {
+    width: 70%;
+    margin: 6em auto 5em;
+  }
+  
+  .feature-illustration {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    margin-bottom: 5em;
+  }
+  
+  .feature-illustration-details {
+    margin-bottom: 2.5em;
+  }
+  
+  .feature-illustration-details img {
+    height: 17em;
+  }
+  
+  .inbox {
+    display: grid;
+    grid-template-columns: 15% 84%;
+    height: fit-content;
+  }
+  
+  .icon {
+    display: inline-block;
+    margin: 0em 0.3em 0em .4em;
+  }
+  
+  .number-of-mails {
+    margin-left: 17%;
+  }
+  
+  .inbox-menu-items {
+    padding: .4em 0;
+  }
+  
+  tr.data td:nth-of-type(1) {
+    width: 25%;
+  }
+  
+  tr.data td:nth-of-type(2) {
+    width: 60%;
+  }
+  
+  tr.data td:nth-of-type(3) {
+    width: 15%;
+  }
+ 
 }

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>EPIC Mail</title>
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/all.min.css">
+</head>
+<body>
+  <div class="container inbox">
+    <sidebar class="inbox-sidebar-nav">
+      <ul class="inbox-menu">
+        <a href="#compose-mail"><li class="inbox-menu-items" id="nav-compose"><span class="icon"><i class="fas fa-edit"></span></i><span class="icon-text">Compose</span></li></a>
+        <a href="inbox.html"><li class="inbox-menu-items inbox-active" id="nav-inbox"><span class="icon"><i class="fas fa-inbox"></span></i><span class="icon-text">Inbox </span><span class="number-of-mails">3</span></li></a>
+        <a href="inbox.html"><li class="inbox-menu-items" id="nav-sent"><span class="icon"><i class="fas fa-envelope"></span></i><span class="icon-text">Sent</span></li></a>
+        <a href="inbox.html"><li class="inbox-menu-items" id="nav-drafts"><span class="icon"><i class="fas fa-folder"></span></i><span class="icon-text">Drafts</span><span class="number-of-mails">3</span></li></a>
+        <a href="admin.html"><li class="inbox-menu-items" id="nav-groups"><span class="icon"><i class="fas fa-users"></span></i><span class="icon-text">Groups</span></li></a>
+      </ul>
+    </sidebar>
+    <div class="mail-div">
+      <input type="text" id="search" name="search" class="search" placeholder="Search Mail">
+      <main class="inbox-main-content">
+        <div class="emails-div">
+          <div class="read-mail">
+            <h1 class="title">Welcome, User.</h1>
+            <div class="admin-form-container">
+                <div class="admin-form-div">
+                  <div class="signup-heading">
+                    <h1 class="login-form-title">Compose Email</h1>
+                  </div>
+                  <form id="signup-form" class="form-element">
+                    <div class="full-form-elements" id="group-div">
+                        <input type="text" class="compose-recipients" name="recipients" id="recipients" placeholder="Recipients Email">
+                        <input type="text" class="compose-recipients" name="recipients" id="recipients" placeholder="Subject">
+                        <textarea name="compose-mail" id="compose-mail" cols="30" rows="10" placeholder="Message"></textarea>
+                    </div>
+                    <div class="admin-form-bottom-links">
+                      <div class="signin-link"><a href="#"></a></div>
+                      
+                      <div class="submit-link compose-buttons">
+                        <span class="admin-button" id="save-message">Save</span>
+                        <span class="admin-button" id="send-message">Send</span>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+                <footer class="admin-signup-footer">
+                  <div class="footer-link">&copy;2019 Copyright EPIC Mail.</div>
+                </footer>
+              </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+  <div class="compose-mail" id="compose-mail">
+      <div class="compose-header">New Message
+      <a href="#" class="compose-close">&times;</a>
+      <a href="#" class="compose-minimize" id="compose-minimize">&minus;</a>
+      </div>
+      <div class="compose-mail-body" id="compose-mail-body">
+        <div class="mail-headers">
+          <input type="text" class="compose-recipients" name="recipients" id="recipients" placeholder="Recipients">
+          <hr />
+          <input type="text" class="subject" name="subject" id="subject" placeholder="Subject">
+          <hr />
+        </div>
+        <div class="commpose-mail">
+          <textarea name="compose-mail" id="compose-mail" cols="30" rows="10"></textarea>
+        </div>
+        <div class="compose-buttons">
+          <span class="button">Send</span>
+          <span class="button">Save</span>
+        </div>
+      </div>
+    </div>
+  <script src="./js/main.js"></script>
+  <script src="./js/all.min.js"></script>
+  
+  <script type="text/javascript">
+  
+    document.getElementById('group-select').addEventListener('change', (e) => changeButtonText(e.target));
+    document.getElementById('submit-group').addEventListener('click', (e) => createGroup(e));
+    
+    const changeButtonText = (e) => {
+      const groupButton = document.getElementById('submit-group');
+      if(e.value !== 'create new') {
+        groupButton.innerText = 'Add User';
+        addUser();
+      } else {
+        groupButton.innerText = 'Create Group';
+        createGroup();
+      }
+    }
+    const createGroup = (e) => {
+      const groupDiv = document.getElementById('group-div');
+      const createGroupForm = `
+      <input type="text" name="group-name" id="group-name" placeholder="Name">
+      <input type="text" name="description" id="description" placeholder="Description">
+      <input type="text" name="members-email" id="members-email" placeholder="Members email separated by comma">
+      `;
+      document.getElementById('members-email').innerHTML = '';
+      groupDiv.innerHTML = createGroupForm;
+    }
+    
+    const addUser = (e) => {
+      document.getElementById('members-email').innerHTML = `<input type="text" name="members-email" id="members-email" placeholder="Members email separated by comma">`;
+    }
+    
+    document.getElementById('compose-minimize').addEventListener('click', (e) => addMinimize(e));
+    
+    const addMinimize = (e) => {
+      e.preventDefault();
+      document.getElementById('compose-mail').style.top = '94.5%';
+      document.getElementById('compose-minimize').removeEventListener('click', (e) => addMinimize(e))
+      document.getElementById('compose-minimize').addEventListener('click', (e) => addMaximize(e));
+    }
+    
+    const addMaximize = (e) => {
+      e.preventDefault();
+      document.getElementById('compose-mail').style.top = '30%';
+      document.getElementById('compose-minimize').removeEventListener('click', (e) => addMaximize(e))
+      document.getElementById('compose-minimize').addEventListener('click', (e) => addMinimize(e));
+    }
+  </script>
+</body>
+</html>

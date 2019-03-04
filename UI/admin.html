@@ -12,45 +12,110 @@
   <div class="container inbox">
     <sidebar class="inbox-sidebar-nav">
       <ul class="inbox-menu">
-        <a href="#compose-mail"><li class="inbox-menu-items" id="nav-compose"><span class="icon"><i class="fas fa-edit"></span></i><span class="icon-text">Compose</span></li></a>
-        <a href="inbox.html"><li class="inbox-menu-items inbox-active" id="nav-inbox"><span class="icon"><i class="fas fa-inbox"></span></i><span class="icon-text">Inbox </span><span class="number-of-mails">3</span></li></a>
-        <a href="inbox.html"><li class="inbox-menu-items" id="nav-sent"><span class="icon"><i class="fas fa-envelope"></span></i><span class="icon-text">Sent</span></li></a>
-        <a href="inbox.html"><li class="inbox-menu-items" id="nav-drafts"><span class="icon"><i class="fas fa-folder"></span></i><span class="icon-text">Drafts</span><span class="number-of-mails">3</span></li></a>
-        <a href="admin.html"><li class="inbox-menu-items" id="nav-groups"><span class="icon"><i class="fas fa-users"></span></i><span class="icon-text">Groups</span></li></a>
+        <a href="#compose-mail">
+          <li class="inbox-menu-items" id="nav-compose">
+            <span class="icon">
+              <i class="fas fa-edit"></i>
+            </span>
+            <span class="icon-text">Compose</span>
+          </li>
+        </a>
+        <a href="#">
+          <li class="inbox-menu-items inbox-active" id="nav-inbox">
+            <span class="icon">
+              <i class="fas fa-inbox"></i>
+            </span>
+            <span class="icon-text">Inbox </span>
+            <span class="number-of-mails">3</span>
+          </li>
+        </a>
+        <a href="#">
+          <li class="inbox-menu-items" id="nav-sent">
+            <span class="icon">
+              <i class="fas fa-envelope"></i>
+            </span>
+            <span class="icon-text">Sent</span>
+          </li>
+        </a>
+        <a href="#">
+          <li class="inbox-menu-items" id="nav-drafts">
+            <span class="icon">
+              <i class="fas fa-folder"></i>
+            </span>
+            <span class="icon-text">Drafts </span>
+            <span class="number-of-mails">3</span>
+          </li>
+        </a>
+        <a href="admin.html">
+          <li class="inbox-menu-items" id="nav-groups">
+            <span class="icon">
+              <i class="fas fa-users"></i>
+            </span>
+            <span class="icon-text">Groups</span>
+          </li>
+        </a>
       </ul>
     </sidebar>
     <div class="mail-div">
       <input type="text" id="search" name="search" class="search" placeholder="Search Mail">
       <main class="inbox-main-content">
         <div class="emails-div">
-          <div class="read-mail">
-            <h1 class="title">Welcome, Admin.</h1>
-            <div class="admin-form-container">
-                <div class="admin-form-div">
-                  <div class="signup-heading">
-                    <h1 class="login-form-title">Create User Group</h1>
-                  </div>
-                  <form id="signup-form" class="form-element">
-                    <div class="full-form-elements" id="group-div">
-                      <input type="text" name="group" id="group" placeholder="Enter group name">
-                    </div>
-                    <div class="form-bottom-links">
-                      <div class="signin-link"><a href="#"></a></div>
-                      <div class="button submit-link" onclick="addUsers()" id="submit-group">Create group</div>
-                    </div>
-                  </form>
-                </div>
-                <footer class="admin-signup-footer">
-                  <div class="language">English(United Kingdom)</div>
-                  <div class="footer-link">&copy;2019 Copyright EPIC Mail.</div>
-                </footer>
-              </div>
+          <div class="email-sections">
+          </div>
+          <table id="inbox">
+            <thead>
+              <tr class="data">
+                <td>Name</td>
+                <td>Description</td>
+                <td>Actions</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="data">
+                <td class="sender-name">
+                  <input type="checkbox" name="" id="" class="sender-checkbox">Group 1
+                </td>
+                <td>
+                  <span class='statement'>This is a group for sub-admins</span>
+                </td>
+                <td>
+                  <span><i class="mail-icons fas fa-edit"></i></span>
+                  <span><i class="mail-icons fas fa-trash"></i></span>
+                </td>
+              </tr>
+              <tr class="data">
+                <td class="sender-name">
+                  <input type="checkbox" name="" id="" class="sender-checkbox">Group 2
+                </td>
+                <td>
+                  <span class='statement'>This is a group for early bird users</span>
+                </td>
+                <td>
+                  <span><i class="mail-icons fas fa-edit"></i></span>
+                  <span><i class="mail-icons fas fa-trash"></i></span>
+                </td>
+              </tr>
+              <tr class="data">
+                <td class="sender-name">
+                  <input type="checkbox" name="" id="" class="sender-checkbox">Group 3
+                </td>
+                <td>
+                  <span class='statement'>This is a group for regular users</span>
+                </td>
+                <td>
+                  <span><i class="mail-icons fas fa-edit"></i></span>
+                  <span><i class="mail-icons fas fa-trash"></i></span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="new-group">
+            <div class="button create-new-group">Create New</div>
           </div>
         </div>
       </main>
     </div>
-  </div>
-  <div class="compose-mail" id="compose-mail">
+    <div class="compose-mail" id="compose-mail">
       <div class="compose-header">New Message
       <a href="#" class="compose-close">&times;</a>
       <a href="#" class="compose-minimize" id="compose-minimize">&minus;</a>
@@ -71,26 +136,20 @@
         </div>
       </div>
     </div>
+  </div>
   <script src="./js/main.js"></script>
   <script src="./js/all.min.js"></script>
   
   <script type="text/javascript">
-    const addUsers = function() {
-      const groupField = document.getElementById('group');
-      const groupDiv = document.getElementById('group-div');
-      const value = groupField.value;
-      groupField.value = '';
-      const addUserForm = `
-      <select>
-        <option value="${value}" selected>${value}</option>
-      </select>
-      <input type="text" name="otp" id="otp" placeholder="Enter the email of users, to add them to group">
-      `
-      groupDiv.innerHTML = addUserForm;
-      document.getElementById('submit-group').innerText = 'Add Users';
+    document.getElementById('nav-compose').addEventListener('click', (e) => showCompose(e));
+    const mailRows = document.getElementsByClassName('data');
+    
+    for (const element of mailRows) {
+      element.addEventListener('click', (e) => showCreateGroupPage(e));
     }
     
     document.getElementById('compose-minimize').addEventListener('click', (e) => addMinimize(e));
+    
     
     const addMinimize = (e) => {
       e.preventDefault();
@@ -104,6 +163,19 @@
       document.getElementById('compose-mail').style.top = '30%';
       document.getElementById('compose-minimize').removeEventListener('click', (e) => addMaximize(e))
       document.getElementById('compose-minimize').addEventListener('click', (e) => addMinimize(e));
+    }
+    
+    const showCreateGroupPage = (e) => {
+      window.location.href = './createGroups.html';
+    }
+    
+    const showCompose = (e) => {
+      if(document.documentElement.clientWidth < 1024) {
+        e.preventDefault();
+        window.location.href = './compose.html'
+      } else {
+        window.location.href += '#compose-mail';
+      }
     }
   </script>
 </body>
