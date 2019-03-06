@@ -22,7 +22,7 @@ li {
 
 .container {
   width: 100%;
-  position: absolute;
+  position: relative;
 }
 
 a {
@@ -32,6 +32,18 @@ a {
 .footer-link {
   width: 100%;
   text-align: center;
+}
+
+footer {
+  background-color: whitesmoke;
+  width: 100%;
+  padding: 1.5em 0 1em;
+  height: 1.5em;
+}
+
+footer div.copyright{
+  text-align: center;
+  font-size: 1em;
 }
 
 .clearfix {
@@ -51,6 +63,7 @@ a {
   background-color: whitesmoke;
   display: grid;
   grid-template-columns: 65% 35%;
+  top: 0;
 }
 
 .logo-elements {
@@ -138,14 +151,14 @@ a {
 
 .main-content > header {
   background-image: url('../images/computer-3368242_1920.jpg');
-  height: 73em;
+  height: 100%vh;
   background-repeat: no-repeat;
   display: grid;
   grid-template-columns: 40% 60%;
 }
 
 .main-content-statement {
-  margin: 13em 0 0 5em;
+  margin: 9em 0 0 2em;
   color: white;
 }
 
@@ -157,6 +170,7 @@ a {
 .create-account {
   background-color: #4c9cdc;
   height: 5em;
+  margin-bottom: 5em;
   width: fit-content;
 }
 
@@ -184,13 +198,13 @@ a {
 
 .feature-illustration {
   display: grid;
-  grid-template-columns: 33.3% 33.3% 33.3%;
-  margin-bottom: 5em;
+  grid-template-columns: 31% 31% 31%;
+  grid-gap: 3.5%;
+  margin: 0 3.5% 5em;
+  
 }
 
 .feature-illustration-details {
-  margin-left: 3em;
-  margin-right: 1em;
   border: .04em solid grey;
   border-radius: .7em .7em .3em .3em;
   text-align: center;
@@ -211,11 +225,6 @@ a {
 .feature-illustration-details p.details {
   padding: 1em 1.5em;
 }
-
-.copyright{
-  text-align: center;
-  font-size: 1em;
-}
 /** Index Page styling ends **/
 
 /** Sign Up Page styling **/
@@ -228,7 +237,7 @@ a {
 
 .form-div {
   width: 65%;
-  margin: 0 auto;
+  margin: 8.5em auto 0;
   border: .05em solid lightgray;
   border-radius: .5em;
   padding: 2em;
@@ -345,8 +354,7 @@ select {
   background-repeat: no-repeat;
   display: grid;
   grid-template-columns: 20% 79%;
-  padding-top: 2em;
-  opacity: .75;
+  padding-top: 6em;
 }
 
 .inbox-main-content {
@@ -632,15 +640,21 @@ hr {
 /** Sign in Page **/
 .login-form-div {
   width: 50%;
-  margin: 0 auto;
+  margin: 10.4em auto 0;
   border: .05em solid lightgray;
   border-radius: .5em;
   padding: 2em;
 }
 
+.bottom {
+  position: absolute;
+  bottom: 0;
+  height: 1.5em;
+}
+
 .admin-form-div {
   width: 80%;
-  margin: 0 auto;
+  margin: 10.4em auto 0;
   border: .05em solid lightgray;
   border-radius: .5em;
   padding: 5em;
@@ -717,7 +731,7 @@ hr {
   
   .main-content > header {
     background-image: url('../images/computer-3368242_1920.jpg');
-    height: 50em;
+    height: 27em;
     background-repeat: no-repeat;
     background-position-x: center;
     background-position-y: center;
@@ -800,7 +814,7 @@ hr {
     grid-template-columns: 5% 85%;
     grid-gap: 10%;
     background-size: cover;
-    padding-top: 1em;
+    padding-top: 6em;
   }
   
   tr.data td:nth-of-type(1), tr.data td:nth-of-type(2) {
@@ -938,7 +952,7 @@ hr {
   
   .main-content > header {
     background-image: url('../images/computer-3368242_1920.jpg');
-    height: 65em;
+    height: 35em;
     background-position-x: center;
     background-position-y: center;
     display: grid;
@@ -946,7 +960,7 @@ hr {
   }
  
   .main-content-statement {
-    margin-top: 7.5em;
+    margin-top: 2.5em;
   }
   
   .sender-checkbox {
@@ -1038,14 +1052,14 @@ hr {
   .feature-illustration {
     display: grid;
     grid-template-columns: 90%;
-    margin-bottom: 2em;
+    margin-bottom: 8em;
   }
   
   .feature-illustration-details {
     margin-left: 5em;
     margin-right: 1em;
     padding-bottom: 1em;
-    margin-bottom: 1.8em;
+    margin-bottom: .8em;
   }
   
   .feature-illustration-details img {
@@ -1075,7 +1089,11 @@ hr {
   .main-content > header {
     display: grid;
     grid-template-columns: 55% 45%;
-    height: 70em;
+    height: 32em;
+  }
+  
+  .main-content-statement {
+    margin-top: 2.5em;
   }
   
   .features-intro {
