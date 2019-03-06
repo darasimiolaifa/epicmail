@@ -8,9 +8,32 @@
   <title>EPIC Mail</title>
 </head>
 <body>
-    <div id="fb-root"></div>
-    <script async defer src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2&appId=363177464522399&autoLogAppEvents=1"></script>
+  <div id="fb-root"></div>
+  <script async defer src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2&appId=363177464522399&autoLogAppEvents=1"></script>
   <div class="container">
+    <div class="container-fixed-header">
+      <div class="logo-elements">
+        <a class="logo" href="./index.html">
+          <img src="./images/email-icon-vector-FreeVector-Email-Icon-small.png" alt="Logo Here">
+          <p>EPIC Mail</p>
+        </a>
+      </div>
+      <nav class="navigation">
+        <ul class="navbar-list">
+          <a href="#productivity"><li class="navbar-list-items"><p>Productivity</p></li></a>
+          <a href="signin.html"><li class="navbar-list-items"><p>Sign in</p></li></a>
+          <a href="signup.html"><li class="navbar-list-items"><p>Create an Account</p></li></a>
+        </ul>
+        <a href="#" class="navbar-mobile-icon" id="mobile-navbar-icon"><i class="fas fa-th-list"></i></a>
+        <div class="mobile-nav-div" id="mobile-nav-div">
+          <ul class="mobile-navbar-list">
+            <a href="#productivity" id="goProductivity"><li class="mobile-navbar-list-items"><p>Productivity</p></li></a>
+            <a href="signin.html"><li class="mobile-navbar-list-items"><p>Sign in</p></li></a>
+            <a href="signup.html"><li class="mobile-navbar-list-items"><p>Create Account</p></li></a>
+          </ul>
+        </div>
+      </nav>
+    </div>
     <div class="form-container">
       <div class="login-form-div">
         <div class="signup-heading">
@@ -33,13 +56,32 @@
           <!--<div class="fb-login-button" data-size="medium" data-button-type="login_with" data-auto-logout-link="false" data-use-continue-as="true"></div> -->
         </form>
       </div>
-      <footer class="signup-footer">
-        <div class="footer-link">&copy;2019 Copyright EPIC Mail.</div>
-      </footer>
     </div>
-  </div>
+  </div> 
+  <footer>
+      <div class="copyright">
+        &copy;2019 Copyright EPIC Mail
+      </div>
+    </footer>
   <script src="js/main.js"></script>
   <script type="text/javascript">
+   
+    document.getElementById('mobile-navbar-icon').addEventListener('click', (e) => openNav(e));
+    document.getElementById('goProductivity').addEventListener('click', (e) => closeNav(e));
+    
+    const openNav = (e) => {
+      e.preventDefault();  
+      document.getElementById('mobile-nav-div').style.display = 'block';
+      document.getElementById('mobile-navbar-icon').removeEventListener('click', (e) => openNav(e));
+      document.getElementById('mobile-navbar-icon').addEventListener('click', (e) => closeNav(e, true));
+    }
+    
+    const closeNav = (e, prevent) => {
+      if(prevent) e.preventDefault();  
+      document.getElementById('mobile-nav-div').style.display = 'none';
+      document.getElementById('mobile-navbar-icon').removeEventListener('click', (e) => closeNav(e, prevent));
+      document.getElementById('mobile-navbar-icon').addEventListener('click', (e) => openNav(e));
+    }
     document.getElementById('login').addEventListener('click', (e) => window.location.href = './inbox.html');
     const showPassword = function() {
       const passwordField = document.getElementById('password');

@@ -10,13 +10,82 @@
 </head>
 <body>
   <div class="container inbox">
+      <div class="container">
+          <div class="container-fixed-header">
+            <div class="logo-elements">
+              <a class="logo" href="./index.html">
+                <img src="./images/email-icon-vector-FreeVector-Email-Icon-small.png" alt="Logo Here">
+                <p>EPIC Mail</p>
+              </a>
+            </div>
+            <nav class="navigation">
+              <ul class="navbar-list">
+                <a href="#productivity"><li class="navbar-list-items"><p>Productivity</p></li></a>
+                <a href="signin.html"><li class="navbar-list-items"><p>Sign in</p></li></a>
+                <a href="signup.html"><li class="navbar-list-items"><p>Create an Account</p></li></a>
+              </ul>
+              <a href="#" class="navbar-mobile-icon" id="mobile-navbar-icon"><i class="fas fa-th-list"></i></a>
+              <div class="mobile-nav-div" id="mobile-nav-div">
+                <ul class="mobile-navbar-list">
+                  <a href="#productivity" id="goProductivity"><li class="mobile-navbar-list-items"><p>Productivity</p></li></a>
+                  <a href="signin.html"><li class="mobile-navbar-list-items"><p>Sign in</p></li></a>
+                  <a href="signup.html"><li class="mobile-navbar-list-items"><p>Create Account</p></li></a>
+                </ul>
+              </div>
+            </nav>
+          </div>
     <sidebar class="inbox-sidebar-nav">
       <ul class="inbox-menu">
-        <a href="#compose-mail"><li class="inbox-menu-items" id="nav-compose"><span class="icon"><i class="fas fa-edit"></span></i><span class="icon-text">Compose</span></li></a>
-        <a href="inbox.html"><li class="inbox-menu-items inbox-active" id="nav-inbox"><span class="icon"><i class="fas fa-inbox"></span></i><span class="icon-text">Inbox </span><span class="number-of-mails">3</span></li></a>
-        <a href="inbox.html"><li class="inbox-menu-items" id="nav-sent"><span class="icon"><i class="fas fa-envelope"></span></i><span class="icon-text">Sent</span></li></a>
-        <a href="inbox.html"><li class="inbox-menu-items" id="nav-drafts"><span class="icon"><i class="fas fa-folder"></span></i><span class="icon-text">Drafts</span><span class="number-of-mails">3</span></li></a>
-        <a href="admin.html"><li class="inbox-menu-items" id="nav-groups"><span class="icon"><i class="fas fa-users"></span></i><span class="icon-text">Groups</span></li></a>
+        <a href="#compose-mail">
+          <li class="inbox-menu-items inbox-active" id="nav-compose">
+            <span class="icon">
+              <i class="fas fa-edit"></i>
+            </span>
+            <span class="icon-text">Compose</span>
+          </li>
+        </a>
+        <a href="inbox.html">
+          <li class="inbox-menu-items" id="nav-inbox">
+            <span class="icon">
+              <i class="fas fa-inbox"></i>
+            </span>
+            <span class="icon-text">Inbox </span>
+            <span class="number-of-mails">3</span>
+          </li>
+        </a>
+        <a href="inbox.html">
+          <li class="inbox-menu-items" id="nav-sent">
+            <span class="icon">
+              <i class="fas fa-envelope"></i>
+            </span>
+            <span class="icon-text">Sent</span>
+          </li>
+        </a>
+        <a href="inbox.html">
+          <li class="inbox-menu-items" id="nav-drafts">
+            <span class="icon">
+              <i class="fas fa-folder"></i>
+            </span>
+            <span class="icon-text">Drafts</span>
+            <span class="number-of-mails">3</span>
+          </li>
+        </a>
+        <a href="admin.html">
+          <li class="inbox-menu-items" id="nav-groups">
+            <span class="icon">
+              <i class="fas fa-users"></i>
+            </span>
+            <span class="icon-text">Groups</span>
+          </li>
+        </a>
+        <a href="index.html">
+          <li class="inbox-menu-items" id="nav-groups">
+            <span class="icon">
+              <i class="fas fa-eject"></i>
+            </span>
+            <span class="icon-text">Log Out</span>
+          </li>
+        </a>
       </ul>
     </sidebar>
     <div class="mail-div">
@@ -123,6 +192,22 @@
       document.getElementById('compose-mail').style.top = '30%';
       document.getElementById('compose-minimize').removeEventListener('click', (e) => addMaximize(e))
       document.getElementById('compose-minimize').addEventListener('click', (e) => addMinimize(e));
+    }
+    document.getElementById('mobile-navbar-icon').addEventListener('click', (e) => openNav(e));
+    document.getElementById('goProductivity').addEventListener('click', (e) => closeNav(e));
+    
+    const openNav = (e) => {
+      e.preventDefault();  
+      document.getElementById('mobile-nav-div').style.display = 'block';
+      document.getElementById('mobile-navbar-icon').removeEventListener('click', (e) => openNav(e));
+      document.getElementById('mobile-navbar-icon').addEventListener('click', (e) => closeNav(e, true));
+    }
+    
+    const closeNav = (e, prevent) => {
+      if(prevent) e.preventDefault();  
+      document.getElementById('mobile-nav-div').style.display = 'none';
+      document.getElementById('mobile-navbar-icon').removeEventListener('click', (e) => closeNav(e, prevent));
+      document.getElementById('mobile-navbar-icon').addEventListener('click', (e) => openNav(e));
     }
   </script>
 </body>

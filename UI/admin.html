@@ -9,131 +9,169 @@
   <link rel="stylesheet" href="./css/all.min.css">
 </head>
 <body>
-  <div class="container inbox">
-    <sidebar class="inbox-sidebar-nav">
-      <ul class="inbox-menu">
-        <a href="#compose-mail">
-          <li class="inbox-menu-items" id="nav-compose">
-            <span class="icon">
-              <i class="fas fa-edit"></i>
-            </span>
-            <span class="icon-text">Compose</span>
-          </li>
+  <div class="container">
+    <div class="container-fixed-header">
+      <div class="logo-elements">
+        <a class="logo" href="./index.html">
+          <img src="./images/email-icon-vector-FreeVector-Email-Icon-small.png" alt="Logo Here">
+          <p>EPIC Mail</p>
         </a>
-        <a href="#">
-          <li class="inbox-menu-items inbox-active" id="nav-inbox">
-            <span class="icon">
-              <i class="fas fa-inbox"></i>
-            </span>
-            <span class="icon-text">Inbox </span>
-            <span class="number-of-mails">3</span>
-          </li>
-        </a>
-        <a href="#">
-          <li class="inbox-menu-items" id="nav-sent">
-            <span class="icon">
-              <i class="fas fa-envelope"></i>
-            </span>
-            <span class="icon-text">Sent</span>
-          </li>
-        </a>
-        <a href="#">
-          <li class="inbox-menu-items" id="nav-drafts">
-            <span class="icon">
-              <i class="fas fa-folder"></i>
-            </span>
-            <span class="icon-text">Drafts </span>
-            <span class="number-of-mails">3</span>
-          </li>
-        </a>
-        <a href="admin.html">
-          <li class="inbox-menu-items" id="nav-groups">
-            <span class="icon">
-              <i class="fas fa-users"></i>
-            </span>
-            <span class="icon-text">Groups</span>
-          </li>
-        </a>
-      </ul>
-    </sidebar>
-    <div class="mail-div">
-      <input type="text" id="search" name="search" class="search" placeholder="Search Mail">
-      <main class="inbox-main-content">
-        <div class="emails-div">
-          <div class="email-sections">
-          </div>
-          <table id="inbox">
-            <thead>
-              <tr class="data">
-                <td>Name</td>
-                <td>Description</td>
-                <td>Actions</td>
-              </tr>
-            </thead>
-            <tbody>
-              <tr class="data">
-                <td class="sender-name">
-                  <input type="checkbox" name="" id="" class="sender-checkbox">Group 1
-                </td>
-                <td>
-                  <span class='statement'>This is a group for sub-admins</span>
-                </td>
-                <td>
-                  <span><i class="mail-icons fas fa-edit"></i></span>
-                  <span><i class="mail-icons fas fa-trash"></i></span>
-                </td>
-              </tr>
-              <tr class="data">
-                <td class="sender-name">
-                  <input type="checkbox" name="" id="" class="sender-checkbox">Group 2
-                </td>
-                <td>
-                  <span class='statement'>This is a group for early bird users</span>
-                </td>
-                <td>
-                  <span><i class="mail-icons fas fa-edit"></i></span>
-                  <span><i class="mail-icons fas fa-trash"></i></span>
-                </td>
-              </tr>
-              <tr class="data">
-                <td class="sender-name">
-                  <input type="checkbox" name="" id="" class="sender-checkbox">Group 3
-                </td>
-                <td>
-                  <span class='statement'>This is a group for regular users</span>
-                </td>
-                <td>
-                  <span><i class="mail-icons fas fa-edit"></i></span>
-                  <span><i class="mail-icons fas fa-trash"></i></span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="new-group">
-            <div class="button create-new-group">Create New</div>
-          </div>
-        </div>
-      </main>
-    </div>
-    <div class="compose-mail" id="compose-mail">
-      <div class="compose-header">New Message
-      <a href="#" class="compose-close">&times;</a>
-      <a href="#" class="compose-minimize" id="compose-minimize">&minus;</a>
       </div>
-      <div class="compose-mail-body" id="compose-mail-body">
-        <div class="mail-headers">
-          <input type="text" class="compose-recipients" name="recipients" id="recipients" placeholder="Recipients">
-          <hr />
-          <input type="text" class="subject" name="subject" id="subject" placeholder="Subject">
-          <hr />
+      <nav class="navigation">
+        <ul class="navbar-list">
+          <a href="#productivity"><li class="navbar-list-items"><p>Productivity</p></li></a>
+          <a href="signin.html"><li class="navbar-list-items"><p>Sign in</p></li></a>
+          <a href="signup.html"><li class="navbar-list-items"><p>Create an Account</p></li></a>
+        </ul>
+        <a href="#" class="navbar-mobile-icon" id="mobile-navbar-icon"><i class="fas fa-th-list"></i></a>
+        <div class="mobile-nav-div" id="mobile-nav-div">
+          <ul class="mobile-navbar-list">
+            <a href="#productivity" id="goProductivity"><li class="mobile-navbar-list-items"><p>Productivity</p></li></a>
+            <a href="signin.html"><li class="mobile-navbar-list-items"><p>Sign in</p></li></a>
+            <a href="signup.html"><li class="mobile-navbar-list-items"><p>Create Account</p></li></a>
+          </ul>
         </div>
-        <div class="commpose-mail">
-          <textarea name="compose-mail" id="compose-mail" cols="30" rows="10"></textarea>
-        </div>
-        <div class="compose-buttons">
-          <span class="button">Send</span>
-          <span class="button">Save</span>
-        </div>
+      </nav>
+    </div>
+    <div class="inbox">
+      <sidebar class="inbox-sidebar-nav">
+        <ul class="inbox-menu">
+          <a href="#compose-mail">
+            <li class="inbox-menu-items" id="nav-compose">
+              <span class="icon">
+                <i class="fas fa-edit"></i>
+              </span>
+              <span class="icon-text">Compose</span>
+            </li>
+          </a>
+          <a href="inbox.html">
+            <li class="inbox-menu-items" id="nav-inbox">
+              <span class="icon">
+                <i class="fas fa-inbox"></i>
+              </span>
+              <span class="icon-text">Inbox </span>
+              <span class="number-of-mails">3</span>
+            </li>
+          </a>
+          <a href="inbox.html">
+            <li class="inbox-menu-items" id="nav-sent">
+              <span class="icon">
+                <i class="fas fa-envelope"></i>
+              </span>
+              <span class="icon-text">Sent</span>
+            </li>
+          </a>
+          <a href="inbox.html">
+            <li class="inbox-menu-items" id="nav-drafts">
+              <span class="icon">
+                <i class="fas fa-folder"></i>
+              </span>
+              <span class="icon-text">Drafts </span>
+              <span class="number-of-mails">3</span>
+            </li>
+          </a>
+          <a href="admin.html">
+            <li class="inbox-menu-items inbox-active" id="nav-groups">
+              <span class="icon">
+                <i class="fas fa-users"></i>
+              </span>
+              <span class="icon-text">Groups</span>
+            </li>
+          </a>
+          <a href="index.html">
+            <li class="inbox-menu-items" id="nav-groups">
+              <span class="icon">
+                <i class="fas fa-eject"></i>
+              </span>
+              <span class="icon-text">Log Out</span>
+            </li>
+          </a>
+        </ul>
+      </sidebar>
+      <div class="mail-div">
+        <input type="text" id="search" name="search" class="search" placeholder="Search Mail">
+        <main class="inbox-main-content">
+          <div class="emails-div">
+            <div class="email-sections">
+            </div>
+            <table id="inbox">
+              <thead>
+                <tr class="data">
+                  <td>Name</td>
+                  <td>Description</td>
+                  <td>Actions</td>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="data">
+                  <td class="sender-name">
+                    <input type="checkbox" name="" id="" class="sender-checkbox">Group 1
+                  </td>
+                  <td>
+                    <span class='statement'>This is a group for sub-admins</span>
+                  </td>
+                  <td>
+                    <span><i class="mail-icons fas fa-edit"></i></span>
+                    <span><i class="mail-icons fas fa-trash"></i></span>
+                  </td>
+                </tr>
+                <tr class="data">
+                  <td class="sender-name">
+                    <input type="checkbox" name="" id="" class="sender-checkbox">Group 2
+                  </td>
+                  <td>
+                    <span class='statement'>This is a group for early bird users</span>
+                  </td>
+                  <td>
+                    <span><i class="mail-icons fas fa-edit"></i></span>
+                    <span><i class="mail-icons fas fa-trash"></i></span>
+                  </td>
+                </tr>
+                <tr class="data">
+                  <td class="sender-name">
+                    <input type="checkbox" name="" id="" class="sender-checkbox">Group 3
+                  </td>
+                  <td>
+                    <span class='statement'>This is a group for regular users</span>
+                  </td>
+                  <td>
+                    <span><i class="mail-icons fas fa-edit"></i></span>
+                    <span><i class="mail-icons fas fa-trash"></i></span>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="new-group">
+              <div class="button create-new-group" id="create-group">Create New</div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <footer>
+      <div class="copyright">
+        &copy;2019 Copyright EPIC Mail
+      </div>
+    </footer>
+  </div>
+  <div class="compose-mail" id="compose-mail">
+    <div class="compose-header">New Message
+    <a href="#" class="compose-close">&times;</a>
+    <a href="#" class="compose-minimize" id="compose-minimize">&minus;</a>
+    </div>
+    <div class="compose-mail-body" id="compose-mail-body">
+      <div class="mail-headers">
+        <input type="text" class="compose-recipients" name="recipients" id="recipients" placeholder="Recipients">
+        <hr />
+        <input type="text" class="subject" name="subject" id="subject" placeholder="Subject">
+        <hr />
+      </div>
+      <div class="commpose-mail">
+        <textarea name="compose-mail" id="compose-mail" cols="30" rows="10"></textarea>
+      </div>
+      <div class="compose-buttons">
+        <span class="button">Send</span>
+        <span class="button">Save</span>
       </div>
     </div>
   </div>
@@ -142,6 +180,8 @@
   
   <script type="text/javascript">
     document.getElementById('nav-compose').addEventListener('click', (e) => showCompose(e));
+    document.getElementById('create-group').addEventListener('click', (e) => showCreateGroupPage(e));
+    
     const mailRows = document.getElementsByClassName('data');
     
     for (const element of mailRows) {
@@ -176,6 +216,23 @@
       } else {
         window.location.href += '#compose-mail';
       }
+    }
+    
+    document.getElementById('mobile-navbar-icon').addEventListener('click', (e) => openNav(e));
+    document.getElementById('goProductivity').addEventListener('click', (e) => closeNav(e));
+    
+    const openNav = (e) => {
+      e.preventDefault();  
+      document.getElementById('mobile-nav-div').style.display = 'block';
+      document.getElementById('mobile-navbar-icon').removeEventListener('click', (e) => openNav(e));
+      document.getElementById('mobile-navbar-icon').addEventListener('click', (e) => closeNav(e, true));
+    }
+    
+    const closeNav = (e, prevent) => {
+      if(prevent) e.preventDefault();  
+      document.getElementById('mobile-nav-div').style.display = 'none';
+      document.getElementById('mobile-navbar-icon').removeEventListener('click', (e) => closeNav(e, prevent));
+      document.getElementById('mobile-navbar-icon').addEventListener('click', (e) => openNav(e));
     }
   </script>
 </body>
