@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+- stable
+after_success: npm run coverage
+deploy:
+  provider: heroku
+  api_key:
+    secure: YoUFGFbMVDmNMoEAFuksLPRfo/PRmfbwftty0beourUWoNGI4i5kLyP9GI44tEval6ww7bMtyi/M+AcZ0au1rFh27fgL+8thE8BxJB3Fqu0Eud+9PZPn9yjATB/qF+OS/DxEXU7Y2dag3XkfgnoKol3pB3WFShzFhGpfoZiWkHmp6h+i4kvHWUtJrAAFF89jrZs+IGC/mjd7dl9BKNLzBWAXSQLatxaJW5QDS48LTnt7MEUR32JmeXFBUIUwZTCENXXEK3Ene5e3xqQ9CR4f56RjYNS2h2bgQCTOQc1J8cxWATeeJitHWt0Tj2Q+GoOgAXxNj5RXL6GthkHNqg4RqfdxQ9pykhsVOaCNj31DAdMNV+lcVpVeW20LVHBQ7XL5ysOePzPROhw9opvhN3vCB6erIrLE2NGkQa6EVgDejtzAZsUMtwH+rYxlqgIb8jAcpKAFqMHfZF1O7bIEDjRn8GuYcA5TAYL9rl5dsnN3fEVXp6s39oS/HP5NHl+K/jK+/b8+GaedPRmeY550jd3/kQgyX3PBa4nVxQwZ+rVyb83IXByV+zESHXyXW+pMh5aA+WLNQv9gDnNbeJHsaWdAwc+yiho09O+ynVr1JxQedVOYiDMOELxOgZm71yLhPePdztHsVFcvFSawkthl3Rw5CUxtl3eW2Tx57KNdg3/i3cY=
+  app: darasimi-epicmail
+  on: develop
