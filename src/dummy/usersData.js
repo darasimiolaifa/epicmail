@@ -4,7 +4,8 @@ const users = [{
   username: 'darasimiolaifa',
   firstname: 'Darasimi',
   lastname: 'Olaifa',
-  password: '$2a$10$F726vWjlYsvwbjpmLmAFcuA8BFo.C1Nx5/iwziH9bT3fF1I5AVGMi',
+  salt: '$2a$10$PZ./jjAsziGIa/b1VMjmN.',
+  password: '$2a$10$PZ./jjAsziGIa/b1VMjmN.C7fNKe0ASKjW8RE1ByP1CTw6Vak7EhW',
 },
 {
   id: 2,
@@ -12,7 +13,8 @@ const users = [{
   username: 'chinedu.emeka',
   firstname: 'Emeka',
   lastname: 'Chinedu',
-  password: '$2a$10$ko43PdMfQhIVKeOoXQpfz.0iodNCKgHYZ1xet0q.85ay.BRoE5/G2',
+  salt: '$2a$10$Aoy.zof43FDu/k8BBpj.Ju',
+  password: '$2a$10$Aoy.zof43FDu/k8BBpj.JuNMugYAhDZbdVCkvAuPgxuWj0RhKo9Ny',
 },
 {
   id: 3,
@@ -20,7 +22,8 @@ const users = [{
   username: 'ebenezer.makinde',
   firstname: 'Ebenezer',
   lastname: 'Makinde',
-  password: '$2a$10$ZJlfUGK98zwl53pJBzlV5Oxg6le4fQ2mB/2BCb6jNP0sD0IhUafvi',
+  salt: '$2a$10$CmVOJyu571GBxpNUd8.0lu',
+  password: '$2a$10$CmVOJyu571GBxpNUd8.0lumUoWGLwgjHq5dPjEiA189FFggE1kpbu',
 }];
 
 export default users;
