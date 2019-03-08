@@ -4,6 +4,7 @@ const {
   getAllMessages,
   getAllUnreadMessages,
   getAllSentMessages,
+  getSpecificMessage,
 } = messageControllers;
 
 export default (app) => {
@@ -15,4 +16,7 @@ export default (app) => {
     
   app.route('/api/v1/messages/sent')
     .get(getAllSentMessages);
+    
+  app.route('/api/v1/messages/:id')
+    .get(getSpecificMessage);
 };
