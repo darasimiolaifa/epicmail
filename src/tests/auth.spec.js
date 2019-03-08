@@ -23,14 +23,15 @@ describe('Authentication API', () => {
           password: 'imonitie.yahoo',
         })
         .end((err, res) => {
+          const { data } = res.body;
           res.should.have.status(201);
           // eslint-disable-next-line no-unused-expressions
           res.should.be.json;
           res.body.should.be.a('object');
           res.body.should.have.property('status', 201);
           res.body.should.have.property('data');
-          res.body.data.should.be.a('object');
-          res.body.data.should.have.property('token');
+          data.should.be.a('object');
+          data.should.have.property('token');
         });
     });
     it('should return an error when one of the field is missing', () => {
@@ -43,13 +44,14 @@ describe('Authentication API', () => {
           username: 'imonitie.yahoo',
         })
         .end((err, res) => {
+          const { error } = res.body;
           res.should.have.status(400);
           res.body.should.not.have.property('data');
           res.body.should.have.property('status', 400);
           res.body.should.have.property('error');
-          res.body.error.should.have.property('missingValues');
-          res.body.error.missingValues.should.be.an('array');
-          res.body.error.missingValues.should.include('password');
+          error.should.have.property('missingValues');
+          error.missingValues.should.be.an('array');
+          error.missingValues.should.include('password');
         });
     });
     it('should return an error for a username already in the database', () => {
@@ -62,12 +64,13 @@ describe('Authentication API', () => {
           password: 'monkeys4real',
         })
         .end((err, res) => {
+          const { error } = res.body;
           res.should.have.status(400);
           res.body.should.have.property('status', 400);
           res.body.should.have.property('error');
-          res.body.error.should.have.property('invalidInput');
-          res.body.error.invalidInput.should.be.an('object');
-          res.body.error.invalidInput.should.have.property('username');
+          error.should.have.property('invalidInput');
+          error.invalidInput.should.be.an('object');
+          error.invalidInput.should.have.property('username');
         });
     });
     it('should return an error for a username that contains invalid characters', () => {
@@ -80,12 +83,13 @@ describe('Authentication API', () => {
           password: 'monkeys4real',
         })
         .end((err, res) => {
+          const { error } = res.body;
           res.should.have.status(400);
           res.body.should.have.property('status', 400);
           res.body.should.have.property('error');
-          res.body.error.should.have.property('invalidInput');
-          res.body.error.invalidInput.should.be.an('object');
-          res.body.error.invalidInput.should.have.property('username');
+          error.should.have.property('invalidInput');
+          error.invalidInput.should.be.an('object');
+          error.invalidInput.should.have.property('username');
         });
     });
     it('should reject passwords with less than 8 characters', () => {
@@ -98,12 +102,13 @@ describe('Authentication API', () => {
           password: 'monk',
         })
         .end((req, res) => {
+          const { error } = res.body;
           res.should.have.status(400);
           res.body.should.have.property('status', 400);
           res.body.should.have.property('error');
-          res.body.error.should.have.property('invalidInput');
-          res.body.error.invalidInput.should.be.an('object');
-          res.body.error.invalidInput.should.have.property('password');
+          error.should.have.property('invalidInput');
+          error.invalidInput.should.be.an('object');
+          error.invalidInput.should.have.property('password');
         });
     });
   });
@@ -120,13 +125,14 @@ describe('Authentication API', () => {
           password: '',
         })
         .end((err, res) => {
+          const { error } = res.body;
           res.should.have.status(400);
           res.body.should.not.have.property('data');
           res.body.should.have.property('status', 400);
           res.body.should.have.property('error');
-          res.body.error.should.have.property('missingValues');
-          res.body.error.missingValues.should.be.an('array');
-          res.body.error.missingValues.should.include('password');
+          error.should.have.property('missingValues');
+          error.missingValues.should.be.an('array');
+          error.missingValues.should.include('password');
         });
     });
     it('should return a 404 error if no stored username matches the one specified', () => {
@@ -137,12 +143,13 @@ describe('Authentication API', () => {
           password: 'badPassword',
         })
         .end((err, res) => {
+          const { error } = res.body;
           res.should.have.status(404);
           res.body.should.have.property('status', 404);
           res.body.should.have.property('error');
-          res.body.error.should.have.property('invalidInput');
-          res.body.error.invalidInput.should.be.an('object');
-          res.body.error.invalidInput.should.have.property('username');
+          error.should.have.property('invalidInput');
+          error.invalidInput.should.be.an('object');
+          error.invalidInput.should.have.property('username');
         });
     });
     it('should return a 400 error the stored password does not match the one specified', () => {
@@ -153,12 +160,13 @@ describe('Authentication API', () => {
           password: 'wrongpassword',
         })
         .end((err, res) => {
+          const { error } = res.body;
           res.should.have.status(400);
           res.body.should.have.property('status', 400);
           res.body.should.property('error');
-          res.body.error.should.have.property('invalidInput');
-          res.body.error.invalidInput.should.be.an('object');
-          res.body.error.invalidInput.should.have.property('password');
+          error.should.have.property('invalidInput');
+          error.invalidInput.should.be.an('object');
+          error.invalidInput.should.have.property('password');
         });
     });
     it('should sign in the new user and return a token', () => {
@@ -169,11 +177,12 @@ describe('Authentication API', () => {
           password: 'darasimiolaifa',
         })
         .end((err, res) => {
+          const { data } = res.body;
           res.should.have.status(200);
           res.body.should.be.a('object');
           res.body.should.have.property('status', 200);
-          res.body.data.should.have.property('token');
-          res.body.data.token.should.be.a('string');
+          data.should.have.property('token');
+          data.token.should.be.a('string');
         });
     });
   });
