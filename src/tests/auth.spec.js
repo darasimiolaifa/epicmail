@@ -1,7 +1,8 @@
+/* eslint-disable no-undef */
+/* eslint-disable no-trailing-spaces */
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import app from '../server';
-import { exists } from 'fs';
 
 chai.use(chaiHttp);
 chai.should();
@@ -11,7 +12,7 @@ describe('Authentication API', () => {
   describe('POST /api/v1/auth/signup', () => {
     beforeEach(() => {
       url = '/api/v1/auth/signup';
-    })
+    });
     it('should sign up the new user and return a token', () => {
       chai.request(app)
         .post(url)
@@ -38,14 +39,17 @@ describe('Authentication API', () => {
         .send({
           firstname: 'Imonitie',
           lastname: 'Yahoo',
-          password: 'imonitie.yahoo',
-          username: '',
+          password: '',
+          username: 'imonitie.yahoo',
         })
         .end((err, res) => {
           res.should.have.status(400);
           res.body.should.not.have.property('data');
           res.body.should.have.property('status', 400);
           res.body.should.have.property('error');
+          res.body.error.should.have.property('missingValues');
+          res.body.error.missingValues.should.be.an('array');
+          res.body.error.missingValues.should.include('password');
         });
     });
     it('should return an error for a username already in the database', () => {
@@ -61,14 +65,52 @@ describe('Authentication API', () => {
           res.should.have.status(400);
           res.body.should.have.property('status', 400);
           res.body.should.have.property('error');
-          res.body.error.should.include('username');
+          res.body.error.should.have.property('invalidInput');
+          res.body.error.invalidInput.should.be.an('object');
+          res.body.error.invalidInput.should.have.property('username');
+        });
+    });
+    it('should return an error for a username that contains invalid characters', () => {
+      chai.request(app)
+        .post(url)
+        .send({
+          username: '$#@ollarjay)(',
+          firstname: 'Isaiah',
+          lastname: 'Ibikunle',
+          password: 'monkeys4real',
+        })
+        .end((err, res) => {
+          res.should.have.status(400);
+          res.body.should.have.property('status', 400);
+          res.body.should.have.property('error');
+          res.body.error.should.have.property('invalidInput');
+          res.body.error.invalidInput.should.be.an('object');
+          res.body.error.invalidInput.should.have.property('username');
+        });
+    });
+    it('should reject passwords with less than 8 characters', () => {
+      chai.request(app)
+        .post(url)
+        .send({
+          username: 'darasimiolaifa',
+          firstname: 'Isaiah',
+          lastname: 'Ibikunle',
+          password: 'monk',
+        })
+        .end((req, res) => {
+          res.should.have.status(400);
+          res.body.should.have.property('status', 400);
+          res.body.should.have.property('error');
+          res.body.error.should.have.property('invalidInput');
+          res.body.error.invalidInput.should.be.an('object');
+          res.body.error.invalidInput.should.have.property('password');
         });
     });
   });
   
-  describe('POST /api/v1/auth/signin', () => {
+  describe('POST /api/v1/auth/login', () => {
     beforeEach(() => {
-      url = '/api/v1/auth/signin';
+      url = '/api/v1/auth/login';
     });
     it('should return a 400 error if any of the fields is missing', () => {
       chai.request(app)
@@ -79,11 +121,13 @@ describe('Authentication API', () => {
         })
         .end((err, res) => {
           res.should.have.status(400);
+          res.body.should.not.have.property('data');
           res.body.should.have.property('status', 400);
           res.body.should.have.property('error');
-          res.body.error.should.be.a('string');
-          res.body.should.be.an('object');
-        })
+          res.body.error.should.have.property('missingValues');
+          res.body.error.missingValues.should.be.an('array');
+          res.body.error.missingValues.should.include('password');
+        });
     });
     it('should return a 404 error if no stored username matches the one specified', () => {
       chai.request(app)
@@ -95,8 +139,10 @@ describe('Authentication API', () => {
         .end((err, res) => {
           res.should.have.status(404);
           res.body.should.have.property('status', 404);
-          res.body.should.property('error');
-          res.body.error.should.include('username');
+          res.body.should.have.property('error');
+          res.body.error.should.have.property('invalidInput');
+          res.body.error.invalidInput.should.be.an('object');
+          res.body.error.invalidInput.should.have.property('username');
         });
     });
     it('should return a 400 error the stored password does not match the one specified', () => {
@@ -110,7 +156,9 @@ describe('Authentication API', () => {
           res.should.have.status(400);
           res.body.should.have.property('status', 400);
           res.body.should.property('error');
-          res.body.error.should.include('password');
+          res.body.error.should.have.property('invalidInput');
+          res.body.error.invalidInput.should.be.an('object');
+          res.body.error.invalidInput.should.have.property('password');
         });
     });
     it('should sign in the new user and return a token', () => {
@@ -124,8 +172,8 @@ describe('Authentication API', () => {
           res.should.have.status(200);
           res.body.should.be.a('object');
           res.body.should.have.property('status', 200);
-          res.body.should.have.property('token');
-          res.body.token.should.be.a('string');
+          res.body.data.should.have.property('token');
+          res.body.data.token.should.be.a('string');
         });
     });
   });
