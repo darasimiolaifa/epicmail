@@ -18,4 +18,13 @@ export default class messageControllers {
       data: unreadMessages,
     });
   }
+  
+  static getAllSentMessages(req, res) {
+    const sentMessages = messageData.filter(message => message.status === 'sent');
+    res.setHeader('content-type', 'application/json');
+    return res.status(200).send({
+      status: 200,
+      data: sentMessages,
+    });
+  }
 }

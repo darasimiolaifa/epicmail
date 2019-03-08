@@ -6,7 +6,7 @@ chai.use(chaiHttp);
 chai.should();
 
 describe('Messages API', () => {
-  describe('/api/v1/messages', () => {
+  describe('GET /api/v1/messages', () => {
     it('should get all the received messages for the requester', () => {
       chai.request(app)
         .get('/api/v1/messages')
@@ -25,7 +25,7 @@ describe('Messages API', () => {
     });
   });
   
-  describe('/api/v1/messages/unread', () => {
+  describe('GET /api/v1/messages/unread', () => {
     it('should get all the unread received messages for the requester', () => {
       chai.request(app)
         .get('/api/v1/messages/unread')
@@ -39,6 +39,25 @@ describe('Messages API', () => {
           data.should.have.lengthOf(3);
           data.forEach((mail) => {
             mail.should.satisfy(message => message.status === 'unread');
+          });
+        });
+    });
+  });
+  
+  describe('GET /api/v1/messages/sent', () => {
+    it('should get all the sent messages for the requester', () => {
+      chai.request(app)
+        .get('/api/v1/messages/sent')
+        .send('Accepts', 'application/json')
+        .end((err, res) => {
+          const { data } = res.body;
+          res.should.have.status(200);
+          res.body.should.have.property('status', 200);
+          res.body.should.have.property('data');
+          data.should.be.an('array');
+          data.should.have.lengthOf(3);
+          data.forEach((mail) => {
+            mail.should.satisfy(message => message.status === 'sent');
           });
         });
     });
