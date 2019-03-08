@@ -27,4 +27,21 @@ export default class messageControllers {
       data: sentMessages,
     });
   }
+  
+  static getSpecificMessage(req, res) {
+    const { id } = req.params;
+    const singleMessage = messageData.filter(message => message.id === Number(id))[0];
+    res.setHeader('content-type', 'application/json');
+    if (!singleMessage) {
+      return res.status(404).send({
+        status: 404,
+        error: 'Message not found in our database',
+      });
+    }
+    
+    return res.status(200).send({
+      status: 200,
+      data: singleMessage,
+    });
+  }
 }
