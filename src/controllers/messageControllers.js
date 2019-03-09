@@ -44,4 +44,24 @@ export default class messageControllers {
       data: singleMessage,
     });
   }
+  
+  static deleteSpecificMessage(req, res) {
+    const { id } = req.params;
+    const messageIndex = messageData.findIndex(message => message.id === Number(id));
+    res.setHeader('content-type', 'application/json');
+    if (messageIndex === -1) {
+      return res.status(404).send({
+        status: 404,
+        error: 'Message not found in our database',
+      });
+    }
+    
+    const deletedMessage = messageData.splice(messageIndex, 1)[0];
+    return res.status(200).send({
+      status: 200,
+      data: {
+        message: deletedMessage.message,
+      },
+    });
+  }
 }

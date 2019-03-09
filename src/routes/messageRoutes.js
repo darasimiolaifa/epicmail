@@ -5,6 +5,7 @@ const {
   getAllUnreadMessages,
   getAllSentMessages,
   getSpecificMessage,
+  deleteSpecificMessage,
 } = messageControllers;
 
 export default (app) => {
@@ -18,5 +19,6 @@ export default (app) => {
     .get(getAllSentMessages);
     
   app.route('/api/v1/messages/:id')
-    .get(getSpecificMessage);
+    .get(getSpecificMessage)
+    .delete(deleteSpecificMessage);
 };
