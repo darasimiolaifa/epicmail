@@ -1,5 +1,4 @@
 import checkMissingRequiredValues from './checkMissingRequiredValues';
-import users from '../../dummy/messageData';
 
 const validateMessageInputs = (req, res, next) => {
   const required = ['message', 'senderId', 'status', 'subject'];

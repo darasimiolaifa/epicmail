@@ -21,7 +21,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 */
 (0, _dotenv.config)();
 var app = (0, _express.default)();
-var port = process.env.port || 8080; // configure app to use middlewares
+var port = process.env.PORT || 8080; // configure app to use middlewares
 
 app.use(_express.default.json());
 app.use(_express.default.urlencoded({
