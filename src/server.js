@@ -10,7 +10,7 @@ import addMessagesRoutes from './routes/messageRoutes';
 config();
 
 const app = express();
-const port = process.env.port || 8080;
+const port = process.env.PORT || 8080;
 
 // configure app to use middlewares
 app.use(express.json());
