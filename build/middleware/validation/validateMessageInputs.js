@@ -7,8 +7,6 @@ exports.default = void 0;
 
 var _checkMissingRequiredValues = _interopRequireDefault(require("./checkMissingRequiredValues"));
 
-var _messageData = _interopRequireDefault(require("../../dummy/messageData"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var validateMessageInputs = function validateMessageInputs(req, res, next) {
