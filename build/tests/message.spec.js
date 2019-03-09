@@ -111,5 +111,46 @@ describe('Messages API', function () {
       });
     });
   });
+  describe('POST /api/v1/messages', function () {
+    var message;
+    var url;
+    beforeEach(function () {
+      url = '/api/v1/messages';
+      message = 'Fuga enim tempore non voluptas quia vitae ipsam voluptas. Et dolor adipisci dolores sunt non explicabo occaecati rerum nesciunt. Sint est asperiores sit voluptatum mollitia enim iste. Nesciunt minima sequi voluptas optio aut voluptatem. Eligendi voluptates iste eius iure commodi molestiae. Quo ex reprehenderit ipsa incidunt corporis vel in unde. Iste asperiores consequatur ex quidem omnis inventore deserunt. Eligendi officiis voluptatem. In omnis labore consequatur nisi. Excepturi doloremque nam omnis odit labore magni rerum quia. Distinctio adipisci nulla exercitationem omnis illum. Eum cum ipsam consequatur ex accusamus ipsum. Eum inventore laboriosam deleniti omnis occaecati. Culpa occaecati nemo alias et doloribus expedita. Ut quia ut nostrum ducimus occaecati veniam ut exercitationem voluptatibus. Quaerat porro error sint aut aliquid qui. Minus officiis neque dolorem animi maiores et aliquid.';
+    });
+    it('should return a 400 error for missing inputs', function () {
+      _chai.default.request(_server.default).post(url).send({
+        snederId: 1,
+        subject: '',
+        status: 'sent',
+        message: message
+      }).end(function (err, res) {
+        var error = res.body.error;
+        res.should.have.status(400);
+        res.body.should.have.property('status', 400);
+        res.body.should.have.property('error');
+        error.should.have.property('missingValues');
+        error.missingValues.should.include('subject');
+      });
+    });
+    it('should post a mail that hass all the required fields', function () {
+      _chai.default.request(_server.default).post(url).send({
+        snederId: 1,
+        subject: 'Soluta accusamus officiis ut excepturi blanditiis libero ut.',
+        status: 'sent',
+        message: message
+      }).end(function (err, res) {
+        var data = res.body.data;
+        res.should.have.status(200);
+        res.body.should.have.property('status', 200);
+        res.body.should.have.property('data');
+        data.should.be.an('object');
+        data.should.have.property('message');
+        data.message.should.be.a('object');
+        data.message.should.have.property('id');
+        data.message.id.should.be.a('number');
+      });
+    });
+  });
 });
 //# sourceMappingURL=message.spec.js.map
