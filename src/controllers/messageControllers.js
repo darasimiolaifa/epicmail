@@ -1,3 +1,4 @@
+import moment from 'moment';
 import messageData from '../dummy/messageData';
 
 export default class messageControllers {
@@ -61,6 +62,24 @@ export default class messageControllers {
       status: 200,
       data: {
         message: deletedMessage.message,
+      },
+    });
+  }
+  
+  static sendMessage(req, res) {
+    const highestId = messageData
+      .map(mail => mail.id)
+      .reduce((maximun, currentId) => Math.max(maximun, currentId));
+    
+    const id = highestId + 1;
+    const createdOn = moment.HTML5_FMT.DATETIME_LOCAL_MS;
+    const message = { id, createdOn, ...req.body };
+    messageData.push(message);
+    
+    return res.status(200).send({
+      status: 200,
+      data: {
+        message,
       },
     });
   }

@@ -1,4 +1,5 @@
 import messageControllers from '../controllers/messageControllers';
+import validateMessageInputs from '../middleware/validation/validateMessageInputs';
 
 const {
   getAllMessages,
@@ -6,11 +7,13 @@ const {
   getAllSentMessages,
   getSpecificMessage,
   deleteSpecificMessage,
+  sendMessage,
 } = messageControllers;
 
 export default (app) => {
   app.route('/api/v1/messages')
-    .get(getAllMessages);
+    .get(getAllMessages)
+    .post(validateMessageInputs, sendMessage);
   
   app.route('/api/v1/messages/unread')
     .get(getAllUnreadMessages);
