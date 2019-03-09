@@ -90,4 +90,33 @@ describe('Messages API', () => {
         });
     });
   });
+  describe('DELETE /api/v1/messages/:id', () => {
+    it('should return a 404 error if id does not match any message record in the database', () => {
+      chai.request(app)
+        .delete('/api/v1/messages/11')
+        .set('Accepts', 'application/json')
+        .end((err, res) => {
+          const { error } = res.body;
+          res.should.have.status(404);
+          res.body.should.have.property('status', 404);
+          res.body.should.have.property('error');
+          error.should.be.a('string');
+          error.should.include('Message');
+        });
+    });
+    it('should delete a specific message and return the message string', () => {
+      chai.request(app)
+        .delete('/api/v1/messages/1')
+        .set('Accepts', 'application/json')
+        .end((err, res) => {
+          const { data } = res.body;
+          res.should.have.status(200);
+          res.body.should.have.property('status', 200);
+          res.body.should.have.property('data');
+          data.should.be.an('object');
+          data.should.have.a.property('message');
+          data.message.should.be.a('string');
+        });
+    });
+  });
 });
