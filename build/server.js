@@ -19,13 +19,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 (0, _dotenv.config)();
 var app = (0, _express.default)();
-var port = process.env.PORT || 8080; // configure app to use middlewares
+var port = process.env.PORT || 3000; // configure app to use middlewares
 
 app.use(_express.default.json());
 app.use(_express.default.urlencoded({
   extended: false
-}));
-app.use('/', _express.default.static(_path.default.join(__dirname, 'UI'))); // add API routes to app
+})); // add API routes to app
 
 (0, _authRoutes.default)(app);
 (0, _messageRoutes.default)(app);
