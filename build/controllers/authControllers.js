@@ -7,9 +7,13 @@ exports.default = void 0;
 
 var _bcryptjs = _interopRequireDefault(require("bcryptjs"));
 
-var _jsonwebtoken = _interopRequireDefault(require("jsonwebtoken"));
-
 var _usersData = _interopRequireDefault(require("../dummy/usersData"));
+
+var _serverResponse = _interopRequireDefault(require("./authHelpers/serverResponse"));
+
+var _generateToken = _interopRequireDefault(require("./authHelpers/generateToken"));
+
+var _idGenerator = _interopRequireDefault(require("./authHelpers/idGenerator"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -41,8 +45,8 @@ function () {
 
       var hashedPassword = _bcryptjs.default.hashSync(password, salt);
 
-      var id = _usersData.default.length + 1;
       var email = "".concat(username, "@epicmail.com");
+      var id = (0, _idGenerator.default)(_usersData.default) + 1;
 
       _usersData.default.push(_objectSpread({
         id: id,
@@ -53,33 +57,18 @@ function () {
       })); // generate token with users username
 
 
-      var token = _jsonwebtoken.default.sign({
-        iss: 'epicmail',
-        sub: username
-      }, process.env.APP_SECRET);
-
-      return res.status(201).send({
-        status: 201,
-        data: {
-          token: token
-        }
-      });
+      var token = (0, _generateToken.default)(username);
+      return (0, _serverResponse.default)(res, {
+        token: token
+      }, 201);
     }
   }, {
     key: "login",
     value: function login(req, res) {
       var username = req.body.username;
-
-      var token = _jsonwebtoken.default.sign({
-        iss: 'epicmail',
-        sub: username
-      }, process.env.APP_SECRET);
-
-      return res.status(200).send({
-        status: 200,
-        data: {
-          token: token
-        }
+      var token = (0, _generateToken.default)(username);
+      return (0, _serverResponse.default)(res, {
+        token: token
       });
     }
   }]);

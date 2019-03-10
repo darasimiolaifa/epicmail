@@ -1,16 +1,12 @@
 import checkMissingRequiredValues from './checkMissingRequiredValues';
 
-const validateMessageInputs = (req, res, next) => {
+export default (req, res, next) => {
   const required = ['message', 'senderId', 'status', 'subject'];
-  const error = {};
-  let status = 200;
   
-  const missingValueStatus = checkMissingRequiredValues(req.body, required);
-  if (missingValueStatus.hasErrors) {
-    const { missingValues, statusCode } = missingValueStatus;
-    error.missingValues = missingValues;
-    status = statusCode;
-  }
+  const missingValues = checkMissingRequiredValues(req.body, required);
+  const error = { ...missingValues };
+  
+  const status = Math.max(200, missingValues.status);
   if (status !== 200) {
     return res.status(status).send({
       status,
@@ -19,4 +15,3 @@ const validateMessageInputs = (req, res, next) => {
   }
   next();
 };
-export default validateMessageInputs;

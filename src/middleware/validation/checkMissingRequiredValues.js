@@ -1,8 +1,7 @@
-const checkMissingRequiredValues = (formInput, required) => {
+export default (formInput, required) => {
   const missingValues = [];
-  
-  let hasErrors;
-  let statusCode;
+  const error = {};
+  let status = 200;
   
   const fields = Object.entries(formInput);
   for (let index = 0; index < fields.length; index++) {
@@ -11,15 +10,10 @@ const checkMissingRequiredValues = (formInput, required) => {
     // populate missing but required values errors
     if (value === '' && required.includes(key)) {
       missingValues.push(key);
+      status = 400;
     }
   }
-  
-  if (missingValues.length > 0) {
-    hasErrors = true;
-    statusCode = 400;
-  }
-  
-  return { missingValues, statusCode, hasErrors };
+  error.missingValues = missingValues;
+  error.status = status;
+  return error;
 };
-
-export default checkMissingRequiredValues;

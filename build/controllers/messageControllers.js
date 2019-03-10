@@ -9,6 +9,12 @@ var _moment = _interopRequireDefault(require("moment"));
 
 var _messageData = _interopRequireDefault(require("../dummy/messageData"));
 
+var _idGenerator = _interopRequireDefault(require("./authHelpers/idGenerator"));
+
+var _serverResponse = _interopRequireDefault(require("./authHelpers/serverResponse"));
+
+var _filterData = _interopRequireDefault(require("./authHelpers/filterData"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
@@ -31,102 +37,43 @@ function () {
   _createClass(messageControllers, null, [{
     key: "getAllMessages",
     value: function getAllMessages(req, res) {
-      var allMessages = _messageData.default.filter(function (message) {
-        return message.status === 'read' || message.status === 'unread';
-      });
-
-      res.setHeader('content-type', 'application/json');
-      return res.status(200).send({
-        status: 200,
-        data: allMessages
-      });
+      var allMessages = (0, _filterData.default)(_messageData.default, 'status', ['read', 'unread']);
+      return (0, _serverResponse.default)(res, allMessages);
     }
   }, {
     key: "getAllUnreadMessages",
     value: function getAllUnreadMessages(req, res) {
-      var unreadMessages = _messageData.default.filter(function (message) {
-        return message.status === 'unread';
-      });
-
-      res.setHeader('content-type', 'application/json');
-      return res.status(200).send({
-        status: 200,
-        data: unreadMessages
-      });
+      var unreadMessages = (0, _filterData.default)(_messageData.default, 'status', ['unread']);
+      return (0, _serverResponse.default)(res, unreadMessages);
     }
   }, {
     key: "getAllSentMessages",
     value: function getAllSentMessages(req, res) {
-      var sentMessages = _messageData.default.filter(function (message) {
-        return message.status === 'sent';
-      });
-
-      res.setHeader('content-type', 'application/json');
-      return res.status(200).send({
-        status: 200,
-        data: sentMessages
-      });
+      var sentMessages = (0, _filterData.default)(_messageData.default, 'status', ['sent']);
+      return (0, _serverResponse.default)(res, sentMessages);
     }
   }, {
     key: "getSpecificMessage",
     value: function getSpecificMessage(req, res) {
-      var id = req.params.id;
-
-      var singleMessage = _messageData.default.filter(function (message) {
-        return message.id === Number(id);
-      })[0];
-
-      res.setHeader('content-type', 'application/json');
-
-      if (!singleMessage) {
-        return res.status(404).send({
-          status: 404,
-          error: 'Message not found in our database'
-        });
-      }
-
-      return res.status(200).send({
-        status: 200,
-        data: singleMessage
-      });
+      var index = req.body.index;
+      var singleMessage = _messageData.default[index];
+      return (0, _serverResponse.default)(res, singleMessage);
     }
   }, {
     key: "deleteSpecificMessage",
     value: function deleteSpecificMessage(req, res) {
-      var id = req.params.id;
+      var index = req.body.index;
 
-      var messageIndex = _messageData.default.findIndex(function (message) {
-        return message.id === Number(id);
-      });
+      var deletedMessage = _messageData.default.splice(index, 1)[0];
 
-      res.setHeader('content-type', 'application/json');
-
-      if (messageIndex === -1) {
-        return res.status(404).send({
-          status: 404,
-          error: 'Message not found in our database'
-        });
-      }
-
-      var deletedMessage = _messageData.default.splice(messageIndex, 1)[0];
-
-      return res.status(200).send({
-        status: 200,
-        data: {
-          message: deletedMessage.message
-        }
+      return (0, _serverResponse.default)(res, {
+        message: deletedMessage.message
       });
     }
   }, {
     key: "sendMessage",
     value: function sendMessage(req, res) {
-      var highestId = _messageData.default.map(function (mail) {
-        return mail.id;
-      }).reduce(function (maximun, currentId) {
-        return Math.max(maximun, currentId);
-      });
-
-      var id = highestId + 1;
+      var id = (0, _idGenerator.default)(_messageData.default) + 1;
       var createdOn = _moment.default.HTML5_FMT.DATETIME_LOCAL_MS;
 
       var message = _objectSpread({
@@ -136,11 +83,8 @@ function () {
 
       _messageData.default.push(message);
 
-      return res.status(200).send({
-        status: 200,
-        data: {
-          message: message
-        }
+      return (0, _serverResponse.default)(res, {
+        message: message
       });
     }
   }]);

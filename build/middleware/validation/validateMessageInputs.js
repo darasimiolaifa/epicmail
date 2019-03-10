@@ -9,18 +9,17 @@ var _checkMissingRequiredValues = _interopRequireDefault(require("./checkMissing
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var validateMessageInputs = function validateMessageInputs(req, res, next) {
-  var required = ['message', 'senderId', 'status', 'subject'];
-  var error = {};
-  var status = 200;
-  var missingValueStatus = (0, _checkMissingRequiredValues.default)(req.body, required);
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
 
-  if (missingValueStatus.hasErrors) {
-    var missingValues = missingValueStatus.missingValues,
-        statusCode = missingValueStatus.statusCode;
-    error.missingValues = missingValues;
-    status = statusCode;
-  }
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var _default = function _default(req, res, next) {
+  var required = ['message', 'senderId', 'status', 'subject'];
+  var missingValues = (0, _checkMissingRequiredValues.default)(req.body, required);
+
+  var error = _objectSpread({}, missingValues);
+
+  var status = Math.max(200, missingValues.status);
 
   if (status !== 200) {
     return res.status(status).send({
@@ -32,6 +31,5 @@ var validateMessageInputs = function validateMessageInputs(req, res, next) {
   next();
 };
 
-var _default = validateMessageInputs;
 exports.default = _default;
 //# sourceMappingURL=validateMessageInputs.js.map
