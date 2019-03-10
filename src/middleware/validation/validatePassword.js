@@ -1,27 +1,27 @@
 import bcrypt from 'bcryptjs';
 
-const validatePassword = (url, users, password, username) => {
+export default (url, users, password, username) => {
   const passwordErrors = [];
-  let statusCode = 400;
-  let hasErrors;
+  const error = {};
+  let status = 200;
+  
   if (url === '/api/v1/auth/signup') {
     if (password.length < 8) {
       passwordErrors.push('Passwords must be 8 characters or more in length');
-      hasErrors = true;
+      status = 400;
     }
   } else {
     const foundUser = users.find(user => user.username === username);
     if (foundUser) {
       if (foundUser.password !== bcrypt.hashSync(password, foundUser.salt)) {
         passwordErrors.push('Username and password does not match');
-        hasErrors = true;
+        status = 400;
       }
     } else {
-      statusCode = 404;
+      status = 404;
     }
   }
-  
-  return { passwordErrors, statusCode, hasErrors };
+  error.password = passwordErrors;
+  error.status = status;
+  return error;
 };
-
-export default validatePassword;

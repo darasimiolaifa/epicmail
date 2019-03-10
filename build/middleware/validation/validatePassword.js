@@ -9,15 +9,15 @@ var _bcryptjs = _interopRequireDefault(require("bcryptjs"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var validatePassword = function validatePassword(url, users, password, username) {
+var _default = function _default(url, users, password, username) {
   var passwordErrors = [];
-  var statusCode = 400;
-  var hasErrors;
+  var error = {};
+  var status = 200;
 
   if (url === '/api/v1/auth/signup') {
     if (password.length < 8) {
       passwordErrors.push('Passwords must be 8 characters or more in length');
-      hasErrors = true;
+      status = 400;
     }
   } else {
     var foundUser = users.find(function (user) {
@@ -27,20 +27,17 @@ var validatePassword = function validatePassword(url, users, password, username)
     if (foundUser) {
       if (foundUser.password !== _bcryptjs.default.hashSync(password, foundUser.salt)) {
         passwordErrors.push('Username and password does not match');
-        hasErrors = true;
+        status = 400;
       }
     } else {
-      statusCode = 404;
+      status = 404;
     }
   }
 
-  return {
-    passwordErrors: passwordErrors,
-    statusCode: statusCode,
-    hasErrors: hasErrors
-  };
+  error.password = passwordErrors;
+  error.status = status;
+  return error;
 };
 
-var _default = validatePassword;
 exports.default = _default;
 //# sourceMappingURL=validatePassword.js.map

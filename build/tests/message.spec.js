@@ -133,7 +133,7 @@ describe('Messages API', function () {
         error.missingValues.should.include('subject');
       });
     });
-    it('should post a mail that hass all the required fields', function () {
+    it('should post a mail that has all the required fields', function () {
       _chai.default.request(_server.default).post(url).send({
         snederId: 1,
         subject: 'Soluta accusamus officiis ut excepturi blanditiis libero ut.',

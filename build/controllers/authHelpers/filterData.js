@@ -13,28 +13,16 @@ function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
-var _default = function _default(formInput, required) {
-  var missingValues = [];
-  var error = {};
-  var status = 200;
-  var fields = Object.entries(formInput);
-
-  for (var index = 0; index < fields.length; index++) {
-    var _ref = _toConsumableArray(fields[index]),
-        key = _ref[0],
-        value = _ref[1]; // populate missing but required values errors
-
-
-    if (value === '' && required.includes(key)) {
-      missingValues.push(key);
-      status = 400;
-    }
-  }
-
-  error.missingValues = missingValues;
-  error.status = status;
-  return error;
+var _default = function _default(data, condition, values) {
+  var returnedData = [];
+  values.forEach(function (value) {
+    var match = data.filter(function (element) {
+      return element[condition] === value;
+    });
+    returnedData.push.apply(returnedData, _toConsumableArray(match));
+  });
+  return returnedData;
 };
 
 exports.default = _default;
-//# sourceMappingURL=checkMissingRequiredValues.js.map
+//# sourceMappingURL=filterData.js.map

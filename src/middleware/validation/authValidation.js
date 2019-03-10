@@ -2,6 +2,7 @@ import checkMissingRequiredValues from './checkMissingRequiredValues';
 import validateUsername from './validateUsername';
 import validatePassword from './validatePassword';
 import users from '../../dummy/usersData';
+import serverResponse from '../../controllers/authHelpers/serverResponse';
 
 const validateAuthData = (req, res, next) => {
   let required;
@@ -12,36 +13,18 @@ const validateAuthData = (req, res, next) => {
   } else {
     required = ['username', 'password'];
   }
+  let error;
   
-  const error = { invalidInput: {} };
-  let status = 200;
+  const missingValues = checkMissingRequiredValues(req.body, required, error);
+  const invalidUsernameErrors = validateUsername(url, users, body.username);
+  const invalidPasswordErrors = validatePassword(url, users, body.password, body.username);
   
-  const missingValueStatus = checkMissingRequiredValues(req.body, required);
-  if (missingValueStatus.hasErrors) {
-    const { missingValues, statusCode } = missingValueStatus;
-    error.missingValues = missingValues;
-    status = statusCode;
-  }
+  error = { ...missingValues };
+  error.invalidInput = { ...invalidUsernameErrors, ...invalidPasswordErrors };
   
-  const invalidUsername = validateUsername(url, users, body.username);
-  if (invalidUsername.hasErrors) {
-    const { usernameErrors, statusCode } = invalidUsername;
-    error.invalidInput.username = usernameErrors;
-    status = statusCode;
-  }
-  
-  const invalidPassword = validatePassword(url, users, body.password, body.username);
-  if (invalidPassword.hasErrors) {
-    const { passwordErrors, statusCode } = invalidPassword;
-    error.invalidInput.password = passwordErrors;
-    status = statusCode;
-  }
-  
+  const status = Math.max(200, missingValues.status, invalidUsernameErrors.status, invalidPasswordErrors.status);
   if (status !== 200) {
-    return res.status(status).send({
-      status,
-      error,
-    });
+    return serverResponse(res, error, status);
   }
   next();
 };

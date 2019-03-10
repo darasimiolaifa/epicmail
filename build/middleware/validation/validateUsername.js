@@ -5,10 +5,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var validateUsername = function validateUsername(url, users, username) {
+var _default = function _default(url, users, username) {
   var usernameErrors = [];
-  var hasErrors;
-  var statusCode;
+  var error = {};
+  var status = 200;
 
   if (url === '/api/v1/auth/signup') {
     if (users.findIndex(function (user) {
@@ -22,8 +22,7 @@ var validateUsername = function validateUsername(url, users, username) {
     }
 
     if (usernameErrors.length > 0) {
-      statusCode = 400;
-      hasErrors = true;
+      status = 400;
     }
   } else {
     var userIndex = users.findIndex(function (user) {
@@ -32,18 +31,14 @@ var validateUsername = function validateUsername(url, users, username) {
 
     if (userIndex) {
       usernameErrors.push('This username does not exist in our records.');
-      statusCode = 404;
-      hasErrors = true;
+      status = 404;
     }
   }
 
-  return {
-    usernameErrors: usernameErrors,
-    statusCode: statusCode,
-    hasErrors: hasErrors
-  };
+  error.username = usernameErrors;
+  error.status = status;
+  return error;
 };
 
-var _default = validateUsername;
 exports.default = _default;
 //# sourceMappingURL=validateUsername.js.map

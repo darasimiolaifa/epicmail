@@ -144,7 +144,7 @@ describe('Messages API', () => {
           error.missingValues.should.include('subject');
         });
     });
-    it('should post a mail that hass all the required fields', () => {
+    it('should post a mail that has all the required fields', () => {
       chai.request(app)
         .post(url)
         .send({
