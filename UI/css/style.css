@@ -5,15 +5,30 @@
   padding: 0;
 }
 
+html, body {
+  height: 100vh;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, Roboto, 'Segoe UI', Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   font-size: 1em;
-  height: 100%;
 }
 
 h1 {
   font-weight: 300;
   margin-bottom: 1em;
+}
+
+.groups-contact-div h1 {
+  margin-top: 1em;
+  margin-left: .7em;
+  margin-bottom: .2em;
+}
+
+.groups-contact-div h2 {
+  margin-left: 2em;
+  margin-bottom: .6em;
+  font-weight: 300;
 }
 
 li {
@@ -233,6 +248,7 @@ footer div.copyright{
 .form-container {
   width: 60%;
   margin: 5em auto;
+  height: 100vh;
 }
 
 .form-div {
@@ -348,7 +364,7 @@ select {
 
 /* Inbox Content Area */
 .inbox {
-  height: 100%;
+  height: 100vh;
   padding-bottom: 2em;
   background-image: url('../images/beach-bench-boardwalk-462024.jpg');
   background-repeat: no-repeat;
@@ -359,9 +375,9 @@ select {
 
 .inbox-main-content {
   background-color: white;
-  height: fit-content;
   color: black;
 }
+
 
 /* EMail Serach field */
 .search {
@@ -414,15 +430,19 @@ select {
 }
 
 /* EMail Display Section */
-.emails-div table {
+.emails-div table, .groups-contact-div table {
   width: 100%;
 }
 
-tr.data {
+.mail-box {
+  height: 90vh;
+}
+
+tr.data, tr.groups {
   border-bottom: 1px solid gray;
 }
 
-tr.data:hover {
+tr.data:hover, tr.groups:hover {
   box-shadow: 0 .15em .4em gray;
   cursor: pointer;
 }
@@ -432,10 +452,26 @@ tr.data td:nth-of-type(1) {
 }
 
 tr.data td:nth-of-type(2) {
-  width: 70%;
+  min-width: 70%;
 }
 
 tr.data td:nth-of-type(3) {
+  min-width: 10%;
+}
+
+tr.groups td:nth-of-type(1) {
+  width: 10%;
+}
+
+tr.groups td:nth-of-type(2) {
+  width: 50%;
+}
+
+tr.groups td:nth-of-type(3) {
+  width: 30%;
+}
+
+tr.groups td:nth-of-type(4) {
   width: 10%;
 }
 
@@ -451,6 +487,7 @@ td {
 #drafts-mail {
   display: none;
 }
+
 
 /* Mail Message View */
 .email-sections {
@@ -543,7 +580,7 @@ hr {
 
 .reply-buttons-item{
   display: inline-block;
-  margin: .7em;
+  margin: .7em .7em .2em .7em;
   border: 1px solid dodgerblue;
   border-radius: .4em;
   color: dodgerblue;
@@ -654,7 +691,7 @@ hr {
 
 .admin-form-div {
   width: 80%;
-  margin: 10.4em auto 0;
+  margin: 2em auto 0;
   border: .05em solid lightgray;
   border-radius: .5em;
   padding: 5em;
