@@ -13,7 +13,7 @@ var _validatePassword = _interopRequireDefault(require("./validatePassword"));
 
 var _usersData = _interopRequireDefault(require("../../dummy/usersData"));
 
-var _serverResponse = _interopRequireDefault(require("../../controllers/authHelpers/serverResponse"));
+var _serverResponse = _interopRequireDefault(require("../../controllers/controllerHelpers/serverResponse"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -44,7 +44,7 @@ var validateAuthData = function validateAuthData(req, res, next) {
     return (0, _serverResponse.default)(res, error, status);
   }
 
-  next();
+  return next();
 };
 
 var _default = validateAuthData;

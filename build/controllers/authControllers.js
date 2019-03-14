@@ -9,11 +9,11 @@ var _bcryptjs = _interopRequireDefault(require("bcryptjs"));
 
 var _usersData = _interopRequireDefault(require("../dummy/usersData"));
 
-var _serverResponse = _interopRequireDefault(require("./authHelpers/serverResponse"));
+var _serverResponse = _interopRequireDefault(require("./controllerHelpers/serverResponse"));
 
-var _generateToken = _interopRequireDefault(require("./authHelpers/generateToken"));
+var _generateToken = _interopRequireDefault(require("./controllerHelpers/generateToken"));
 
-var _idGenerator = _interopRequireDefault(require("./authHelpers/idGenerator"));
+var _idGenerator = _interopRequireDefault(require("./controllerHelpers/idGenerator"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

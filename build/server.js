@@ -9,11 +9,13 @@ var _dotenv = require("dotenv");
 
 var _express = _interopRequireDefault(require("express"));
 
-var _path = _interopRequireDefault(require("path"));
+var _swaggerUiExpress = _interopRequireDefault(require("swagger-ui-express"));
 
 var _authRoutes = _interopRequireDefault(require("./routes/authRoutes"));
 
 var _messageRoutes = _interopRequireDefault(require("./routes/messageRoutes"));
+
+var _docs = _interopRequireDefault(require("../docs.json"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -24,7 +26,8 @@ var port = process.env.PORT || 3000; // configure app to use middlewares
 app.use(_express.default.json());
 app.use(_express.default.urlencoded({
   extended: false
-})); // add API routes to app
+}));
+app.use('/api/v1/docs', _swaggerUiExpress.default.serve, _swaggerUiExpress.default.setup(_docs.default)); // add API routes to app
 
 (0, _authRoutes.default)(app);
 (0, _messageRoutes.default)(app);

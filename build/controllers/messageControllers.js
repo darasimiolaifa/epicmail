@@ -9,11 +9,11 @@ var _moment = _interopRequireDefault(require("moment"));
 
 var _messageData = _interopRequireDefault(require("../dummy/messageData"));
 
-var _idGenerator = _interopRequireDefault(require("./authHelpers/idGenerator"));
+var _idGenerator = _interopRequireDefault(require("./controllerHelpers/idGenerator"));
 
-var _serverResponse = _interopRequireDefault(require("./authHelpers/serverResponse"));
+var _serverResponse = _interopRequireDefault(require("./controllerHelpers/serverResponse"));
 
-var _filterData = _interopRequireDefault(require("./authHelpers/filterData"));
+var _filterData = _interopRequireDefault(require("./controllerHelpers/filterData"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
