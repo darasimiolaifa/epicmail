@@ -19,16 +19,16 @@
       </div>
       <nav class="navigation">
         <ul class="navbar-list">
-          <a href="#productivity"><li class="navbar-list-items"><p>Productivity</p></li></a>
-          <a href="signin.html"><li class="navbar-list-items"><p>Sign in</p></li></a>
-          <a href="signup.html"><li class="navbar-list-items"><p>Create an Account</p></li></a>
+          <a href="inbox.html"><li class="navbar-list-items"><p>Check Inbox</p></li></a>
+          <a href="createGroups.html"><li class="navbar-list-items"><p>Create Group</p></li></a>
+          <a href="index.html"><li class="navbar-list-items"><p>Log out</p></li></a>
         </ul>
         <a href="#" class="navbar-mobile-icon" id="mobile-navbar-icon"><i class="fas fa-th-list"></i></a>
         <div class="mobile-nav-div" id="mobile-nav-div">
           <ul class="mobile-navbar-list">
-            <a href="#productivity" id="goProductivity"><li class="mobile-navbar-list-items"><p>Productivity</p></li></a>
-            <a href="signin.html"><li class="mobile-navbar-list-items"><p>Sign in</p></li></a>
-            <a href="signup.html"><li class="mobile-navbar-list-items"><p>Create Account</p></li></a>
+            <a href="inbox.html" id="goProductivity"><li class="mobile-navbar-list-items"><p>Check Inbox</p></li></a>
+            <a href="createGroups.html"><li class="mobile-navbar-list-items"><p>Create Group</p></li></a>
+            <a href="index.html"><li class="mobile-navbar-list-items"><p>Log out</p></li></a>
           </ul>
         </div>
       </nav>
@@ -105,13 +105,13 @@
               <tbody>
                 <tr class="data">
                   <td class="sender-name">
-                    <input type="checkbox" name="" id="" class="sender-checkbox">Group 1
+                    <input type="checkbox" name="" id="" class="sender-checkbox"><span class='group-details'>Group 1</span>
                   </td>
                   <td>
-                    <span class='statement'>This is a group for sub-admins</span>
+                    <span class='statement group-details'>This is a group for sub-admins</span>
                   </td>
                   <td>
-                    <span><i class="mail-icons fas fa-edit"></i></span>
+                    <span><i class="mail-icons edit-icon fas fa-edit"></i></span>
                     <span><i class="mail-icons fas fa-trash"></i></span>
                   </td>
                 </tr>
@@ -148,12 +148,12 @@
         </main>
       </div>
     </div>
-    <footer>
-      <div class="copyright">
-        &copy;2019 Copyright EPIC Mail
-      </div>
-    </footer>
   </div>
+  <footer>
+    <div class="copyright">
+      &copy;2019 Copyright EPIC Mail
+    </div>
+  </footer>
   <div class="compose-mail" id="compose-mail">
     <div class="compose-header">New Message
     <a href="#" class="compose-close">&times;</a>
@@ -182,10 +182,15 @@
     document.getElementById('nav-compose').addEventListener('click', (e) => showCompose(e));
     document.getElementById('create-group').addEventListener('click', (e) => showCreateGroupPage(e));
     
-    const mailRows = document.getElementsByClassName('data');
+    const mailRows = document.getElementsByClassName('create-group');
+    const editMailRecords = document.getElementsByClassName('group-details');
     
     for (const element of mailRows) {
       element.addEventListener('click', (e) => showCreateGroupPage(e));
+    }
+    
+    for (const element of editMailRecords) {
+      element.addEventListener('click', (e) => showGroupDetailsPage(e));
     }
     
     document.getElementById('compose-minimize').addEventListener('click', (e) => addMinimize(e));
@@ -207,6 +212,10 @@
     
     const showCreateGroupPage = (e) => {
       window.location.href = './createGroups.html';
+    }
+    
+    const showGroupDetailsPage = (e) => {
+      window.location.href = './groupDetails.html';
     }
     
     const showCompose = (e) => {
