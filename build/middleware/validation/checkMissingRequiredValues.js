@@ -15,6 +15,7 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 
 var _default = function _default(formInput, required) {
   var missingValues = [];
+  var emptyValues = [];
   var error = {};
   var status = 200;
   var fields = Object.entries(formInput);
@@ -22,16 +23,21 @@ var _default = function _default(formInput, required) {
   for (var index = 0; index < fields.length; index += 1) {
     var _ref = _toConsumableArray(fields[index]),
         key = _ref[0],
-        value = _ref[1]; // populate missing but required values errors
+        value = _ref[1];
+
+    if (!required.includes(key)) {
+      missingValues.push("You didn't fill the ".concat(key, " field. It is required. Kindly input a value"));
+    } // populate missing but required values errors
 
 
     if (value.toString().trim() === '' && required.includes(key)) {
-      missingValues.push("".concat(key, " is missing from the input sent. Please send a value"));
+      emptyValues.push("".concat(key, " field is empty. Please send a value"));
       status = 400;
     }
   }
 
   error.missingValues = missingValues;
+  error.emptyValues = emptyValues;
   error.status = status;
   return error;
 };

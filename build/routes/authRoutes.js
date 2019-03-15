@@ -11,7 +11,6 @@ var _authValidation = _interopRequireDefault(require("../middleware/validation/a
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/* eslint-disable no-trailing-spaces */
 var signup = _authControllers.default.signup,
     login = _authControllers.default.login;
 

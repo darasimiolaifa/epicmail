@@ -24,8 +24,8 @@ describe('Authentication API', function () {
     it('should sign up the new user and return a token', function () {
       _chai.default.request(_server.default).post(url).send({
         username: 'imonitie.yahoo',
-        firstname: 'Imonitie',
-        lastname: 'Yahoo',
+        firstName: 'Imonitie',
+        lastName: 'Yahoo',
         password: 'imonitie.yahoo'
       }).end(function (err, res) {
         var data = res.body.data;
@@ -41,8 +41,8 @@ describe('Authentication API', function () {
     });
     it('should return an error when one of the field is missing', function () {
       _chai.default.request(_server.default).post(url).send({
-        firstname: 'Imonitie',
-        lastname: 'Yahoo',
+        firstName: 'Imonitie',
+        lastName: 'Yahoo',
         password: '',
         username: 'imonitie.yahoo'
       }).end(function (err, res) {
@@ -52,15 +52,15 @@ describe('Authentication API', function () {
         res.body.should.have.property('status', 400);
         res.body.should.have.property('error');
         error.should.have.property('missingValues');
-        error.missingValues.should.be.an('array');
-        error.missingValues[0].should.include('password');
+        error.emptyValues.should.be.an('array');
+        error.emptyValues[0].should.include('password');
       });
     });
     it('should return an error for a username already in the database', function () {
       _chai.default.request(_server.default).post(url).send({
         username: 'darasimiolaifa',
-        firstname: 'Isaiah',
-        lastname: 'Ibikunle',
+        firstName: 'Isaiah',
+        lastName: 'Ibikunle',
         password: 'monkeys4real'
       }).end(function (err, res) {
         var error = res.body.error;
@@ -75,8 +75,8 @@ describe('Authentication API', function () {
     it('should return an error for a username that contains invalid characters', function () {
       _chai.default.request(_server.default).post(url).send({
         username: '$#@ollarjay)(',
-        firstname: 'Isaiah',
-        lastname: 'Ibikunle',
+        firstName: 'Isaiah',
+        lastName: 'Ibikunle',
         password: 'monkeys4real'
       }).end(function (err, res) {
         var error = res.body.error;
@@ -91,8 +91,8 @@ describe('Authentication API', function () {
     it('should reject passwords with less than 8 characters', function () {
       _chai.default.request(_server.default).post(url).send({
         username: 'darasimiolaifa',
-        firstname: 'Isaiah',
-        lastname: 'Ibikunle',
+        firstName: 'Isaiah',
+        lastName: 'Ibikunle',
         password: 'monk'
       }).end(function (req, res) {
         var error = res.body.error;
@@ -120,8 +120,8 @@ describe('Authentication API', function () {
         res.body.should.have.property('status', 400);
         res.body.should.have.property('error');
         error.should.have.property('missingValues');
-        error.missingValues.should.be.an('array');
-        error.missingValues[0].should.include('password');
+        error.emptyValues.should.be.an('array');
+        error.emptyValues[0].should.include('password');
       });
     });
     it('should return a 404 error if no stored username matches the one specified', function () {
