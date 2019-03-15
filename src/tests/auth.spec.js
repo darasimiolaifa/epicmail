@@ -51,7 +51,7 @@ describe('Authentication API', () => {
           res.body.should.have.property('error');
           error.should.have.property('missingValues');
           error.missingValues.should.be.an('array');
-          error.missingValues.should.include('password');
+          error.missingValues[0].should.include('password');
         });
     });
     it('should return an error for a username already in the database', () => {
@@ -132,7 +132,7 @@ describe('Authentication API', () => {
           res.body.should.have.property('error');
           error.should.have.property('missingValues');
           error.missingValues.should.be.an('array');
-          error.missingValues.should.include('password');
+          error.missingValues[0].should.include('password');
         });
     });
     it('should return a 404 error if no stored username matches the one specified', () => {

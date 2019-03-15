@@ -4,11 +4,11 @@ export default (formInput, required) => {
   let status = 200;
   
   const fields = Object.entries(formInput);
-  for (let index = 0; index < fields.length; index++) {
+  for (let index = 0; index < fields.length; index += 1) {
     const [key, value] = [...fields[index]];
     
     // populate missing but required values errors
-    if (value.trim() === '' && required.includes(key)) {
+    if (value.toString().trim() === '' && required.includes(key)) {
       missingValues.push(`${key} is missing from the input sent. Please send a value`);
       status = 400;
     }
