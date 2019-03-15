@@ -19,14 +19,14 @@ var _default = function _default(formInput, required) {
   var status = 200;
   var fields = Object.entries(formInput);
 
-  for (var index = 0; index < fields.length; index++) {
+  for (var index = 0; index < fields.length; index += 1) {
     var _ref = _toConsumableArray(fields[index]),
         key = _ref[0],
         value = _ref[1]; // populate missing but required values errors
 
 
-    if (value === '' && required.includes(key)) {
-      missingValues.push(key);
+    if (value.toString().trim() === '' && required.includes(key)) {
+      missingValues.push("".concat(key, " is missing from the input sent. Please send a value"));
       status = 400;
     }
   }

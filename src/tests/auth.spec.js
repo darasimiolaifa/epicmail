@@ -18,8 +18,8 @@ describe('Authentication API', () => {
         .post(url)
         .send({
           username: 'imonitie.yahoo',
-          firstname: 'Imonitie',
-          lastname: 'Yahoo',
+          firstName: 'Imonitie',
+          lastName: 'Yahoo',
           password: 'imonitie.yahoo',
         })
         .end((err, res) => {
@@ -38,8 +38,8 @@ describe('Authentication API', () => {
       chai.request(app)
         .post(url)
         .send({
-          firstname: 'Imonitie',
-          lastname: 'Yahoo',
+          firstName: 'Imonitie',
+          lastName: 'Yahoo',
           password: '',
           username: 'imonitie.yahoo',
         })
@@ -50,8 +50,8 @@ describe('Authentication API', () => {
           res.body.should.have.property('status', 400);
           res.body.should.have.property('error');
           error.should.have.property('missingValues');
-          error.missingValues.should.be.an('array');
-          error.missingValues.should.include('password');
+          error.emptyValues.should.be.an('array');
+          error.emptyValues[0].should.include('password');
         });
     });
     it('should return an error for a username already in the database', () => {
@@ -59,8 +59,8 @@ describe('Authentication API', () => {
         .post(url)
         .send({
           username: 'darasimiolaifa',
-          firstname: 'Isaiah',
-          lastname: 'Ibikunle',
+          firstName: 'Isaiah',
+          lastName: 'Ibikunle',
           password: 'monkeys4real',
         })
         .end((err, res) => {
@@ -78,8 +78,8 @@ describe('Authentication API', () => {
         .post(url)
         .send({
           username: '$#@ollarjay)(',
-          firstname: 'Isaiah',
-          lastname: 'Ibikunle',
+          firstName: 'Isaiah',
+          lastName: 'Ibikunle',
           password: 'monkeys4real',
         })
         .end((err, res) => {
@@ -97,8 +97,8 @@ describe('Authentication API', () => {
         .post(url)
         .send({
           username: 'darasimiolaifa',
-          firstname: 'Isaiah',
-          lastname: 'Ibikunle',
+          firstName: 'Isaiah',
+          lastName: 'Ibikunle',
           password: 'monk',
         })
         .end((req, res) => {
@@ -131,8 +131,8 @@ describe('Authentication API', () => {
           res.body.should.have.property('status', 400);
           res.body.should.have.property('error');
           error.should.have.property('missingValues');
-          error.missingValues.should.be.an('array');
-          error.missingValues.should.include('password');
+          error.emptyValues.should.be.an('array');
+          error.emptyValues[0].should.include('password');
         });
     });
     it('should return a 404 error if no stored username matches the one specified', () => {

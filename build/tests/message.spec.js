@@ -130,7 +130,7 @@ describe('Messages API', function () {
         res.body.should.have.property('status', 400);
         res.body.should.have.property('error');
         error.should.have.property('missingValues');
-        error.missingValues.should.include('subject');
+        error.missingValues[0].should.include('subject');
       });
     });
     it('should post a mail that has all the required fields', function () {

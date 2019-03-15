@@ -1,4 +1,3 @@
-/* eslint-disable no-trailing-spaces */
 import authControllers from '../controllers/authControllers';
 import authValidator from '../middleware/validation/authValidation';
 
