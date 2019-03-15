@@ -13,17 +13,18 @@ export default class authControllers {
     const email = `${username}@epicmail.com`;
     const id = generateUserId(users) + 1;
     
-    users.push({
+    const user = {
       id,
       email,
       salt,
       ...req.body,
       password: hashedPassword,
-    });
+    }; 
+    users.push(user);
     
     // generate token with users username
     const token = generateToken(username);
-    return serverResponse(res, { token }, 201);
+    return serverResponse(res, { token, user }, 201);
   }
   
   static login(req, res) {
