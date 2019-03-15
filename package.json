@@ -39,9 +39,7 @@
     "express": "^4.16.4",
     "jsonwebtoken": "^8.5.0",
     "moment": "^2.24.0",
-    "swagger-ui": "^3.21.0",
-    "swagger-ui-express": "^4.0.2",
-    "uuid": "^3.3.2"
+    "swagger-ui-express": "^4.0.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
