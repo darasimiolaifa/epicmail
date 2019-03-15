@@ -15,6 +15,8 @@ var _authRoutes = _interopRequireDefault(require("./routes/authRoutes"));
 
 var _messageRoutes = _interopRequireDefault(require("./routes/messageRoutes"));
 
+var _userRoutes = _interopRequireDefault(require("./routes/userRoutes"));
+
 var _docs = _interopRequireDefault(require("../docs.json"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -31,6 +33,7 @@ app.use('/api/v1/docs', _swaggerUiExpress.default.serve, _swaggerUiExpress.defau
 
 (0, _authRoutes.default)(app);
 (0, _messageRoutes.default)(app);
+(0, _userRoutes.default)(app);
 app.listen(port, function () {
   return console.log("App listening on port ".concat(port));
 });

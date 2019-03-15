@@ -48,18 +48,21 @@ function () {
       var email = "".concat(username, "@epicmail.com");
       var id = (0, _idGenerator.default)(_usersData.default) + 1;
 
-      _usersData.default.push(_objectSpread({
+      var user = _objectSpread({
         id: id,
         email: email,
         salt: salt
       }, req.body, {
         password: hashedPassword
-      })); // generate token with users username
+      });
+
+      _usersData.default.push(user); // generate token with users username
 
 
       var token = (0, _generateToken.default)(username);
       return (0, _serverResponse.default)(res, {
-        token: token
+        token: token,
+        user: user
       }, 201);
     }
   }, {
