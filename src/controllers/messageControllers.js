@@ -34,8 +34,13 @@ export default class messageControllers {
   
   static sendMessage(req, res) {
     const id = generateIDFromData(messageData) + 1;
-    const createdOn = moment.HTML5_FMT.DATETIME_LOCAL_MS;
-    const message = { id, createdOn, ...req.body };
+    const createdOn = new Date(moment.HTML5_FMT.DATETIME_LOCAL_MS);
+    const message = {
+      id,
+      createdOn,
+      ...req.body,
+      status: 'sent',
+    };
     messageData.push(message);
     return serverResponse(res, { message });
   }

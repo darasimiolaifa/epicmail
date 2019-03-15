@@ -74,12 +74,14 @@ function () {
     key: "sendMessage",
     value: function sendMessage(req, res) {
       var id = (0, _idGenerator.default)(_messageData.default) + 1;
-      var createdOn = _moment.default.HTML5_FMT.DATETIME_LOCAL_MS;
+      var createdOn = new Date(_moment.default.HTML5_FMT.DATETIME_LOCAL_MS);
 
       var message = _objectSpread({
         id: id,
         createdOn: createdOn
-      }, req.body);
+      }, req.body, {
+        status: 'sent'
+      });
 
       _messageData.default.push(message);
 
