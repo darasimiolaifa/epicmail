@@ -8,8 +8,8 @@ export default (formInput, required) => {
     const [key, value] = [...fields[index]];
     
     // populate missing but required values errors
-    if (value === '' && required.includes(key)) {
-      missingValues.push(key);
+    if (value.trim() === '' && required.includes(key)) {
+      missingValues.push(`${key} is missing from the input sent. Please send a value`);
       status = 400;
     }
   }
