@@ -4,8 +4,8 @@ import checkMessageExist from '../middleware/validation/confirmDataInRecords';
 
 const {
   getAllMessages,
-  getAllUnreadMessages,
-  getAllSentMessages,
+  getUnreadMessages,
+  getSentMessages,
   getSpecificMessage,
   deleteSpecificMessage,
   sendMessage,
@@ -17,10 +17,10 @@ export default (app) => {
     .post(validateMessageInputs, sendMessage);
   
   app.route('/api/v1/messages/unread')
-    .get(getAllUnreadMessages);
+    .get(getUnreadMessages);
   
   app.route('/api/v1/messages/sent')
-    .get(getAllSentMessages);
+    .get(getSentMessages);
 
   app.route('/api/v1/messages/:id')
     .get(checkMessageExist, getSpecificMessage)

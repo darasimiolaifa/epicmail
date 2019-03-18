@@ -209,10 +209,9 @@
         }
       }
     },
-
     "/auth/login" : {
       "post" : {
-        "tags" : [ "user" ],
+        "tags" : [ "User" ],
         "summary" : "Logs user into the system",
         "operationId" : "login",
         "parameters" : [ {

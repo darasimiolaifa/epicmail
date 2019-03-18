@@ -436,6 +436,7 @@ select {
 
 .mail-box {
   height: 90vh;
+  overflow-y: scroll;
 }
 
 tr.data, tr.groups {

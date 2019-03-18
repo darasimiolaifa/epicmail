@@ -5,11 +5,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _serverResponse = _interopRequireDefault(require("../utils/serverResponse"));
+var _bcryptjs = _interopRequireDefault(require("bcryptjs"));
 
-var _generateToken = _interopRequireDefault(require("../utils/generateToken"));
+var _filterData = _interopRequireDefault(require("../utils/filterData"));
 
-var _userModel = _interopRequireDefault(require("../models/userModel"));
+var _idGenerator = _interopRequireDefault(require("../utils/idGenerator"));
+
+var _usersData = _interopRequireDefault(require("../dummy/usersData"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -23,39 +25,56 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var authControllers =
+var UserModel =
 /*#__PURE__*/
 function () {
-  function authControllers() {
-    _classCallCheck(this, authControllers);
+  function UserModel() {
+    _classCallCheck(this, UserModel);
+
+    this.users = _usersData.default;
   }
 
-  _createClass(authControllers, null, [{
-    key: "signup",
-    value: function signup(req, res) {
-      var user = _userModel.default.createUser(req.body); // generate token with users object
-
-
-      var token = (0, _generateToken.default)(user);
-      return (0, _serverResponse.default)(res, {
-        token: token,
-        user: user
-      }, 201);
+  _createClass(UserModel, [{
+    key: "getAllusers",
+    value: function getAllusers() {
+      return this.users;
     }
   }, {
-    key: "login",
-    value: function login(req, res) {
-      var user = _objectSpread({}, req.body);
+    key: "getUserbyId",
+    value: function getUserbyId(id) {
+      var user = (0, _filterData.default)(this.user, 'id', id);
+      return user;
+    }
+  }, {
+    key: "createUser",
+    value: function createUser(payload) {
+      var username = payload.username,
+          password = payload.password;
 
-      var token = (0, _generateToken.default)(user);
-      return (0, _serverResponse.default)(res, {
-        token: token
+      var salt = _bcryptjs.default.genSaltSync();
+
+      var hashedPassword = _bcryptjs.default.hashSync(password, salt);
+
+      var email = "".concat(username, "@epicmail.com");
+      var id = (0, _idGenerator.default)(this.users) + 1;
+
+      var user = _objectSpread({
+        id: id,
+        email: email,
+        salt: salt
+      }, payload, {
+        password: hashedPassword
       });
+
+      this.users.push(user);
+      return user;
     }
   }]);
 
-  return authControllers;
+  return UserModel;
 }();
 
-exports.default = authControllers;
-//# sourceMappingURL=authControllers.js.map
+var _default = new UserModel();
+
+exports.default = _default;
+//# sourceMappingURL=userModel.js.map
