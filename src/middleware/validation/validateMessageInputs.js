@@ -13,5 +13,5 @@ export default (req, res, next) => {
       error,
     });
   }
-  next();
+  return next();
 };

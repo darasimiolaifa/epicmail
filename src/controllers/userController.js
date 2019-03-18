@@ -1,6 +1,6 @@
 import users from '../dummy/usersData';
-import serverResponse from './authHelpers/serverResponse';
-import filterUser from './authHelpers/filterData';
+import serverResponse from '../utils/serverResponse';
+import filterUser from '../utils/filterData';
 
 export default class userControllers {
   static getAllUsers(req, res) {
