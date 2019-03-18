@@ -13,7 +13,7 @@ var _validatePassword = _interopRequireDefault(require("./validatePassword"));
 
 var _usersData = _interopRequireDefault(require("../../dummy/usersData"));
 
-var _serverResponse = _interopRequireDefault(require("../../controllers/authHelpers/serverResponse"));
+var _serverResponse = _interopRequireDefault(require("../../utils/serverResponse"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 

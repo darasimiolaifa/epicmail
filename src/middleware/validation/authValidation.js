@@ -2,7 +2,7 @@ import checkMissingRequiredValues from './checkMissingRequiredValues';
 import validateUsername from './validateUsername';
 import validatePassword from './validatePassword';
 import users from '../../dummy/usersData';
-import serverResponse from '../../controllers/authHelpers/serverResponse';
+import serverResponse from '../../utils/serverResponse';
 
 const validateAuthData = (req, res, next) => {
   let required;

@@ -1,5 +1,5 @@
 import messageData from '../../dummy/messageData';
-import serverResponse from '../../controllers/authHelpers/serverResponse';
+import serverResponse from '../../utils/serverResponse';
 
 export default (req, res, next) => {
   const { id } = req.params;
@@ -9,5 +9,5 @@ export default (req, res, next) => {
     return serverResponse(res, error, 404);
   }
   req.body.index = index;
-  next();
+  return next();
 };

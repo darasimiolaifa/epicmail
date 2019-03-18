@@ -28,7 +28,7 @@ var _default = function _default(req, res, next) {
     });
   }
 
-  next();
+  return next();
 };
 
 exports.default = _default;
