@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _messageData = _interopRequireDefault(require("../../dummy/messageData"));
 
-var _serverResponse = _interopRequireDefault(require("../../controllers/authHelpers/serverResponse"));
+var _serverResponse = _interopRequireDefault(require("../../utils/serverResponse"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -24,7 +24,7 @@ var _default = function _default(req, res, next) {
   }
 
   req.body.index = index;
-  next();
+  return next();
 };
 
 exports.default = _default;

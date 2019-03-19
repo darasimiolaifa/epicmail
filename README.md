@@ -39,13 +39,13 @@ The project API base is hosted here on [Heroku](https://darasimi-epicmail.heroku
 S/N | Verb   | Endpoint                 | Description             |
 ---:| -------|--------------------------|-------------------------|
   1 | Post   | /api/v1/auth/signup      | Create a user account   |
-  2 | Post   | /api/v1//auth/login      | Sign in a user          |
-  3 | Get    | /api/v1//messages        | Get all received emails |
-  4 | Get    | /api/v1//messages/unread | Get all unread emails   |
-  5 | Get    | /api/v1//messages/sent   | Get all emails sent     |
-  6 | Get    | /api/v1//messages/id     | Get a specific email    |
-  7 | Post   | /api/v1//messages        | Send email to users     |
-  8 | Delete | /api/v1//messages/id     | Delete an email         |
+  2 | Post   | /api/v1/auth/login      | Sign in a user          |
+  3 | Get    | /api/v1/messages        | Get all received emails |
+  4 | Get    | /api/v1/messages/unread | Get all unread emails   |
+  5 | Get    | /api/v1/messages/sent   | Get all emails sent     |
+  6 | Get    | /api/v1/messages/id     | Get a specific email    |
+  7 | Post   | /api/v1/messages        | Send email to users     |
+  8 | Delete | /api/v1/messages/id     | Delete an email         |
 
 ### API Documentation :file_folder: :point_left:
 The API documentation page can be found here [Documentation](https://darasimi-epicmail.herokuapp.com/api/v1/docs)

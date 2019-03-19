@@ -13,7 +13,7 @@ var _validatePassword = _interopRequireDefault(require("./validatePassword"));
 
 var _usersData = _interopRequireDefault(require("../../dummy/usersData"));
 
-var _serverResponse = _interopRequireDefault(require("../../controllers/authHelpers/serverResponse"));
+var _serverResponse = _interopRequireDefault(require("../../utils/serverResponse"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -27,24 +27,24 @@ var validateAuthData = function validateAuthData(req, res, next) {
       body = req.body;
 
   if (url === '/api/v1/auth/signup') {
-    required = ['firstname', 'lastname', 'username', 'password'];
+    required = ['firstName', 'lastName', 'username', 'password'];
   } else {
     required = ['username', 'password'];
   }
 
   var error;
-  var missingValues = (0, _checkMissingRequiredValues.default)(req.body, required, error);
+  var missingAndEmptyErrors = (0, _checkMissingRequiredValues.default)(req.body, required, error);
   var invalidUsernameErrors = (0, _validateUsername.default)(url, _usersData.default, body.username);
   var invalidPasswordErrors = (0, _validatePassword.default)(url, _usersData.default, body.password, body.username);
-  error = _objectSpread({}, missingValues);
+  error = _objectSpread({}, missingAndEmptyErrors);
   error.invalidInput = _objectSpread({}, invalidUsernameErrors, invalidPasswordErrors);
-  var status = Math.max(200, missingValues.status, invalidUsernameErrors.status, invalidPasswordErrors.status);
+  var status = Math.max(200, missingAndEmptyErrors.status, invalidUsernameErrors.status, invalidPasswordErrors.status);
 
   if (status !== 200) {
     return (0, _serverResponse.default)(res, error, status);
   }
 
-  next();
+  return next();
 };
 
 var _default = validateAuthData;

@@ -5,21 +5,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = void 0;
 
-var _moment = _interopRequireDefault(require("moment"));
+var _serverResponse = _interopRequireDefault(require("../utils/serverResponse"));
 
-var _messageData = _interopRequireDefault(require("../dummy/messageData"));
-
-var _idGenerator = _interopRequireDefault(require("./authHelpers/idGenerator"));
-
-var _serverResponse = _interopRequireDefault(require("./authHelpers/serverResponse"));
-
-var _filterData = _interopRequireDefault(require("./authHelpers/filterData"));
+var _messageModel = _interopRequireDefault(require("../models/messageModel"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -37,26 +27,31 @@ function () {
   _createClass(messageControllers, null, [{
     key: "getAllMessages",
     value: function getAllMessages(req, res) {
-      var allMessages = (0, _filterData.default)(_messageData.default, 'status', ['read', 'unread']);
+      var allMessages = _messageModel.default.getAllMessages();
+
       return (0, _serverResponse.default)(res, allMessages);
     }
   }, {
-    key: "getAllUnreadMessages",
-    value: function getAllUnreadMessages(req, res) {
-      var unreadMessages = (0, _filterData.default)(_messageData.default, 'status', ['unread']);
+    key: "getUnreadMessages",
+    value: function getUnreadMessages(req, res) {
+      var unreadMessages = _messageModel.default.getUnreadMessages();
+
       return (0, _serverResponse.default)(res, unreadMessages);
     }
   }, {
-    key: "getAllSentMessages",
-    value: function getAllSentMessages(req, res) {
-      var sentMessages = (0, _filterData.default)(_messageData.default, 'status', ['sent']);
+    key: "getSentMessages",
+    value: function getSentMessages(req, res) {
+      var sentMessages = _messageModel.default.getSentMessages();
+
       return (0, _serverResponse.default)(res, sentMessages);
     }
   }, {
     key: "getSpecificMessage",
     value: function getSpecificMessage(req, res) {
       var index = req.body.index;
-      var singleMessage = _messageData.default[index];
+
+      var singleMessage = _messageModel.default.getSpecificMessage(index);
+
       return (0, _serverResponse.default)(res, singleMessage);
     }
   }, {
@@ -64,7 +59,7 @@ function () {
     value: function deleteSpecificMessage(req, res) {
       var index = req.body.index;
 
-      var deletedMessage = _messageData.default.splice(index, 1)[0];
+      var deletedMessage = _messageModel.default.deleteSpecificMessage(index);
 
       return (0, _serverResponse.default)(res, {
         message: deletedMessage.message
@@ -73,15 +68,7 @@ function () {
   }, {
     key: "sendMessage",
     value: function sendMessage(req, res) {
-      var id = (0, _idGenerator.default)(_messageData.default) + 1;
-      var createdOn = _moment.default.HTML5_FMT.DATETIME_LOCAL_MS;
-
-      var message = _objectSpread({
-        id: id,
-        createdOn: createdOn
-      }, req.body);
-
-      _messageData.default.push(message);
+      var message = _messageModel.default.sendMessage(req.body);
 
       return (0, _serverResponse.default)(res, {
         message: message

@@ -1,42 +1,36 @@
-import moment from 'moment';
-import messageData from '../dummy/messageData';
-import generateIDFromData from './authHelpers/idGenerator';
-import serverResponse from './authHelpers/serverResponse';
-import filterMessages from './authHelpers/filterData';
+import serverResponse from '../utils/serverResponse';
+import MessageModel from '../models/messageModel';
 
 export default class messageControllers {
   static getAllMessages(req, res) {
-    const allMessages = filterMessages(messageData, 'status', ['read', 'unread']);
+    const allMessages = MessageModel.getAllMessages();
     return serverResponse(res, allMessages);
   }
   
-  static getAllUnreadMessages(req, res) {
-    const unreadMessages = filterMessages(messageData, 'status', ['unread']);
+  static getUnreadMessages(req, res) {
+    const unreadMessages = MessageModel.getUnreadMessages();
     return serverResponse(res, unreadMessages);
   }
   
-  static getAllSentMessages(req, res) {
-    const sentMessages = filterMessages(messageData, 'status', ['sent']);
+  static getSentMessages(req, res) {
+    const sentMessages = MessageModel.getSentMessages();
     return serverResponse(res, sentMessages);
   }
   
   static getSpecificMessage(req, res) {
     const { index } = req.body;
-    const singleMessage = messageData[index];
+    const singleMessage = MessageModel.getSpecificMessage(index);
     return serverResponse(res, singleMessage);
   }
   
   static deleteSpecificMessage(req, res) {
     const { index } = req.body;
-    const deletedMessage = messageData.splice(index, 1)[0];
+    const deletedMessage = MessageModel.deleteSpecificMessage(index);
     return serverResponse(res, { message: deletedMessage.message });
   }
   
   static sendMessage(req, res) {
-    const id = generateIDFromData(messageData) + 1;
-    const createdOn = moment.HTML5_FMT.DATETIME_LOCAL_MS;
-    const message = { id, createdOn, ...req.body };
-    messageData.push(message);
+    const message = MessageModel.sendMessage(req.body);
     return serverResponse(res, { message });
   }
 }

@@ -13,15 +13,15 @@
     "url" : "http://swagger.io"
   },
   "servers" : [ {
-    "url" : "https://virtserver.swaggerhub.com/darasimiolaifa/darasimi-epicmail/1.0.0"
+    "url" : "https://darasimi-epicmail.herokuapp.com/api/v1"
   }, {
-    "url" : "http://virtserver.swaggerhub.com/darasimiolaifa/darasimi-epicmail/1.0.0"
+    "url" : "https://darasimi-epicmail.herokuapp.com/api/v1"
   } ],
   "tags" : [ {
-    "name" : "messages",
+    "name" : "Message",
     "description" : "Operations about the messages exchanged"
   }, {
-    "name" : "user",
+    "name" : "User",
     "description" : "Operations about user"
   } ],
   "paths" : {
@@ -37,7 +37,7 @@
         }
       },
       "post" : {
-        "tags" : [ "messages" ],
+        "tags" : [ "Message" ],
         "summary" : "Sends a new message",
         "operationId" : "sendMessage",
         "requestBody" : {
@@ -115,8 +115,25 @@
           }
         } ],
         "responses" : {
+          "200" : {
+            "description" : "Successful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type": "object"
+                }
+              }
+            }
+          },
           "404" : {
-            "description" : "Message not found"
+            "description" : "Message not found",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type": "object"
+                }
+              }
+            }
           }
         }
       }
@@ -161,12 +178,12 @@
         }
       }
     },
-    "/user" : {
+    "/auth/signup" : {
       "post" : {
-        "tags" : [ "user" ],
+        "tags" : [ "User" ],
         "summary" : "Create user",
-        "description" : "This can only be done by the logged in user.",
-        "operationId" : "createUser",
+        "description" : "This action creates a new user.",
+        "operationId" : "signup",
         "requestBody" : {
           "description" : "Created user object",
           "content" : {
@@ -179,47 +196,24 @@
           "required" : true
         },
         "responses" : {
-          "default" : {
-            "description" : "successful operation"
+          "201" : {
+            "description" : "successful operation",
+            "content" : {
+              "application/json" : {
+                "schema" : {
+                  "type" : "string"
+                }
+              }
+            }
           }
         }
       }
     },
-    "/user/createWithArray" : {
+    "/auth/login" : {
       "post" : {
-        "tags" : [ "user" ],
-        "summary" : "Creates list of users with given input array",
-        "operationId" : "createUsersWithArrayInput",
-        "requestBody" : {
-          "$ref" : "#/components/requestBodies/UserArray"
-        },
-        "responses" : {
-          "default" : {
-            "description" : "successful operation"
-          }
-        }
-      }
-    },
-    "/user/createWithList" : {
-      "post" : {
-        "tags" : [ "user" ],
-        "summary" : "Creates list of users with given input array",
-        "operationId" : "createUsersWithListInput",
-        "requestBody" : {
-          "$ref" : "#/components/requestBodies/UserArray"
-        },
-        "responses" : {
-          "default" : {
-            "description" : "successful operation"
-          }
-        }
-      }
-    },
-    "/user/login" : {
-      "get" : {
-        "tags" : [ "user" ],
+        "tags" : [ "User" ],
         "summary" : "Logs user into the system",
-        "operationId" : "loginUser",
+        "operationId" : "login",
         "parameters" : [ {
           "name" : "username",
           "in" : "query",
@@ -244,33 +238,8 @@
         "responses" : {
           "200" : {
             "description" : "successful operation",
-            "headers" : {
-              "X-Rate-Limit" : {
-                "description" : "calls per hour allowed by the user",
-                "style" : "simple",
-                "explode" : false,
-                "schema" : {
-                  "type" : "integer",
-                  "format" : "int32"
-                }
-              },
-              "X-Expires-After" : {
-                "description" : "date in UTC when token expires",
-                "style" : "simple",
-                "explode" : false,
-                "schema" : {
-                  "type" : "string",
-                  "format" : "date-time"
-                }
-              }
-            },
             "content" : {
               "application/json" : {
-                "schema" : {
-                  "type" : "string"
-                }
-              },
-              "application/xml" : {
                 "schema" : {
                   "type" : "string"
                 }
@@ -279,120 +248,6 @@
           },
           "400" : {
             "description" : "Invalid username/password supplied"
-          }
-        }
-      }
-    },
-    "/user/logout" : {
-      "get" : {
-        "tags" : [ "user" ],
-        "summary" : "Logs out current logged in user session",
-        "operationId" : "logoutUser",
-        "responses" : {
-          "default" : {
-            "description" : "successful operation"
-          }
-        }
-      }
-    },
-    "/user/{username}" : {
-      "get" : {
-        "tags" : [ "user" ],
-        "summary" : "Get user by user name",
-        "operationId" : "getUserByName",
-        "parameters" : [ {
-          "name" : "username",
-          "in" : "path",
-          "description" : "The name that needs to be fetched. Use user1 for testing.",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "successful operation",
-            "content" : {
-              "application/json" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/User"
-                }
-              },
-              "application/xml" : {
-                "schema" : {
-                  "$ref" : "#/components/schemas/User"
-                }
-              }
-            }
-          },
-          "400" : {
-            "description" : "Invalid username supplied"
-          },
-          "404" : {
-            "description" : "User not found"
-          }
-        }
-      },
-      "put" : {
-        "tags" : [ "user" ],
-        "summary" : "Updated user",
-        "description" : "This can only be done by the logged in user.",
-        "operationId" : "updateUser",
-        "parameters" : [ {
-          "name" : "username",
-          "in" : "path",
-          "description" : "name that need to be updated",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "requestBody" : {
-          "description" : "Updated user object",
-          "content" : {
-            "application/json" : {
-              "schema" : {
-                "$ref" : "#/components/schemas/User"
-              }
-            }
-          },
-          "required" : true
-        },
-        "responses" : {
-          "400" : {
-            "description" : "Invalid user supplied"
-          },
-          "404" : {
-            "description" : "User not found"
-          }
-        }
-      },
-      "delete" : {
-        "tags" : [ "user" ],
-        "summary" : "Delete user",
-        "description" : "This can only be done by the logged in user.",
-        "operationId" : "deleteUser",
-        "parameters" : [ {
-          "name" : "username",
-          "in" : "path",
-          "description" : "The name that needs to be deleted",
-          "required" : true,
-          "style" : "simple",
-          "explode" : false,
-          "schema" : {
-            "type" : "string"
-          }
-        } ],
-        "responses" : {
-          "400" : {
-            "description" : "Invalid username supplied"
-          },
-          "404" : {
-            "description" : "User not found"
           }
         }
       }
@@ -463,22 +318,6 @@
         "xml" : {
           "name" : "User"
         }
-      }
-    },
-    "requestBodies" : {
-      "UserArray" : {
-        "description" : "List of user object",
-        "content" : {
-          "application/json" : {
-            "schema" : {
-              "type" : "array",
-              "items" : {
-                "$ref" : "#/components/schemas/User"
-              }
-            }
-          }
-        },
-        "required" : true
       }
     }
   }
