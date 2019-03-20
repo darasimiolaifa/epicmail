@@ -109,6 +109,23 @@ describe('Authentication API', function () {
     beforeEach(function () {
       url = '/api/v1/auth/login';
     });
+    beforeEach(function () {
+      _chai.default.request(_server.default).post('/api/v1/auth/signup').send({
+        firstName: 'Darasimi',
+        lastName: 'Olaifa',
+        username: 'darash86',
+        password: 'holiness86'
+      }).end(function (res, err) {
+        var data = res.data;
+        accessToken = data.token;
+        userId = data.user.id;
+      });
+    });
+    afterEach(function () {
+      _chai.default.request(_server.default).delete("/api/v1/users/".concat(userId)).end(function (res, err) {
+        if (err) console.log(err);else console.log(res);
+      });
+    });
     it('should return a 400 error if any of the fields is missing', function () {
       _chai.default.request(_server.default).post(url).send({
         username: 'darasimiolaifa',

@@ -1,6 +1,7 @@
 import messageControllers from '../controllers/messageControllers';
 import validateMessageInputs from '../middleware/validation/validateMessageInputs';
 import checkMessageExist from '../middleware/validation/confirmDataInRecords';
+import Authenticate from '../middleware/authentication/authenticate';
 
 const {
   getAllMessages,
@@ -13,16 +14,16 @@ const {
 
 export default (app) => {
   app.route('/api/v1/messages')
-    .get(getAllMessages)
-    .post(validateMessageInputs, sendMessage);
+    .get(Authenticate.verifyToken, getAllMessages)
+    .post(validateMessageInputs, Authenticate.verifyToken, sendMessage);
   
   app.route('/api/v1/messages/unread')
-    .get(getUnreadMessages);
+    .get(Authenticate.verifyToken, getUnreadMessages);
   
   app.route('/api/v1/messages/sent')
-    .get(getSentMessages);
+    .get(Authenticate.verifyToken, getSentMessages);
 
   app.route('/api/v1/messages/:id')
-    .get(checkMessageExist, getSpecificMessage)
-    .delete(checkMessageExist, deleteSpecificMessage);
+    .get(Authenticate.verifyToken, checkMessageExist, getSpecificMessage)
+    .delete(Authenticate.verifyToken, checkMessageExist, deleteSpecificMessage);
 };

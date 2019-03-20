@@ -1,3 +1,4 @@
+import '@babel/polyfill';
 import { config } from 'dotenv';
 import express from 'express';
 import swaggerUI from 'swagger-ui-express';

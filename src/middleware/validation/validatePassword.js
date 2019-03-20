@@ -13,7 +13,7 @@ export default (url, users, password, username) => {
   } else {
     const foundUser = users.find(user => user.username === username);
     if (foundUser) {
-      if (foundUser.password !== bcrypt.hashSync(password, foundUser.salt)) {
+      if (!bcrypt.compareSync(password, foundUser.password)) {
         passwordErrors.push('Username and password does not match');
         status = 400;
       }

@@ -8,7 +8,7 @@ export default (url, users, username) => {
       usernameErrors.push('The username already exists. Please choose another.');
     }
     if (username.search(new RegExp(/[^0-9A-za-z._]/)) > -1) {
-      usernameErrors.push('Username should contain only alphanumeric, the dot, and underscore characters');
+      usernameErrors.push('Username should contain only alphanumeric characters, and the underscore character');
     }
     if (usernameErrors.length > 0) {
       status = 400;

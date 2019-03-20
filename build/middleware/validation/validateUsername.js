@@ -18,7 +18,7 @@ var _default = function _default(url, users, username) {
     }
 
     if (username.search(new RegExp(/[^0-9A-za-z._]/)) > -1) {
-      usernameErrors.push('Username should contain only alphanumeric, the dot, and underscore characters');
+      usernameErrors.push('Username should contain only alphanumeric characters, and the underscore character');
     }
 
     if (usernameErrors.length > 0) {

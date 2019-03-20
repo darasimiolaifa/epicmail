@@ -1,12 +1,13 @@
 import checkMissingRequiredValues from './checkMissingRequiredValues';
 import validateUsername from './validateUsername';
 import validatePassword from './validatePassword';
-import users from '../../dummy/usersData';
 import serverResponse from '../../utils/serverResponse';
+import userModel from '../../models/userModel';
 
-const validateAuthData = (req, res, next) => {
+const validateAuthData = async (req, res, next) => {
   let required;
   const { url, body } = req;
+  const users = await userModel.getAllusers();
   
   if (url === '/api/v1/auth/signup') {
     required = ['firstName', 'lastName', 'username', 'password'];

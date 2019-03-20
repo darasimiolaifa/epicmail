@@ -25,7 +25,7 @@ var _default = function _default(url, users, password, username) {
     });
 
     if (foundUser) {
-      if (foundUser.password !== _bcryptjs.default.hashSync(password, foundUser.salt)) {
+      if (!_bcryptjs.default.compareSync(password, foundUser.password)) {
         passwordErrors.push('Username and password does not match');
         status = 400;
       }

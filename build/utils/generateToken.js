@@ -9,10 +9,10 @@ var _jsonwebtoken = _interopRequireDefault(require("jsonwebtoken"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _default = function _default(username) {
+var _default = function _default(user) {
   return _jsonwebtoken.default.sign({
     iss: 'epicmail',
-    sub: username
+    sub: user
   }, process.env.APP_SECRET);
 };
 

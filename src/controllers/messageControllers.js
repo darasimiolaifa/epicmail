@@ -18,14 +18,14 @@ export default class messageControllers {
   }
   
   static getSpecificMessage(req, res) {
-    const { index } = req.body;
-    const singleMessage = MessageModel.getSpecificMessage(index);
+    const { id } = req.body;
+    const singleMessage = MessageModel.getSpecificMessage(id);
     return serverResponse(res, singleMessage);
   }
   
   static deleteSpecificMessage(req, res) {
-    const { index } = req.body;
-    const deletedMessage = MessageModel.deleteSpecificMessage(index);
+    const { id } = req.body;
+    const deletedMessage = MessageModel.deleteSpecificMessage(id);
     return serverResponse(res, { message: deletedMessage.message });
   }
   

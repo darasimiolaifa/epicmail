@@ -117,6 +117,29 @@ describe('Authentication API', () => {
     beforeEach(() => {
       url = '/api/v1/auth/login';
     });
+    beforeEach(() => {
+      chai.request(app)
+        .post('/api/v1/auth/signup')
+        .send({
+          firstName: 'Darasimi',
+          lastName: 'Olaifa',
+          username: 'darash86',
+          password: 'holiness86',
+        })
+        .end((res, err) => {
+          const { data } = res;
+          accessToken = data.token;
+          userId = data.user.id;
+        });
+    });
+    afterEach(() => {
+      chai.request(app)
+        .delete(`/api/v1/users/${userId}`)
+        .end((res, err) => {
+          if (err) console.log(err);
+          else console.log(res);
+        });
+    });
     it('should return a 400 error if any of the fields is missing', () => {
       chai.request(app)
         .post(url)
