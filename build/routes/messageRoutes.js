@@ -11,6 +11,8 @@ var _validateMessageInputs = _interopRequireDefault(require("../middleware/valid
 
 var _confirmDataInRecords = _interopRequireDefault(require("../middleware/validation/confirmDataInRecords"));
 
+var _authenticate = _interopRequireDefault(require("../middleware/authentication/authenticate"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var getAllMessages = _messageControllers.default.getAllMessages,
@@ -21,10 +23,10 @@ var getAllMessages = _messageControllers.default.getAllMessages,
     sendMessage = _messageControllers.default.sendMessage;
 
 var _default = function _default(app) {
-  app.route('/api/v1/messages').get(getAllMessages).post(_validateMessageInputs.default, sendMessage);
-  app.route('/api/v1/messages/unread').get(getUnreadMessages);
-  app.route('/api/v1/messages/sent').get(getSentMessages);
-  app.route('/api/v1/messages/:id').get(_confirmDataInRecords.default, getSpecificMessage).delete(_confirmDataInRecords.default, deleteSpecificMessage);
+  app.route('/api/v1/messages').get(_authenticate.default.verifyToken, getAllMessages).post(_validateMessageInputs.default, _authenticate.default.verifyToken, sendMessage);
+  app.route('/api/v1/messages/unread').get(_authenticate.default.verifyToken, getUnreadMessages);
+  app.route('/api/v1/messages/sent').get(_authenticate.default.verifyToken, getSentMessages);
+  app.route('/api/v1/messages/:id').get(_authenticate.default.verifyToken, _confirmDataInRecords.default, getSpecificMessage).delete(_authenticate.default.verifyToken, _confirmDataInRecords.default, deleteSpecificMessage);
 };
 
 exports.default = _default;

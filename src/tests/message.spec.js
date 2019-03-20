@@ -5,12 +5,39 @@ import app from '../server';
 chai.use(chaiHttp);
 chai.should();
 
+let accessToken;
+let userId;
+
 describe('Messages API', () => {
+  beforeEach(() => {
+    chai.request(app)
+      .post('/api/v1/auth/signup')
+      .send({
+        firstName: 'Darasimi',
+        lastName: 'Olaifa',
+        username: 'darash86',
+        password: 'holiness86',
+      })
+      .end((res, err) => {
+        const { data } = res;
+        accessToken = data.token;
+        userId = data.user.id;
+      });
+  });
+  afterEach(() => {
+    chai.request(app)
+      .delete(`/api/v1/users/${userId}`)
+      .end((res, err) => {
+        if (err) console.log(err);
+        else console.log(res);
+      });
+  });
   describe('GET /api/v1/messages', () => {
     it('should get all the received messages for the requester', () => {
       chai.request(app)
         .get('/api/v1/messages')
         .set('Accepts', 'application/json')
+        .set('x-access-token', accessToken)
         .end((err, res) => {
           const { data } = res.body;
           res.should.have.status(200);

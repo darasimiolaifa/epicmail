@@ -12,10 +12,29 @@ _chai.default.use(_chaiHttp.default);
 
 _chai.default.should();
 
+var accessToken;
+var userId;
 describe('Messages API', function () {
+  beforeEach(function () {
+    _chai.default.request(_server.default).post('/api/v1/auth/signup').send({
+      firstName: 'Darasimi',
+      lastName: 'Olaifa',
+      username: 'darash86',
+      password: 'holiness86'
+    }).end(function (res, err) {
+      var data = res.data;
+      accessToken = data.token;
+      userId = data.user.id;
+    });
+  });
+  afterEach(function () {
+    _chai.default.request(_server.default).delete("/api/v1/users/".concat(userId)).end(function (res, err) {
+      if (err) console.log(err);else console.log(res);
+    });
+  });
   describe('GET /api/v1/messages', function () {
     it('should get all the received messages for the requester', function () {
-      _chai.default.request(_server.default).get('/api/v1/messages').set('Accepts', 'application/json').end(function (err, res) {
+      _chai.default.request(_server.default).get('/api/v1/messages').set('Accepts', 'application/json').set('x-access-token', accessToken).end(function (err, res) {
         var data = res.body.data;
         res.should.have.status(200);
         res.body.should.have.property('status', 200);

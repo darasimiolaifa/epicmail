@@ -48,18 +48,18 @@ function () {
   }, {
     key: "getSpecificMessage",
     value: function getSpecificMessage(req, res) {
-      var index = req.body.index;
+      var id = req.body.id;
 
-      var singleMessage = _messageModel.default.getSpecificMessage(index);
+      var singleMessage = _messageModel.default.getSpecificMessage(id);
 
       return (0, _serverResponse.default)(res, singleMessage);
     }
   }, {
     key: "deleteSpecificMessage",
     value: function deleteSpecificMessage(req, res) {
-      var index = req.body.index;
+      var id = req.body.id;
 
-      var deletedMessage = _messageModel.default.deleteSpecificMessage(index);
+      var deletedMessage = _messageModel.default.deleteSpecificMessage(id);
 
       return (0, _serverResponse.default)(res, {
         message: deletedMessage.message

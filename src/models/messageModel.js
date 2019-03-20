@@ -1,49 +1,77 @@
-import moment from 'moment';
-import filterMessages from '../utils/filterData';
-import generateIDFromData from '../utils/idGenerator';
-import messagesData from '../dummy/messageData';
+import queryFunction from '../database';
 
 class MessageModel {
-  constructor() {
-    this.messages = messagesData;
+  static async getAllReceivedMessages(userId) {
+    const query = 'SELECT * FROM messages INNER JOIN inbox on messages.id = inbox.message_id WHERE inbox.user_id = $1';
+    try {
+      const messages = await queryFunction.query(query, [userId]);
+      return messages;
+    } catch (error) {
+      return error;
+    }
   }
   
-  getAllMessages() {
-    return filterMessages(this.messages, 'status', ['unread', 'read']);
+  static async getSpecificMessage(id) {
+    const query = 'SELECT * FROM messages wHERE id = $1';
+    try {
+      const message = await queryFunction.query(query, [id]);
+      return message;
+    } catch (error) {
+      return error;
+    }
   }
   
-  getSpecificMessage(index) {
-    const specificMessage = this.messages[index];
-    return specificMessage;
+  static async getSentMessages(senderId) {
+    const query = 'SELECT * FROM messages wHERE sender_id = $1';
+    try {
+      const messages = await queryFunction.query(query, [senderId]);
+      return messages;
+    } catch (error) {
+      return error;
+    }
   }
   
-  getSentMessages() {
-    const sentMessages = filterMessages(this.messages, 'status', ['sent']);
-    return sentMessages;
+  static async getUnreadMessages(userId) {
+    const query = 'SELECT * FROM messages INNER JOIN inbox on messages.id = inbox.message_id WHERE inbox.user_id = $1 AND message.status = $2';
+    try {
+      const messages = await queryFunction.query(query, [userId, 'unread']);
+      return messages;
+    } catch (error) {
+      return error;
+    }
   }
   
-  getUnreadMessages() {
-    const unreadMessages = filterMessages(this.messages, 'status', ['unread']);
-    return unreadMessages;
+  static async deleteSpecificMessage(user, messageId) {
+    const selectQuery = 'SELECT senderId, status FROM messages INNER JOIN inbox ON inbox.message_id = messages.id WHERE message.id = $1';
+    const deleteQuery = 'DELETE FROM messages WHERE id = $1 RETURNING *';
+    try {
+      const { rows } = await queryFunction.query(selectQuery, [messageId]);
+      if (rows.sender_id === user.id && rows.status === 'read') {
+        return { messaage: 'Message has been read already.' };
+      }
+      const message = await queryFunction.query(deleteQuery, [messageId]);
+      return message;
+    } catch (error) {
+      return error;
+    }
   }
   
-  deleteSpecificMessage(index) {
-    const deletedMessage = this.messages.splice(index, 1)[0];
-    return deletedMessage;
-  }
-  
-  sendMessage(payload) {
-    const id = generateIDFromData(this.messages) + 1;
-    const createdOn = new Date(moment.HTML5_FMT.DATETIME_LOCAL_MS);
-    const message = {
-      id,
-      createdOn,
-      ...payload,
-      status: 'sent',
-    };
-    this.messages.push(message);
-    return message;
+  static async sendMessage(payload) {
+    const {
+      subject, message, senderId, receiverId,
+    } = payload;
+    const createdOn = new Date();
+    const messageQuery = 'INSERT INTO messages(subject, message, created_on, sender_id, receiver_id) VALUES($1, $2, $3, $4, $5, $6) RETURNING id';
+    const inboxQuery = 'INSERT INTO inbox(receiver_id, message_id, status) VALUES($1, $2, $3) RETURNING *';
+    try {
+      const { rows } = await queryFunction.query(messageQuery,
+        [subject, message, createdOn, senderId, receiverId]);
+      const result = await queryFunction.query(inboxQuery, [receiverId, rows.id, 'unread']);
+      return { ...rows, inbox_id: result.id };
+    } catch (error) {
+      return error;
+    }
   }
 }
 
-export default new MessageModel();
+export default MessageModel;

@@ -1,40 +1,44 @@
 import bcrypt from 'bcryptjs';
-import filterUser from '../utils/filterData';
-import generateUserId from '../utils/idGenerator';
-import userData from '../dummy/usersData';
+import queryFunction from '../database';
 
 class UserModel {
-  constructor() {
-    this.users = userData;
+  static async getAllusers() {
+    const query = 'SELECT * FROM users';
+    try {
+      const { rows } = await queryFunction.query(query);
+      return rows;
+    } catch (error) {
+      return error;
+    }
   }
   
-  getAllusers() {
-    return this.users;
+  static async getUserbyId(id) {
+    const query = 'SELECT * FROM users wHERE id = $1';
+    try {
+      const { user } = await queryFunction.query(query, [id]);
+      return user;
+    } catch (error) {
+      return error;
+    }
   }
   
-  getUserbyId(id) {
-    const user = filterUser(this.user, 'id', id);
-    return user;
-  }
-  
-  createUser(payload) {
-    const { username, password } = payload;
-    const salt = bcrypt.genSaltSync();
-    const hashedPassword = bcrypt.hashSync(password, salt);
+  static async createUser(payload) {
+    const {
+      username, password, firstName, lastName,
+    } = payload;
+    const salt = await bcrypt.genSalt();
+    const hashedPassword = await bcrypt.hash(password, salt);
     const email = `${username}@epicmail.com`;
-    const id = generateUserId(this.users) + 1;
-    
-    const user = {
-      id,
-      email,
-      salt,
-      ...payload,
-      password: hashedPassword,
-    };
-    
-    this.users.push(user);
-    return user;
+    const createdOn = new Date();
+    const query = 'INSERT INTO users(first_name, last_name, password, created_on, username, email) VALUES($1, $2, $3, $4, $5, $6) RETURNING *';
+    try {
+      const { rows } = await queryFunction.query(query,
+        [firstName, lastName, hashedPassword, createdOn, username, email]);
+      return rows;
+    } catch (error) {
+      return error;
+    }
   }
 }
 
-export default new UserModel();
+export default UserModel;

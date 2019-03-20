@@ -1,8 +1,8 @@
 import JWT from 'jsonwebtoken';
 
-export default (username) => {
+export default (user) => {
   return JWT.sign({
     iss: 'epicmail',
-    sub: username,
+    sub: user,
   }, process.env.APP_SECRET);
 };
