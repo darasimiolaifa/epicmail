@@ -5,8 +5,10 @@ import app from '../server';
 chai.use(chaiHttp);
 chai.should();
 let accessToken;
+const url = '/api/v1/groups';
+let requestId;
 
-describe('Messages API', () => {
+describe('Groups API', () => {
   describe('Login functionality', () => {
     it('should log in a registered user', (done) => {
       chai.request(app)
@@ -23,22 +25,14 @@ describe('Messages API', () => {
         });
     });
   });
-  describe('POST /api/v1/messages', () => {
-    let message;
-    let url;
-    beforeEach(() => {
-      url = '/api/v1/messages';
-      message = 'Fuga enim tempore non voluptas quia vitae ipsam voluptas. Et dolor adipisci dolores sunt non explicabo occaecati rerum nesciunt. Sint est asperiores sit voluptatum mollitia enim iste. Nesciunt minima sequi voluptas optio aut voluptatem. Eligendi voluptates iste eius iure commodi molestiae. Quo ex reprehenderit ipsa incidunt corporis vel in unde. Iste asperiores consequatur ex quidem omnis inventore deserunt. Eligendi officiis voluptatem. In omnis labore consequatur nisi. Excepturi doloremque nam omnis odit labore magni rerum quia. Distinctio adipisci nulla exercitationem omnis illum. Eum cum ipsam consequatur ex accusamus ipsum. Eum inventore laboriosam deleniti omnis occaecati. Culpa occaecati nemo alias et doloribus expedita. Ut quia ut nostrum ducimus occaecati veniam ut exercitationem voluptatibus. Quaerat porro error sint aut aliquid qui. Minus officiis neque dolorem animi maiores et aliquid.';
-    });
+  describe('POST /api/v1/groups', () => {
     it('should return a 400 error for missing inputs', (done) => {
       chai.request(app)
         .post(url)
         .set('x-access-token', accessToken)
         .send({
-          receiverId: 1,
-          subject: '',
-          status: 'sent',
-          message,
+          name: ' ',
+          description: 'A group to hold details for Andelan cycle 42 Bootcampers',
         })
         .end((err, res) => {
           const { error } = res.body;
@@ -46,37 +40,35 @@ describe('Messages API', () => {
           res.body.should.have.property('status', 400);
           res.body.should.have.property('error');
           error.should.have.property('missingValues');
-          error.emptyValues[0].should.include('subject');
+          error.emptyValues[0].should.include('name');
           done();
         });
     });
-    it('should post a mail that has all the required fields', (done) => {
+    it('should create a group that has all the details', (done) => {
       chai.request(app)
         .post(url)
         .set('x-access-token', accessToken)
         .send({
-          receiverEmail: 'imonitieyahoo@epicmail.com',
-          subject: 'Soluta accusamus officiis ut excepturi blanditiis libero ut.',
-          message,
+          name: 'Andela Cycle 42 Bootcampers',
+          decsription: 'A group to hold details for Andelan cycle 42 Bootcampers',
         })
         .end((err, res) => {
           const { data } = res.body;
+          console.log(res.body);
           res.should.have.status(200);
           res.body.should.have.property('status', 200);
           res.body.should.have.property('data');
           data.should.be.an('object');
-          data.should.have.property('message');
-          data.message.should.be.a('object');
-          data.message.should.have.property('id');
-          data.message.id.should.be.a('number');
+          data.should.have.property('name');
+          data.message.name.should.be('Andela Cycle 42 Bootcampers');
           done();
         });
     });
   });
-  describe('GET /api/v1/messages', () => {
-    it('should get all the received messages of the requester', (done) => {
+  describe('GET /api/v1/groups', () => {
+    it('should get all the groups registered by the requester', (done) => {
       chai.request(app)
-        .get('/api/v1/messages')
+        .get('/api/v1/groups')
         .set('x-access-token', accessToken)
         .end((err, res) => {
           const { data } = res.body;
@@ -84,19 +76,27 @@ describe('Messages API', () => {
           res.should.have.status(200);
           res.body.should.have.property('status', 200);
           res.body.should.have.property('data');
+          requestId = data[0].id;
           data.should.be.an('array');
           data.forEach((mail) => {
-            mail.should.satisfy(message => message.status === 'unread' || message.status === 'read');
+            mail.should.satisfy((group) => {
+              group.should.include.have.property('name');
+              group.should.include.have.property('id');
+            });
           });
           done();
         });
     });
   });
-  describe('GET /api/v1/messages/unread', () => {
+  describe('PATCH /api/v1/groups/:groupId/name', () => {
     it('should get all the unread received messages for the requester', (done) => {
       chai.request(app)
-        .get('/api/v1/messages/unread')
+        .patch('/api/v1/messages/unread')
         .set('x-access-token', accessToken)
+        .send({
+          grouId: requestId,
+          name: 'Andelan Bootcampers',
+        })
         .end((err, res) => {
           const { data } = res.body;
           res.should.have.status(200);
@@ -110,20 +110,21 @@ describe('Messages API', () => {
         });
     });
   });
-  describe('GET /api/v1/messages/sent', () => {
+  describe('POST /api/v1/groups/:groupId/users', () => {
     it('should get all the sent messages for the requester', (done) => {
       chai.request(app)
-        .get('/api/v1/messages/sent')
+        .post('/api/v1/groups/:groupId/users')
         .set('x-access-token', accessToken)
+        .send({
+          groupId: requestId,
+          userEmail: 'imonitieyahoo@epicmail.com',
+        })
         .end((err, res) => {
           const { data } = res.body;
           res.should.have.status(200);
           res.body.should.have.property('status', 200);
           res.body.should.have.property('data');
-          data.should.be.an('array');
-          data.forEach((mail) => {
-            mail.should.satisfy(message => message.senderId === 1);
-          });
+          data.should.be.an('object');
           done();
         });
     });

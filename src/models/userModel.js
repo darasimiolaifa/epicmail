@@ -12,11 +12,11 @@ class UserModel {
     }
   }
   
-  static async getUserbyId(id) {
-    const query = 'SELECT * FROM users wHERE id = $1';
+  static async getUserbyUsername(username) {
+    const query = 'SELECT * FROM users wHERE username = $1';
     try {
-      const { user } = await queryFunction.query(query, [id]);
-      return user;
+      const { rows } = await queryFunction.query(query, [username]);
+      return rows[0];
     } catch (error) {
       return error;
     }
@@ -34,6 +34,16 @@ class UserModel {
     try {
       const { rows } = await queryFunction.query(query,
         [firstName, lastName, hashedPassword, createdOn, username, email]);
+      return rows;
+    } catch (error) {
+      return error;
+    }
+  }
+  
+  static async deleteUserbyId(id) {
+    const query = 'DELETE * FROM users wHERE id = $1 RETURNING *';
+    try {
+      const { rows } = await queryFunction.query(query, [id]);
       return rows;
     } catch (error) {
       return error;

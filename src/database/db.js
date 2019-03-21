@@ -43,28 +43,31 @@ const createTables = () => {
     message_id INTEGER NOT NULL,
     receiver_id INTEGER NOT NULL,
     status VARCHAR(15) NOT NULL,
-    FOREIGN KEY(message_id) REFERENCES messages(id),
+    FOREIGN KEY(message_id) REFERENCES messages(id) ON DELETE CASCADE,
     FOREIGN KEY(receiver_id) REFERENCES users(id) 
   );
   
   CREATE TABLE groups(
     id SERIAL PRIMARY KEY,
-    group_name VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,
     description VARCHAR(255) NOT NULL,
-    created_on TIMESTAMP NOT NULL
+    created_on TIMESTAMP NOT NULL,
+    group_email VARCHAR(255) NOT NULL,
+    owner_id INTEGER NOT NULL,
+    FOREIGN KEY(owner_id) REFERENCES users(id)
   );
   
   CREATE TABLE groups_members(
    group_id INTEGER NOT NULL,
-   user_id INTEGER NOT NULL,
+   member_id INTEGER NOT NULL,
    FOREIGN KEY(group_id) REFERENCES groups(id),
-   FOREIGN KEY(user_id) REFERENCES users(id) 
+   FOREIGN KEY(member_id) REFERENCES users(id) 
   );
   `;
   
   pool.query(sql)
     .then((res) => {
-      console.log('Tables created', res);
+      console.log('Tables created');
       pool.end();
     })
     .catch((error) => {
