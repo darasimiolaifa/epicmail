@@ -2,7 +2,6 @@ node_modules
 .env
 .nyc_output
 src/dummy/gensalt.js
-build
 
 # Created by https://www.gitignore.io/api/node
 # Edit at https://www.gitignore.io/?templates=node

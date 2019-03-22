@@ -111,6 +111,48 @@ function () {
 
       return getUserById;
     }()
+  }, {
+    key: "deleteUserById",
+    value: function () {
+      var _deleteUserById = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee3(req, res) {
+        var id, response;
+        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                id = req.params.id;
+                _context3.next = 3;
+                return _userModel.default.deleteUserbyId(id);
+
+              case 3:
+                response = _context3.sent;
+
+                if (!(response.name && response.name === 'error')) {
+                  _context3.next = 6;
+                  break;
+                }
+
+                return _context3.abrupt("return", (0, _serverResponse.default)(res, response, 500));
+
+              case 6:
+                return _context3.abrupt("return", (0, _serverResponse.default)(res, response));
+
+              case 7:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }));
+
+      function deleteUserById(_x5, _x6) {
+        return _deleteUserById.apply(this, arguments);
+      }
+
+      return deleteUserById;
+    }()
   }]);
 
   return userControllers;

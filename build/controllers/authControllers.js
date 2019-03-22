@@ -13,10 +13,6 @@ var _userModel = _interopRequireDefault(require("../models/userModel"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -92,14 +88,40 @@ function () {
     }()
   }, {
     key: "login",
-    value: function login(req, res) {
-      var user = _objectSpread({}, req.body);
+    value: function () {
+      var _login = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee2(req, res) {
+        var username, user, token;
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                username = req.body.username;
+                _context2.next = 3;
+                return _userModel.default.getUserbyUsername(username);
 
-      var token = (0, _generateToken.default)(user);
-      return (0, _serverResponse.default)(res, {
-        token: token
-      });
-    }
+              case 3:
+                user = _context2.sent;
+                token = (0, _generateToken.default)(user);
+                return _context2.abrupt("return", (0, _serverResponse.default)(res, {
+                  token: token
+                }));
+
+              case 6:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }));
+
+      function login(_x3, _x4) {
+        return _login.apply(this, arguments);
+      }
+
+      return login;
+    }()
   }]);
 
   return authControllers;
