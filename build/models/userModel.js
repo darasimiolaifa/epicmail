@@ -111,21 +111,21 @@ function () {
       return getUserbyUsername;
     }()
   }, {
-    key: "getUserbyId",
+    key: "getUserbyEmail",
     value: function () {
-      var _getUserbyId = _asyncToGenerator(
+      var _getUserbyEmail = _asyncToGenerator(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee3(id) {
+      regeneratorRuntime.mark(function _callee3(email) {
         var query, _ref3, rows;
 
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                query = 'SELECT * FROM users WHERE id = $1';
+                query = 'SELECT * FROM users WHERE email = $1';
                 _context3.prev = 1;
                 _context3.next = 4;
-                return _database.default.query(query, [id]);
+                return _database.default.query(query, [email]);
 
               case 4:
                 _ref3 = _context3.sent;
@@ -145,7 +145,48 @@ function () {
         }, _callee3, null, [[1, 9]]);
       }));
 
-      function getUserbyId(_x2) {
+      function getUserbyEmail(_x2) {
+        return _getUserbyEmail.apply(this, arguments);
+      }
+
+      return getUserbyEmail;
+    }()
+  }, {
+    key: "getUserbyId",
+    value: function () {
+      var _getUserbyId = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee4(id) {
+        var query, _ref4, rows;
+
+        return regeneratorRuntime.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                query = 'SELECT * FROM users WHERE id = $1';
+                _context4.prev = 1;
+                _context4.next = 4;
+                return _database.default.query(query, [id]);
+
+              case 4:
+                _ref4 = _context4.sent;
+                rows = _ref4.rows;
+                return _context4.abrupt("return", rows[0]);
+
+              case 9:
+                _context4.prev = 9;
+                _context4.t0 = _context4["catch"](1);
+                return _context4.abrupt("return", _context4.t0);
+
+              case 12:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4, null, [[1, 9]]);
+      }));
+
+      function getUserbyId(_x3) {
         return _getUserbyId.apply(this, arguments);
       }
 
@@ -156,50 +197,50 @@ function () {
     value: function () {
       var _createUser = _asyncToGenerator(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee4(payload) {
-        var username, password, firstName, lastName, salt, hashedPassword, email, createdOn, query, _ref4, rows;
+      regeneratorRuntime.mark(function _callee5(payload) {
+        var username, password, firstName, lastName, salt, hashedPassword, email, createdOn, query, _ref5, rows;
 
-        return regeneratorRuntime.wrap(function _callee4$(_context4) {
+        return regeneratorRuntime.wrap(function _callee5$(_context5) {
           while (1) {
-            switch (_context4.prev = _context4.next) {
+            switch (_context5.prev = _context5.next) {
               case 0:
                 username = payload.username, password = payload.password, firstName = payload.firstName, lastName = payload.lastName;
-                _context4.next = 3;
+                _context5.next = 3;
                 return _bcryptjs.default.genSalt();
 
               case 3:
-                salt = _context4.sent;
-                _context4.next = 6;
+                salt = _context5.sent;
+                _context5.next = 6;
                 return _bcryptjs.default.hash(password, salt);
 
               case 6:
-                hashedPassword = _context4.sent;
+                hashedPassword = _context5.sent;
                 email = "".concat(username.toLowerCase(), "@epicmail.com");
                 createdOn = new Date();
                 query = 'INSERT INTO users(first_name, last_name, password, created_on, username, email) VALUES($1, $2, $3, $4, $5, $6) RETURNING id, first_name, last_name, username';
-                _context4.prev = 10;
-                _context4.next = 13;
-                return _database.default.query(query, [firstName.toLowerCase(), lastName.toLowerCase(), hashedPassword, createdOn, username.toLowerCase(), email]);
+                _context5.prev = 10;
+                _context5.next = 13;
+                return _database.default.query(query, [firstName, lastName, hashedPassword, createdOn, username.toLowerCase(), email]);
 
               case 13:
-                _ref4 = _context4.sent;
-                rows = _ref4.rows;
-                return _context4.abrupt("return", rows);
+                _ref5 = _context5.sent;
+                rows = _ref5.rows;
+                return _context5.abrupt("return", rows);
 
               case 18:
-                _context4.prev = 18;
-                _context4.t0 = _context4["catch"](10);
-                return _context4.abrupt("return", _context4.t0);
+                _context5.prev = 18;
+                _context5.t0 = _context5["catch"](10);
+                return _context5.abrupt("return", _context5.t0);
 
               case 21:
               case "end":
-                return _context4.stop();
+                return _context5.stop();
             }
           }
-        }, _callee4, null, [[10, 18]]);
+        }, _callee5, null, [[10, 18]]);
       }));
 
-      function createUser(_x3) {
+      function createUser(_x4) {
         return _createUser.apply(this, arguments);
       }
 
@@ -210,37 +251,37 @@ function () {
     value: function () {
       var _deleteUserbyId = _asyncToGenerator(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee5(id) {
-        var query, _ref5, rows;
+      regeneratorRuntime.mark(function _callee6(id) {
+        var query, _ref6, rows;
 
-        return regeneratorRuntime.wrap(function _callee5$(_context5) {
+        return regeneratorRuntime.wrap(function _callee6$(_context6) {
           while (1) {
-            switch (_context5.prev = _context5.next) {
+            switch (_context6.prev = _context6.next) {
               case 0:
                 query = 'DELETE * FROM users wHERE id = $1 RETURNING *';
-                _context5.prev = 1;
-                _context5.next = 4;
+                _context6.prev = 1;
+                _context6.next = 4;
                 return _database.default.query(query, [id]);
 
               case 4:
-                _ref5 = _context5.sent;
-                rows = _ref5.rows;
-                return _context5.abrupt("return", rows);
+                _ref6 = _context6.sent;
+                rows = _ref6.rows;
+                return _context6.abrupt("return", rows);
 
               case 9:
-                _context5.prev = 9;
-                _context5.t0 = _context5["catch"](1);
-                return _context5.abrupt("return", _context5.t0);
+                _context6.prev = 9;
+                _context6.t0 = _context6["catch"](1);
+                return _context6.abrupt("return", _context6.t0);
 
               case 12:
               case "end":
-                return _context5.stop();
+                return _context6.stop();
             }
           }
-        }, _callee5, null, [[1, 9]]);
+        }, _callee6, null, [[1, 9]]);
       }));
 
-      function deleteUserbyId(_x4) {
+      function deleteUserbyId(_x5) {
         return _deleteUserbyId.apply(this, arguments);
       }
 
