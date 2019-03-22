@@ -12,7 +12,7 @@ var _default = function _default(url, users, username) {
 
   if (url === '/api/v1/auth/signup') {
     if (users.findIndex(function (user) {
-      return user.username === username;
+      return user.username.toLowerCase() === username.toLowerCase();
     }) > -1) {
       usernameErrors.push('The username already exists. Please choose another.');
     }
@@ -26,7 +26,7 @@ var _default = function _default(url, users, username) {
     }
   } else {
     var userIndex = users.findIndex(function (user) {
-      return user.username === username;
+      return user.username.toLowerCase() === username.toLowerCase();
     }) === -1;
 
     if (userIndex) {

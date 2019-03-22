@@ -70,26 +70,26 @@ function () {
       return getAllusers;
     }()
   }, {
-    key: "getUserbyId",
+    key: "getUserbyUsername",
     value: function () {
-      var _getUserbyId = _asyncToGenerator(
+      var _getUserbyUsername = _asyncToGenerator(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee2(id) {
-        var query, _ref2, user;
+      regeneratorRuntime.mark(function _callee2(username) {
+        var query, _ref2, rows;
 
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                query = 'SELECT * FROM users wHERE id = $1';
+                query = 'SELECT * FROM users WHERE username = $1';
                 _context2.prev = 1;
                 _context2.next = 4;
-                return _database.default.query(query, [id]);
+                return _database.default.query(query, [username]);
 
               case 4:
                 _ref2 = _context2.sent;
-                user = _ref2.user;
-                return _context2.abrupt("return", user);
+                rows = _ref2.rows;
+                return _context2.abrupt("return", rows[0]);
 
               case 9:
                 _context2.prev = 9;
@@ -104,7 +104,48 @@ function () {
         }, _callee2, null, [[1, 9]]);
       }));
 
-      function getUserbyId(_x) {
+      function getUserbyUsername(_x) {
+        return _getUserbyUsername.apply(this, arguments);
+      }
+
+      return getUserbyUsername;
+    }()
+  }, {
+    key: "getUserbyId",
+    value: function () {
+      var _getUserbyId = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee3(id) {
+        var query, _ref3, rows;
+
+        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                query = 'SELECT * FROM users WHERE id = $1';
+                _context3.prev = 1;
+                _context3.next = 4;
+                return _database.default.query(query, [id]);
+
+              case 4:
+                _ref3 = _context3.sent;
+                rows = _ref3.rows;
+                return _context3.abrupt("return", rows[0]);
+
+              case 9:
+                _context3.prev = 9;
+                _context3.t0 = _context3["catch"](1);
+                return _context3.abrupt("return", _context3.t0);
+
+              case 12:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3, null, [[1, 9]]);
+      }));
+
+      function getUserbyId(_x2) {
         return _getUserbyId.apply(this, arguments);
       }
 
@@ -115,54 +156,95 @@ function () {
     value: function () {
       var _createUser = _asyncToGenerator(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee3(payload) {
-        var username, password, firstName, lastName, salt, hashedPassword, email, createdOn, query, _ref3, rows;
+      regeneratorRuntime.mark(function _callee4(payload) {
+        var username, password, firstName, lastName, salt, hashedPassword, email, createdOn, query, _ref4, rows;
 
-        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+        return regeneratorRuntime.wrap(function _callee4$(_context4) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context4.prev = _context4.next) {
               case 0:
                 username = payload.username, password = payload.password, firstName = payload.firstName, lastName = payload.lastName;
-                _context3.next = 3;
+                _context4.next = 3;
                 return _bcryptjs.default.genSalt();
 
               case 3:
-                salt = _context3.sent;
-                _context3.next = 6;
+                salt = _context4.sent;
+                _context4.next = 6;
                 return _bcryptjs.default.hash(password, salt);
 
               case 6:
-                hashedPassword = _context3.sent;
-                email = "".concat(username, "@epicmail.com");
+                hashedPassword = _context4.sent;
+                email = "".concat(username.toLowerCase(), "@epicmail.com");
                 createdOn = new Date();
-                query = 'INSERT INTO users(first_name, last_name, password, created_on, username, email) VALUES($1, $2, $3, $4, $5, $6) RETURNING *';
-                _context3.prev = 10;
-                _context3.next = 13;
-                return _database.default.query(query, [firstName, lastName, hashedPassword, createdOn, username, email]);
+                query = 'INSERT INTO users(first_name, last_name, password, created_on, username, email) VALUES($1, $2, $3, $4, $5, $6) RETURNING id, first_name, last_name, username';
+                _context4.prev = 10;
+                _context4.next = 13;
+                return _database.default.query(query, [firstName.toLowerCase(), lastName.toLowerCase(), hashedPassword, createdOn, username.toLowerCase(), email]);
 
               case 13:
-                _ref3 = _context3.sent;
-                rows = _ref3.rows;
-                return _context3.abrupt("return", rows);
+                _ref4 = _context4.sent;
+                rows = _ref4.rows;
+                return _context4.abrupt("return", rows);
 
               case 18:
-                _context3.prev = 18;
-                _context3.t0 = _context3["catch"](10);
-                return _context3.abrupt("return", _context3.t0);
+                _context4.prev = 18;
+                _context4.t0 = _context4["catch"](10);
+                return _context4.abrupt("return", _context4.t0);
 
               case 21:
               case "end":
-                return _context3.stop();
+                return _context4.stop();
             }
           }
-        }, _callee3, null, [[10, 18]]);
+        }, _callee4, null, [[10, 18]]);
       }));
 
-      function createUser(_x2) {
+      function createUser(_x3) {
         return _createUser.apply(this, arguments);
       }
 
       return createUser;
+    }()
+  }, {
+    key: "deleteUserbyId",
+    value: function () {
+      var _deleteUserbyId = _asyncToGenerator(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee5(id) {
+        var query, _ref5, rows;
+
+        return regeneratorRuntime.wrap(function _callee5$(_context5) {
+          while (1) {
+            switch (_context5.prev = _context5.next) {
+              case 0:
+                query = 'DELETE * FROM users wHERE id = $1 RETURNING *';
+                _context5.prev = 1;
+                _context5.next = 4;
+                return _database.default.query(query, [id]);
+
+              case 4:
+                _ref5 = _context5.sent;
+                rows = _ref5.rows;
+                return _context5.abrupt("return", rows);
+
+              case 9:
+                _context5.prev = 9;
+                _context5.t0 = _context5["catch"](1);
+                return _context5.abrupt("return", _context5.t0);
+
+              case 12:
+              case "end":
+                return _context5.stop();
+            }
+          }
+        }, _callee5, null, [[1, 9]]);
+      }));
+
+      function deleteUserbyId(_x4) {
+        return _deleteUserbyId.apply(this, arguments);
+      }
+
+      return deleteUserbyId;
     }()
   }]);
 

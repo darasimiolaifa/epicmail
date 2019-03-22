@@ -7,7 +7,7 @@ exports.default = void 0;
 
 var _serverResponse = _interopRequireDefault(require("../utils/serverResponse"));
 
-var _messageModel = _interopRequireDefault(require("../models/messageModel"));
+var _groupModel = _interopRequireDefault(require("../models/groupModel"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -21,31 +21,31 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var messageControllers =
+var groupControllers =
 /*#__PURE__*/
 function () {
-  function messageControllers() {
-    _classCallCheck(this, messageControllers);
+  function groupControllers() {
+    _classCallCheck(this, groupControllers);
   }
 
-  _createClass(messageControllers, null, [{
-    key: "getAllMessages",
+  _createClass(groupControllers, null, [{
+    key: "getAllGroups",
     value: function () {
-      var _getAllMessages = _asyncToGenerator(
+      var _getAllGroups = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee(req, res) {
-        var user, allReceivedMessages;
+        var user, allUserGroups;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 user = req.user;
                 _context.next = 3;
-                return _messageModel.default.getAllReceivedMessages(user.id);
+                return _groupModel.default.getAllGroups(user.id);
 
               case 3:
-                allReceivedMessages = _context.sent;
-                return _context.abrupt("return", (0, _serverResponse.default)(res, allReceivedMessages));
+                allUserGroups = _context.sent;
+                return _context.abrupt("return", (0, _serverResponse.default)(res, allUserGroups));
 
               case 5:
               case "end":
@@ -55,32 +55,31 @@ function () {
         }, _callee);
       }));
 
-      function getAllMessages(_x, _x2) {
-        return _getAllMessages.apply(this, arguments);
+      function getAllGroups(_x, _x2) {
+        return _getAllGroups.apply(this, arguments);
       }
 
-      return getAllMessages;
+      return getAllGroups;
     }()
   }, {
-    key: "getUnreadMessages",
+    key: "createGroup",
     value: function () {
-      var _getUnreadMessages = _asyncToGenerator(
+      var _createGroup = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee2(req, res) {
-        var user, unreadMessages;
+        var newGroup;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                user = req.user;
-                _context2.next = 3;
-                return _messageModel.default.getUnreadMessages(user.id);
+                _context2.next = 2;
+                return _groupModel.default.createGroup(req);
 
-              case 3:
-                unreadMessages = _context2.sent;
-                return _context2.abrupt("return", (0, _serverResponse.default)(res, unreadMessages));
+              case 2:
+                newGroup = _context2.sent;
+                return _context2.abrupt("return", (0, _serverResponse.default)(res, newGroup));
 
-              case 5:
+              case 4:
               case "end":
                 return _context2.stop();
             }
@@ -88,29 +87,29 @@ function () {
         }, _callee2);
       }));
 
-      function getUnreadMessages(_x3, _x4) {
-        return _getUnreadMessages.apply(this, arguments);
+      function createGroup(_x3, _x4) {
+        return _createGroup.apply(this, arguments);
       }
 
-      return getUnreadMessages;
+      return createGroup;
     }()
   }, {
-    key: "getSentMessages",
+    key: "editGroupName",
     value: function () {
-      var _getSentMessages = _asyncToGenerator(
+      var _editGroupName = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee3(req, res) {
-        var sentMessages;
+        var editedGroup;
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
                 _context3.next = 2;
-                return _messageModel.default.getSentMessages(req.user);
+                return _groupModel.default.editGroupName(req);
 
               case 2:
-                sentMessages = _context3.sent;
-                return _context3.abrupt("return", (0, _serverResponse.default)(res, sentMessages));
+                editedGroup = _context3.sent;
+                return _context3.abrupt("return", (0, _serverResponse.default)(res, editedGroup));
 
               case 4:
               case "end":
@@ -120,32 +119,31 @@ function () {
         }, _callee3);
       }));
 
-      function getSentMessages(_x5, _x6) {
-        return _getSentMessages.apply(this, arguments);
+      function editGroupName(_x5, _x6) {
+        return _editGroupName.apply(this, arguments);
       }
 
-      return getSentMessages;
+      return editGroupName;
     }()
   }, {
-    key: "getSpecificMessage",
+    key: "addUserToGroup",
     value: function () {
-      var _getSpecificMessage = _asyncToGenerator(
+      var _addUserToGroup = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee4(req, res) {
-        var id, singleMessage;
+        var newGroupUser;
         return regeneratorRuntime.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                id = req.params.id;
-                _context4.next = 3;
-                return _messageModel.default.getSpecificMessage(id);
+                _context4.next = 2;
+                return _groupModel.default.addUserToGroup(req);
 
-              case 3:
-                singleMessage = _context4.sent;
-                return _context4.abrupt("return", (0, _serverResponse.default)(res, singleMessage));
+              case 2:
+                newGroupUser = _context4.sent;
+                return _context4.abrupt("return", (0, _serverResponse.default)(res, newGroupUser));
 
-              case 5:
+              case 4:
               case "end":
                 return _context4.stop();
             }
@@ -153,35 +151,33 @@ function () {
         }, _callee4);
       }));
 
-      function getSpecificMessage(_x7, _x8) {
-        return _getSpecificMessage.apply(this, arguments);
+      function addUserToGroup(_x7, _x8) {
+        return _addUserToGroup.apply(this, arguments);
       }
 
-      return getSpecificMessage;
+      return addUserToGroup;
     }()
   }, {
-    key: "deleteSpecificMessage",
+    key: "deleteUserFromSpecificGroup",
     value: function () {
-      var _deleteSpecificMessage = _asyncToGenerator(
+      var _deleteUserFromSpecificGroup = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee5(req, res) {
-        var id, user, deletedMessage;
+        var deletedUser;
         return regeneratorRuntime.wrap(function _callee5$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
-                id = req.params.id;
-                user = req.user;
-                _context5.next = 4;
-                return _messageModel.default.deleteSpecificMessage(user, id);
+                _context5.next = 2;
+                return _groupModel.default.deleteUserFromSpecificGroup(req);
 
-              case 4:
-                deletedMessage = _context5.sent;
+              case 2:
+                deletedUser = _context5.sent;
                 return _context5.abrupt("return", (0, _serverResponse.default)(res, {
-                  message: deletedMessage.message
+                  message: deletedUser
                 }));
 
-              case 6:
+              case 4:
               case "end":
                 return _context5.stop();
             }
@@ -189,16 +185,16 @@ function () {
         }, _callee5);
       }));
 
-      function deleteSpecificMessage(_x9, _x10) {
-        return _deleteSpecificMessage.apply(this, arguments);
+      function deleteUserFromSpecificGroup(_x9, _x10) {
+        return _deleteUserFromSpecificGroup.apply(this, arguments);
       }
 
-      return deleteSpecificMessage;
+      return deleteUserFromSpecificGroup;
     }()
   }, {
-    key: "sendMessage",
+    key: "deleteSpecificGroup",
     value: function () {
-      var _sendMessage = _asyncToGenerator(
+      var _deleteSpecificGroup = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee6(req, res) {
         var message;
@@ -207,7 +203,7 @@ function () {
             switch (_context6.prev = _context6.next) {
               case 0:
                 _context6.next = 2;
-                return _messageModel.default.sendMessage(req);
+                return _groupModel.default.deleteSpecificGroup(req);
 
               case 2:
                 message = _context6.sent;
@@ -223,16 +219,16 @@ function () {
         }, _callee6);
       }));
 
-      function sendMessage(_x11, _x12) {
-        return _sendMessage.apply(this, arguments);
+      function deleteSpecificGroup(_x11, _x12) {
+        return _deleteSpecificGroup.apply(this, arguments);
       }
 
-      return sendMessage;
+      return deleteSpecificGroup;
     }()
   }]);
 
-  return messageControllers;
+  return groupControllers;
 }();
 
-exports.default = messageControllers;
-//# sourceMappingURL=messageControllers.js.map
+exports.default = groupControllers;
+//# sourceMappingURL=groupControllers.js.map

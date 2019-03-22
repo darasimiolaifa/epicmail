@@ -10,13 +10,14 @@ var _userController = _interopRequireDefault(require("../controllers/userControl
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var getAllUsers = _userController.default.getAllUsers,
-    getUserById = _userController.default.getUserById;
+    getUserById = _userController.default.getUserById,
+    deleteUserById = _userController.default.deleteUserById;
 
 var _default = function _default(app) {
   // get all users
   app.route('/api/v1/users').get(getAllUsers); // get specific user
 
-  app.route('/api/v1/users/:id').get(getUserById);
+  app.route('/api/v1/users/:id').get(getUserById).delete(deleteUserById);
 };
 
 exports.default = _default;

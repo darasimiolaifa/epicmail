@@ -36,31 +36,33 @@ function () {
       var _getAllReceivedMessages = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee(userId) {
-        var query, messages;
+        var query, _ref, rows;
+
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                query = 'SELECT * FROM messages INNER JOIN inbox on messages.id = inbox.message_id WHERE inbox.user_id = $1';
+                query = 'SELECT * FROM messages INNER JOIN inbox on messages.id = inbox.message_id WHERE inbox.receiver_id = $1';
                 _context.prev = 1;
                 _context.next = 4;
                 return _database.default.query(query, [userId]);
 
               case 4:
-                messages = _context.sent;
-                return _context.abrupt("return", messages);
+                _ref = _context.sent;
+                rows = _ref.rows;
+                return _context.abrupt("return", rows);
 
-              case 8:
-                _context.prev = 8;
+              case 9:
+                _context.prev = 9;
                 _context.t0 = _context["catch"](1);
                 return _context.abrupt("return", _context.t0);
 
-              case 11:
+              case 12:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[1, 8]]);
+        }, _callee, null, [[1, 9]]);
       }));
 
       function getAllReceivedMessages(_x) {
@@ -75,7 +77,8 @@ function () {
       var _getSpecificMessage = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee2(id) {
-        var query, message;
+        var query, _ref2, rows;
+
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
@@ -86,20 +89,21 @@ function () {
                 return _database.default.query(query, [id]);
 
               case 4:
-                message = _context2.sent;
-                return _context2.abrupt("return", message);
+                _ref2 = _context2.sent;
+                rows = _ref2.rows;
+                return _context2.abrupt("return", rows[0]);
 
-              case 8:
-                _context2.prev = 8;
+              case 9:
+                _context2.prev = 9;
                 _context2.t0 = _context2["catch"](1);
                 return _context2.abrupt("return", _context2.t0);
 
-              case 11:
+              case 12:
               case "end":
                 return _context2.stop();
             }
           }
-        }, _callee2, null, [[1, 8]]);
+        }, _callee2, null, [[1, 9]]);
       }));
 
       function getSpecificMessage(_x2) {
@@ -113,8 +117,9 @@ function () {
     value: function () {
       var _getSentMessages = _asyncToGenerator(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee3(senderId) {
-        var query, messages;
+      regeneratorRuntime.mark(function _callee3(user) {
+        var query, _ref3, rows;
+
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
@@ -122,23 +127,24 @@ function () {
                 query = 'SELECT * FROM messages wHERE sender_id = $1';
                 _context3.prev = 1;
                 _context3.next = 4;
-                return _database.default.query(query, [senderId]);
+                return _database.default.query(query, [user.id]);
 
               case 4:
-                messages = _context3.sent;
-                return _context3.abrupt("return", messages);
+                _ref3 = _context3.sent;
+                rows = _ref3.rows;
+                return _context3.abrupt("return", rows);
 
-              case 8:
-                _context3.prev = 8;
+              case 9:
+                _context3.prev = 9;
                 _context3.t0 = _context3["catch"](1);
                 return _context3.abrupt("return", _context3.t0);
 
-              case 11:
+              case 12:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, null, [[1, 8]]);
+        }, _callee3, null, [[1, 9]]);
       }));
 
       function getSentMessages(_x3) {
@@ -153,31 +159,33 @@ function () {
       var _getUnreadMessages = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee4(userId) {
-        var query, messages;
+        var query, _ref4, rows;
+
         return regeneratorRuntime.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                query = 'SELECT * FROM messages INNER JOIN inbox on messages.id = inbox.message_id WHERE inbox.user_id = $1 AND message.status = $2';
+                query = 'SELECT * FROM messages INNER JOIN inbox on messages.id = inbox.message_id WHERE inbox.receiver_id = $1 AND inbox.status = $2';
                 _context4.prev = 1;
                 _context4.next = 4;
                 return _database.default.query(query, [userId, 'unread']);
 
               case 4:
-                messages = _context4.sent;
-                return _context4.abrupt("return", messages);
+                _ref4 = _context4.sent;
+                rows = _ref4.rows;
+                return _context4.abrupt("return", rows);
 
-              case 8:
-                _context4.prev = 8;
+              case 9:
+                _context4.prev = 9;
                 _context4.t0 = _context4["catch"](1);
                 return _context4.abrupt("return", _context4.t0);
 
-              case 11:
+              case 12:
               case "end":
                 return _context4.stop();
             }
           }
-        }, _callee4, null, [[1, 8]]);
+        }, _callee4, null, [[1, 9]]);
       }));
 
       function getUnreadMessages(_x4) {
@@ -192,24 +200,34 @@ function () {
       var _deleteSpecificMessage = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee5(user, messageId) {
-        var selectQuery, deleteQuery, _ref, rows, message;
+        var selectQuery, deleteQuery, _ref5, rows, message;
 
         return regeneratorRuntime.wrap(function _callee5$(_context5) {
           while (1) {
             switch (_context5.prev = _context5.next) {
               case 0:
-                selectQuery = 'SELECT senderId, status FROM messages INNER JOIN inbox ON inbox.message_id = messages.id WHERE message.id = $1';
+                selectQuery = 'SELECT sender_id, status FROM messages INNER JOIN inbox ON inbox.message_id = messages.id WHERE messages.id = $1';
                 deleteQuery = 'DELETE FROM messages WHERE id = $1 RETURNING *';
                 _context5.prev = 2;
                 _context5.next = 5;
                 return _database.default.query(selectQuery, [messageId]);
 
               case 5:
-                _ref = _context5.sent;
-                rows = _ref.rows;
+                _ref5 = _context5.sent;
+                rows = _ref5.rows;
 
-                if (!(rows.sender_id === user.id && rows.status === 'read')) {
+                if (!(rows[0].sender_id !== user.id)) {
                   _context5.next = 9;
+                  break;
+                }
+
+                return _context5.abrupt("return", {
+                  messaage: 'This message is not yours. You do not have access to it.'
+                });
+
+              case 9:
+                if (!(rows.status === 'read')) {
+                  _context5.next = 11;
                   break;
                 }
 
@@ -217,25 +235,25 @@ function () {
                   messaage: 'Message has been read already.'
                 });
 
-              case 9:
-                _context5.next = 11;
+              case 11:
+                _context5.next = 13;
                 return _database.default.query(deleteQuery, [messageId]);
 
-              case 11:
+              case 13:
                 message = _context5.sent;
-                return _context5.abrupt("return", message);
+                return _context5.abrupt("return", message.rows[0]);
 
-              case 15:
-                _context5.prev = 15;
+              case 17:
+                _context5.prev = 17;
                 _context5.t0 = _context5["catch"](2);
                 return _context5.abrupt("return", _context5.t0);
 
-              case 18:
+              case 20:
               case "end":
                 return _context5.stop();
             }
           }
-        }, _callee5, null, [[2, 15]]);
+        }, _callee5, null, [[2, 17]]);
       }));
 
       function deleteSpecificMessage(_x5, _x6) {
@@ -250,43 +268,53 @@ function () {
       var _sendMessage = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee6(payload) {
-        var subject, message, senderId, receiverId, createdOn, messageQuery, inboxQuery, _ref2, rows, result;
+        var _payload$body, subject, message, receiverEmail, user, createdOn, receiverQuery, messageQuery, inboxQuery, receiverResult, receiverId, _ref6, rows, savedMessage, results, inboxMessage;
 
         return regeneratorRuntime.wrap(function _callee6$(_context6) {
           while (1) {
             switch (_context6.prev = _context6.next) {
               case 0:
-                subject = payload.subject, message = payload.message, senderId = payload.senderId, receiverId = payload.receiverId;
+                _payload$body = payload.body, subject = _payload$body.subject, message = _payload$body.message, receiverEmail = _payload$body.receiverEmail;
+                user = payload.user;
                 createdOn = new Date();
-                messageQuery = 'INSERT INTO messages(subject, message, created_on, sender_id, receiver_id) VALUES($1, $2, $3, $4, $5, $6) RETURNING id';
+                receiverQuery = 'SELECT * FROM users WHERE email = $1';
+                messageQuery = 'INSERT INTO messages(subject, message, created_on, sender_id) VALUES($1, $2, $3, $4) RETURNING *';
                 inboxQuery = 'INSERT INTO inbox(receiver_id, message_id, status) VALUES($1, $2, $3) RETURNING *';
-                _context6.prev = 4;
-                _context6.next = 7;
-                return _database.default.query(messageQuery, [subject, message, createdOn, senderId, receiverId]);
+                _context6.prev = 6;
+                _context6.next = 9;
+                return _database.default.query(receiverQuery, [receiverEmail]);
 
-              case 7:
-                _ref2 = _context6.sent;
-                rows = _ref2.rows;
-                _context6.next = 11;
-                return _database.default.query(inboxQuery, [receiverId, rows.id, 'unread']);
+              case 9:
+                receiverResult = _context6.sent;
+                receiverId = receiverResult.rows[0].id;
+                _context6.next = 13;
+                return _database.default.query(messageQuery, [subject, message, createdOn, user.id]);
 
-              case 11:
-                result = _context6.sent;
-                return _context6.abrupt("return", _objectSpread({}, rows, {
-                  inbox_id: result.id
-                }));
-
-              case 15:
-                _context6.prev = 15;
-                _context6.t0 = _context6["catch"](4);
-                return _context6.abrupt("return", _context6.t0);
+              case 13:
+                _ref6 = _context6.sent;
+                rows = _ref6.rows;
+                savedMessage = rows[0];
+                _context6.next = 18;
+                return _database.default.query(inboxQuery, [receiverId, savedMessage.id, 'unread']);
 
               case 18:
+                results = _context6.sent;
+                inboxMessage = results.rows[0];
+                return _context6.abrupt("return", _objectSpread({}, savedMessage, {
+                  inbox_id: inboxMessage.id
+                }));
+
+              case 23:
+                _context6.prev = 23;
+                _context6.t0 = _context6["catch"](6);
+                return _context6.abrupt("return", _context6.t0);
+
+              case 26:
               case "end":
                 return _context6.stop();
             }
           }
-        }, _callee6, null, [[4, 15]]);
+        }, _callee6, null, [[6, 23]]);
       }));
 
       function sendMessage(_x7) {
