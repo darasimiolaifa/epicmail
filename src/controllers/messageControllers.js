@@ -2,35 +2,38 @@ import serverResponse from '../utils/serverResponse';
 import MessageModel from '../models/messageModel';
 
 export default class messageControllers {
-  static getAllMessages(req, res) {
-    const allMessages = MessageModel.getAllMessages();
-    return serverResponse(res, allMessages);
+  static async getAllMessages(req, res) {
+    const { user } = req;
+    const allReceivedMessages = await MessageModel.getAllReceivedMessages(user.id);
+    return serverResponse(res, allReceivedMessages);
   }
   
-  static getUnreadMessages(req, res) {
-    const unreadMessages = MessageModel.getUnreadMessages();
+  static async getUnreadMessages(req, res) {
+    const { user } = req;
+    const unreadMessages = await MessageModel.getUnreadMessages(user.id);
     return serverResponse(res, unreadMessages);
   }
   
-  static getSentMessages(req, res) {
-    const sentMessages = MessageModel.getSentMessages();
+  static async getSentMessages(req, res) {
+    const sentMessages = await MessageModel.getSentMessages(req.user);
     return serverResponse(res, sentMessages);
   }
   
-  static getSpecificMessage(req, res) {
-    const { id } = req.body;
-    const singleMessage = MessageModel.getSpecificMessage(id);
+  static async getSpecificMessage(req, res) {
+    const { id } = req.params;
+    const singleMessage = await MessageModel.getSpecificMessage(id);
     return serverResponse(res, singleMessage);
   }
   
-  static deleteSpecificMessage(req, res) {
-    const { id } = req.body;
-    const deletedMessage = MessageModel.deleteSpecificMessage(id);
+  static async deleteSpecificMessage(req, res) {
+    const { id } = req.params;
+    const { user } = req;
+    const deletedMessage = await MessageModel.deleteSpecificMessage(user, id);
     return serverResponse(res, { message: deletedMessage.message });
   }
   
-  static sendMessage(req, res) {
-    const message = MessageModel.sendMessage(req.body);
+  static async sendMessage(req, res) {
+    const message = await MessageModel.sendMessage(req);
     return serverResponse(res, { message });
   }
 }

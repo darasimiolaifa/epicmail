@@ -14,8 +14,9 @@ export default class authControllers {
     return serverResponse(res, { token, user }, 201);
   }
   
-  static login(req, res) {
-    const user = { ...req.body };
+  static async login(req, res) {
+    const { username } = req.body;
+    const user = await userModel.getUserbyUsername(username);
     const token = generateToken(user);
     return serverResponse(res, { token });
   }

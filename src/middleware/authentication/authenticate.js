@@ -9,13 +9,15 @@ const Authenticate = {
       return serverResponse(res, 'Token is not provided', 400);
     }
     try {
-      const decodedUser = await jwt.verify(token, process.env.SECRET);
-      const query = 'SELECT * FROM users WHERE id = $1';
-      const { rows } = await queryFunction.query(query, [decodedUser.id]);
+      const { sub } = await jwt.verify(token, process.env.APP_SECRET);
+      const { username } = sub;
+      const query = 'SELECT * FROM users WHERE username = $1';
+      const { rows } = await queryFunction.query(query, [username]);
       if (!rows[0]) {
         return serverResponse(res, 'The token you provided is invalid', 400);
       }
-      req.user = decodedUser;
+      const [user] = rows;
+      req.user = user;
       return next();
     } catch (error) {
       return serverResponse(res, error.message, 400);

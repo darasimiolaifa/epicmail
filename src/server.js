@@ -5,6 +5,7 @@ import swaggerUI from 'swagger-ui-express';
 import addAuthRoutes from './routes/authRoutes';
 import addMessagesRoutes from './routes/messageRoutes';
 import addUsersRoutes from './routes/userRoutes';
+import addGroupRoutes from './routes/groupRoutes';
 import apiDoc from '../docs.json';
 
 config();
@@ -22,6 +23,7 @@ app.use('/api/v1/docs', swaggerUI.serve, swaggerUI.setup(apiDoc));
 addAuthRoutes(app);
 addMessagesRoutes(app);
 addUsersRoutes(app);
+addGroupRoutes(app);
 
 app.listen(port, () => console.log(`App listening on port ${port}`));
 

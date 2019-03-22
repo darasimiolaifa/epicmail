@@ -18,4 +18,13 @@ export default class userControllers {
     }
     return serverResponse(res, response);
   }
+  
+  static async deleteUserById(req, res) {
+    const { id } = req.params;
+    const response = await userModel.deleteUserbyId(id);
+    if (response.name && response.name === 'error') {
+      return serverResponse(res, response, 500);
+    }
+    return serverResponse(res, response);
+  }
 }

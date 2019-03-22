@@ -1,6 +1,10 @@
 import userControllers from '../controllers/userController';
 
-const { getAllUsers, getUserById } = userControllers;
+const {
+  getAllUsers,
+  getUserById,
+  deleteUserById,
+} = userControllers;
 
 export default (app) => {
   // get all users
@@ -9,5 +13,6 @@ export default (app) => {
   
   // get specific user
   app.route('/api/v1/users/:id')
-    .get(getUserById);
+    .get(getUserById)
+    .delete(deleteUserById);
 };
