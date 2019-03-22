@@ -1,7 +1,7 @@
 class sanitizeInput {
   static checkParams(param) {
     if (param.search(new RegExp(/[^0-9]/)) > -1) {
-      return `${param} should be a number.`;
+      return false;
     }
     return true;
   }
@@ -18,3 +18,5 @@ class sanitizeInput {
     return newInput;
   }
 }
+
+export default sanitizeInput;

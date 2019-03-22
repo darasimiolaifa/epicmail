@@ -2,6 +2,7 @@ import messageControllers from '../controllers/messageControllers';
 import validateMessageInputs from '../middleware/validation/validateMessageInputs';
 import checkMessageExist from '../middleware/validation/confirmDataInRecords';
 import Authenticate from '../middleware/authentication/authenticate';
+import checkParams from '../middleware/validation/checkParams';
 
 const {
   getAllMessages,
@@ -24,6 +25,6 @@ export default (app) => {
     .get(Authenticate.verifyToken, getSentMessages);
 
   app.route('/api/v1/messages/:id')
-    .get(Authenticate.verifyToken, checkMessageExist, getSpecificMessage)
-    .delete(Authenticate.verifyToken, checkMessageExist, deleteSpecificMessage);
+    .get(Authenticate.verifyToken, checkMessageExist, checkParams, getSpecificMessage)
+    .delete(Authenticate.verifyToken, checkMessageExist, checkParams, deleteSpecificMessage);
 };

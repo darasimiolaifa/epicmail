@@ -22,6 +22,16 @@ class UserModel {
     }
   }
   
+  static async getUserbyEmail(email) {
+    const query = 'SELECT * FROM users WHERE email = $1';
+    try {
+      const { rows } = await queryFunction.query(query, [email]);
+      return rows[0];
+    } catch (error) {
+      return error;
+    }
+  }
+  
   static async getUserbyId(id) {
     const query = 'SELECT * FROM users WHERE id = $1';
     try {
@@ -43,8 +53,8 @@ class UserModel {
     const query = 'INSERT INTO users(first_name, last_name, password, created_on, username, email) VALUES($1, $2, $3, $4, $5, $6) RETURNING id, first_name, last_name, username';
     try {
       const { rows } = await queryFunction.query(query, [
-        firstName.toLowerCase(),
-        lastName.toLowerCase(),
+        firstName,
+        lastName,
         hashedPassword,
         createdOn,
         username.toLowerCase(),

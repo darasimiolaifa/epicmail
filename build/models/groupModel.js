@@ -146,35 +146,36 @@ function () {
       var _editGroupName = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee3(payload) {
-        var _payload$body2, groupId, name, user, query, _ref4, rows;
+        var name, groupId, user, query, _ref4, rows;
 
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
               case 0:
-                _payload$body2 = payload.body, groupId = _payload$body2.groupId, name = _payload$body2.name;
+                name = payload.body.name;
+                groupId = payload.params.groupId;
                 user = payload.user;
                 query = 'UPDATE groups SET name = $1 WHERE id = $2 AND owner_id = $3 RETURNING *';
-                _context3.prev = 3;
-                _context3.next = 6;
+                _context3.prev = 4;
+                _context3.next = 7;
                 return _database.default.query(query, [name, groupId, user.id]);
 
-              case 6:
+              case 7:
                 _ref4 = _context3.sent;
                 rows = _ref4.rows;
                 return _context3.abrupt("return", rows[0]);
 
-              case 11:
-                _context3.prev = 11;
-                _context3.t0 = _context3["catch"](3);
+              case 12:
+                _context3.prev = 12;
+                _context3.t0 = _context3["catch"](4);
                 return _context3.abrupt("return", _context3.t0);
 
-              case 14:
+              case 15:
               case "end":
                 return _context3.stop();
             }
           }
-        }, _callee3, null, [[3, 11]]);
+        }, _callee3, null, [[4, 12]]);
       }));
 
       function editGroupName(_x3) {
@@ -189,17 +190,17 @@ function () {
       var _addUserToGroup = _asyncToGenerator(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee4(payload) {
-        var username, groupId, user, newUser, ownerShipQuery, query, response, groupOwner, _ref5, rows, _rows;
+        var email, groupId, user, newUser, ownerShipQuery, query, response, groupOwner, _ref5, rows, _rows;
 
         return regeneratorRuntime.wrap(function _callee4$(_context4) {
           while (1) {
             switch (_context4.prev = _context4.next) {
               case 0:
-                username = payload.body.username;
-                groupId = Number(payload.params);
+                email = payload.body.email;
+                groupId = payload.params.groupId;
                 user = payload.user;
                 _context4.next = 5;
-                return _userModel.default.getUserbyUsername(username);
+                return _userModel.default.getUserbyEmail(email);
 
               case 5:
                 newUser = _context4.sent;

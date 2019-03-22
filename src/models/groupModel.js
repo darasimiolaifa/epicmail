@@ -35,7 +35,8 @@ class GroupModel {
   }
   
   static async editGroupName(payload) {
-    const { groupId, name } = payload.body;
+    const { name } = payload.body;
+    const { groupId } = payload.params;
     const { user } = payload;
     const query = 'UPDATE groups SET name = $1 WHERE id = $2 AND owner_id = $3 RETURNING *';
     try {
@@ -47,10 +48,10 @@ class GroupModel {
   }
   
   static async addUserToGroup(payload) {
-    const { username } = payload.body;
-    const groupId = Number(payload.params);
+    const { email } = payload.body;
+    const { groupId } = payload.params;
     const { user } = payload;
-    const newUser = await userModel.getUserbyUsername(username);
+    const newUser = await userModel.getUserbyEmail(email);
     const ownerShipQuery = 'SELECT * FROM groups WHERE id = $1';
     const query = 'INSERT INTO groups_members(group_id, member_id) VALUES($1, $2) RETURNING *';
     let response;
