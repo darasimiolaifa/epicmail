@@ -15,7 +15,7 @@ export default class messageControllers {
   }
   
   static async getSentMessages(req, res) {
-    const sentMessages = await MessageModel.getSentMessages();
+    const sentMessages = await MessageModel.getSentMessages(req.user);
     return serverResponse(res, sentMessages);
   }
   

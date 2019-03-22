@@ -2,6 +2,11 @@ language: node_js
 node_js:
 - stable
 after_success: npm run coverage
+services:
+  - postgresql
+before-script:
+  - npm install
+  - psql -c 'CREATE DATABASE epicmail_testdb;' -U postgres
 deploy:
   provider: heroku
   app: darasimi-epicmail

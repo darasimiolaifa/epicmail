@@ -122,7 +122,7 @@ describe('Messages API', () => {
           res.body.should.have.property('data');
           data.should.be.an('array');
           data.forEach((mail) => {
-            mail.should.satisfy(message => message.senderId === 1);
+            mail.should.satisfy(message => message.sender_id === 1);
           });
           done();
         });

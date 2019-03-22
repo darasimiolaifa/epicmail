@@ -20,11 +20,11 @@ export default (app) => {
     .patch(Authenticate.verifyToken, editGroupName);
     
   app.route('/api/v1/groups/:groupId/users')
-    .post(addUserToGroup);
+    .post(Authenticate.verifyToken, addUserToGroup);
     
   app.route('/api/v1/groups/:groupId/users/:userId')
-    .delete(deleteUserFromSpecificGroup);
+    .delete(Authenticate.verifyToken, deleteUserFromSpecificGroup);
 
-  app.route('/api/v1/groups/:id')
+  app.route('/api/v1/groups/:groupId')
     .delete(Authenticate.verifyToken, deleteSpecificGroup);
 };

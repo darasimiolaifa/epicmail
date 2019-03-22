@@ -21,10 +21,10 @@ class MessageModel {
     }
   }
   
-  static async getSentMessages(userId) {
+  static async getSentMessages(user) {
     const query = 'SELECT * FROM messages wHERE sender_id = $1';
     try {
-      const { rows } = await queryFunction.query(query, [userId]);
+      const { rows } = await queryFunction.query(query, [user.id]);
       return rows;
     } catch (error) {
       return error;
